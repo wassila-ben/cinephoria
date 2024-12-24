@@ -1,0 +1,85 @@
+{% extends 'cinephoria_webapp/templates/cinephoria_webapp/base.html' %}
+{% load static%}
+
+{% block title %}
+Accueil
+{% endblock %}
+
+{% block content %}
+
+        <!-- Start: films-dernieres-sorties -->
+        <section class="last-added-block films-cards" style="padding-top: 60px;padding-bottom: 60px;" data-bs-theme="dark">
+            <h2 class="display-6 text-center m-auto mb-5 mt-0">Derniers films ajoutés</h2>
+            <div class="container">
+                <!-- Start: Last-added-films-heading -->
+                <div class="heading"></div><!-- End: Last-added-films-heading -->
+                <div class="row">
+                    <div class="col-md-6 col-lg-3 mt-4 pt-4 pe-4 ps-4">
+                        <div class="card border-0"><a href="{% url 'details' %}"><img class="img-fluid card-img-top scale-on-hover" src="{% static 'img/gladiator2.jpeg' %}"></a>
+                            <div class="card-body">
+                                <h6><a href="#">Lorem Ipsum</a></h6>
+                                <p class="text-muted card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc quam urna.</p><button class="btn btn-primary" type="button">Réserver</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-3 mt-4 pt-4 pe-4 ps-4">
+                        <div class="card border-0"><a href="assets/img/jurén2.jpg"><img class="img-fluid card-img-top scale-on-hover" src="{% static 'img/jurén2.jpg' %}"></a>
+                            <div class="card-body">
+                                <h6><a href="#">Lorem Ipsum</a></h6>
+                                <p class="text-muted card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc quam urna.</p><button class="btn btn-primary" type="button">Réserver</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-3 mt-4 pt-4 pe-4 ps-4">
+                        <div class="card border-0"><a href="#"><img class="img-fluid card-img-top scale-on-hover" src="{% static 'img/contedemontecristo.jpg' %}"></a>
+                            <div class="card-body">
+                                <h6><a href="#">Lorem Ipsum</a></h6>
+                                <p class="text-muted card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc quam urna.</p><button class="btn btn-primary" type="button">Réserver</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-3 mt-4 pt-4 pe-4 ps-4">
+                        <div class="card border-0"><a href="film_details.html"><img class="img-fluid card-img-top scale-on-hover" src="{% static 'img/venom.jpg' %}"></a>
+                            <div class="card-body">
+                                <h6><a href="#">Lorem Ipsum</a></h6>
+                                <p class="text-muted card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc quam urna.</p><button class="btn btn-primary" type="button">Réserver</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-3 mt-4 pt-4 pe-4 ps-4">
+                        <div class="card border-0"><a href="#"><img class="img-fluid card-img-top scale-on-hover" src="{% static 'img/moi-moche-et-mechant.jpg' %}"></a>
+                            <div class="card-body">
+                                <h6><a href="#">Lorem Ipsum</a></h6>
+                                <p class="text-muted card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc quam urna.</p><button class="btn btn-primary" type="button">Réserver</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-3 mt-4 pt-4 pe-4 ps-4">
+                        <div class="card border-0"><a href="assets/img/viana2.jpg"><img class="img-fluid card-img-top scale-on-hover" src="{% static 'img/viana2.jpg' %}"></a>
+                            <div class="card-body">
+                                <h6><a href="#">Lorem Ipsum</a></h6>
+                                <p class="text-muted card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc quam urna.</p><button class="btn btn-primary" type="button">Réserver</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-3 mt-4 pt-4 pe-4 ps-4">
+                        <div class="card border-0"><a href="#"><img class="img-fluid card-img-top scale-on-hover" src="{% static 'img/robotsauvage.jpg' %}"></a>
+                            <div class="card-body">
+                                <h6><a href="#">Lorem Ipsum</a></h6>
+                                <p class="text-muted card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc quam urna.</p><button class="btn btn-primary" type="button">Réserver</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-3 mt-4 pt-4 pe-4 ps-4">
+                        <div class="card border-0"><a href="#"><img class="img-fluid card-img-top scale-on-hover" src="{% static 'img/Heretic.jpg' %}"></a>
+                            <div class="card-body">
+                                <h6><a href="#">Lorem Ipsum</a></h6>
+                                <p class="text-muted card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc quam urna.</p><button class="btn btn-primary" type="button">Réserver</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section><!-- End: films-dernieres-sorties -->
+        
+{% endblock %}

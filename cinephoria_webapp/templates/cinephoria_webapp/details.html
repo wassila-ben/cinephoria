@@ -1,0 +1,50 @@
+{% extends 'cinephoria_webapp/templates/cinephoria_webapp/base.html' %}
+{% load static %}
+
+{% block title%}
+{% comment %} titre du film {% endcomment %}
+{% endblock %}
+
+<section class="filmDetails" style="padding-top: 60px;padding-bottom: 60px;" data-bs-theme="dark">
+    <h2 class="display-6 text-center m-auto mb-5 mt-0">Derniers films ajoutés</h2>
+    <div class="container">
+<!-- Start: Banner Heading Image -->
+<section class="py-4 py-xl-5">
+    <!-- Start: 1 Row 2 Columns -->
+    <div class="container">
+        <div class="bg-dark border rounded border-0 border-dark overflow-hidden" style="background: var(--bs-dark-bg-subtle);">
+            <div class="row g-0">
+                <div class="col-md-6" style="background: #040219;">
+                    <div class="text-white p-4 p-md-5">
+                        <h2 class="fw-bold text-white mb-3">Biben dum fringi dictum, augue purus</h2>
+                        <p class="mb-4">Tincidunt laoreet leo, adipiscing taciti tempor. Primis senectus sapien, risus donec ad fusce augue interdum.</p>
+                        <div class="my-3"><a class="btn btn-primary btn-lg me-2" role="button" href="#">Reserver</a><a class="btn btn-light btn-lg link-primary" role="button" href="#" style="border-style: none;background: var(--bs-border-color-transparent);">En savoir plus</a></div>
+                        <div class="col-12 col-md-3 col-lg-6 offset-md-1 meta" style="margin-top: 30px;">
+                            <div class="tags"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 order-first order-md-last" style="min-height: 250px;"><img class="w-100 h-100 fit-cover" src="assets/img/gladiator2.jpeg"></div>
+            </div>
+        </div>
+    </div><!-- End: 1 Row 2 Columns -->
+</section><!-- End: Banner Heading Image -->
+<div class="more-projects">
+    <h3 class="text-center" style="color: var(--bs-success);">À voir aussi...</h3>
+    <div class="row gallery">
+        <div class="col-md-4 col-lg-3">
+            <div class="item"><a href="#"><img class="img-fluid scale-on-hover" src="nature/image2.jpg"></a></div>
+        </div>
+        <div class="col-md-4 col-lg-3">
+            <div class="item"><a href="#"><img class="img-fluid scale-on-hover" src="nature/image3.jpg"></a></div>
+        </div>
+        <div class="col-md-4 col-lg-3">
+            <div class="item"><a href="#"><img class="img-fluid scale-on-hover" src="tech/image4.jpg"></a></div>
+        </div>
+        <div class="col-md-4 col-lg-3">
+            <div class="item"><a href="#"><img class="img-fluid scale-on-hover" src="nature/image5.jpg"></a></div>
+        </div>
+    </div>
+</div>
+</div>
+</section><!-- Start: Footer -->

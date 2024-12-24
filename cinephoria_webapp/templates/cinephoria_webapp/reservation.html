@@ -1,0 +1,25 @@
+{% extends 'cinephoria_webapp/templates/cinephoria_webapp/base.html' %}
+{% load static %}
+
+{% block title%}
+{% comment %} titre du film {% endcomment %}
+{% endblock %}
+
+{% block content %}
+
+<section class="portfolio-block hire-me">
+    <div class="container">
+        <div class="heading">
+            <h2>Réservation</h2>
+        </div>
+    </div>
+    <form><select class="form-select">
+            <optgroup label="Selectionnez un cinéma">
+                <option value="12" selected="">Cinéphoria Nantes</option>
+                <option value="13">Cinéphoria Paris</option>
+                <option value="14">Cinéphoria Lille</option>
+            </optgroup>
+        </select></form>
+</section>
+
+{% endblock %}
