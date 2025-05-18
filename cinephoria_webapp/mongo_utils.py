@@ -13,7 +13,7 @@ def get_mongo_collection():
             tls=True,
             tlsCAFile=certifi.where()
         )
-        db = client["cinephoria"]
+        db = client["cinephoria_db"]
         return db["reservation_stats"]
     except Exception as e:
         print(f"[MongoDB ERROR] {e}")

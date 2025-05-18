@@ -19,7 +19,6 @@ def superuser_required(view_func):
     return _wrapped_view
 
 
-
 @superuser_required
 @login_required
 def admin_dashboard(request):
