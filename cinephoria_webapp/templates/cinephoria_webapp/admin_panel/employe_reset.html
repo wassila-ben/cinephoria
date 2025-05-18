@@ -1,0 +1,33 @@
+{% extends 'cinephoria_webapp/base.html' %}
+{% block title %}Réinitialiser un mot de passe{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-8">
+            <div class="p-4 border rounded bg-body-secondary text-light shadow-sm">
+                <h2 class="mb-4">Réinitialisation du mot de passe employé</h2>
+
+                <form method="post" class="row g-4">
+                    {% csrf_token %}
+                    <div class="col-md-12">
+                        {{ form.employe.label_tag }} {{ form.employe }}
+                    </div>
+                    <div class="col-md-12">
+                        {{ form.nouveau_mot_de_passe.label_tag }} {{ form.nouveau_mot_de_passe }}
+                    </div>
+                    <div class="col-md-12">
+                    {{ form.confirmation_mot_de_passe.label_tag }} {{ form.confirmation_mot_de_passe }}
+                    </div>
+
+                    <div class="col-12 d-flex gap-3 mt-4">
+                        <button type="submit" class="btn btn-light">Réinitialiser</button>
+                        <a href="{% url 'admin_dashboard' %}" class="btn btn-outline-light">Annuler</a>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

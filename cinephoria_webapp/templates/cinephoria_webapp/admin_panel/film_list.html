@@ -1,0 +1,57 @@
+{% extends 'cinephoria_webapp/base.html' %}
+{% load static %}
+{% block title %}Gestion des Films{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2 class="fw-bold">Gestion des Films</h2>
+        <a href="{% url 'admin_film_create' %}" class="btn btn-primary">Ajouter un film</a>
+    </div>
+
+    {% if films %}
+    <div class="table-responsive rounded shadow-sm">
+        <table class="table table-bordered align-middle bg-white">
+            <thead class="table-light">
+                <tr>
+                    <th scope="col" style="width: 10%;">Affiche</th>
+                    <th scope="col">Titre</th>
+                    <th scope="col">Durée</th>
+                    <th scope="col">Genre</th>
+                    <th scope="col">Date de sortie</th>
+                    <th scope="col" style="width: 20%;">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for film in films %}
+                <tr>
+                    <td class="text-center">
+                        {% if film.affiche %}
+                            <img src="{{ film.affiche.url }}" alt="{{ film.titre }}" class="img-fluid rounded" style="max-height: 80px;">
+                        {% else %}
+                            <span class="text-muted small">Aucune</span>
+                        {% endif %}
+                    </td>
+                    <td>{{ film.titre }}</td>
+                    <td>{{ film.duree }} min</td>
+                    <td>{{ film.genre }}</td>
+                    <td>{{ film.date_sortie|date:"d/m/Y" }}</td>
+                    <td>
+                        <div class="d-flex gap-2">
+                            <a href="{% url 'admin_film_edit' film.id %}" class="btn btn-outline-primary btn-sm w-100">Modifier</a>
+                            <form method="post" action="{% url 'admin_film_delete' film.id %}" onsubmit="return confirm('Confirmer la suppression ?');">
+                                {% csrf_token %}
+                                <button type="submit" class="btn btn-outline-danger btn-sm w-100">Supprimer</button>
+                            </form>
+                        </div>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    {% else %}
+        <div class="alert alert-warning text-center">Aucun film enregistré pour le moment.</div>
+    {% endif %}
+</div>
+{% endblock %}

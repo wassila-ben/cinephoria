@@ -1,0 +1,37 @@
+{% extends 'cinephoria_webapp/base.html' %}
+{% block title %}Ajouter / Modifier une Salle{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-8">
+            <div class="p-4 border rounded bg-body-secondary text-light shadow-sm">
+                <h2 class="mb-4">Données de la salle</h2>
+
+                <form method="post" class="row g-4">
+                    {% csrf_token %}
+                    <div class="col-md-6">
+                        {{ form.numero_salle.label_tag }} {{ form.numero_salle }}
+                    </div>
+                    <div class="col-md-6">
+                        {{ form.total_places.label_tag }} {{ form.total_places }}
+                    </div>
+                    <div class="col-md-6">
+                        {{ form.places_pmr.label_tag }} {{ form.places_pmr }}
+                    </div>
+                    <div class="col-md-6">
+                        {{ form.qualite.label_tag }} {{ form.qualite }}
+                    </div>
+                    <div class="col-md-12">
+                        {{ form.cinema.label_tag }} {{ form.cinema }}
+                    </div>
+                    <div class="col-12 d-flex gap-3 mt-4">
+                        <button type="submit" class="btn btn-light">Enregistrer</button>
+                        <a href="{% url 'admin_salle_list' %}" class="btn btn-outline-light">Annuler</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,34 @@
+{% extends 'cinephoria_webapp/base.html' %}
+{% block title %}Ajouter / Modifier une Séance{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-8">
+            <div class="p-4 border rounded bg-body-secondary text-light shadow-sm">
+                <h2 class="mb-4">Nouvelle séance</h2>
+
+                <form method="post" class="row g-4">
+                    {% csrf_token %}
+                    <div class="col-md-6">
+                        {{ form.film.label_tag }} {{ form.film }}
+                    </div>
+                    <div class="col-md-6">
+                        {{ form.salle.label_tag }} {{ form.salle }}
+                    </div>
+                    <div class="col-md-6">
+                        {{ form.heure_debut.label_tag }} {{ form.heure_debut }}
+                    </div>
+                    <div class="col-md-6">
+                        {{ form.jours_diffusion.label_tag }} {{ form.jours_diffusion }}
+                    </div>
+                    <div class="col-12 d-flex gap-3 mt-4">
+                        <button type="submit" class="btn btn-light">Enregistrer</button>
+                        <a href="{% url 'admin_seance_list' %}" class="btn btn-outline-light">Annuler</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

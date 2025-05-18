@@ -1,0 +1,69 @@
+{% extends 'cinephoria_webapp/base.html' %}
+{% block title %}{{ form.instance.pk|yesno:"Modifier un film,Ajouter un film" }}{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-10 col-xl-8">
+            <div class="p-4 p-md-5 border rounded shadow-sm bg-body-secondary text-light">
+
+                <h2 class="mb-4">{{ form.instance.pk|yesno:"Modifier un film,Ajouter un film" }}</h2>
+
+                <form method="post" enctype="multipart/form-data" class="row g-4">
+                    {% csrf_token %}
+
+                    <!-- Titre + Durée -->
+                    <div class="col-md-6">
+                        {{ form.titre.label_tag }} {{ form.titre }}
+                    </div>
+                    <div class="col-md-6">
+                        {{ form.duree.label_tag }} {{ form.duree }}
+                    </div>
+
+                    <!-- Synopsis sur une ligne entière -->
+                    <div class="col-12">
+                        {{ form.synopsis.label_tag }} {{ form.synopsis }}
+                    </div>
+
+                    <!-- Dates -->
+                    <div class="col-md-6">
+                        {{ form.date_ajout.label_tag }} {{ form.date_ajout }}
+                    </div>
+                    <div class="col-md-6">
+                        {{ form.date_sortie.label_tag }} {{ form.date_sortie }}
+                    </div>
+
+                    <!-- Âge + Coup de cœur -->
+                    <div class="col-md-6">
+                        {{ form.age_minimum.label_tag }} {{ form.age_minimum }}
+                    </div>
+                    <div class="col-md-6">
+                        {{ form.label_coup_de_coeur.label_tag }} {{ form.label_coup_de_coeur }}
+                    </div>
+
+                    <!-- Genre + Cinémas -->
+                    <div class="col-md-6">
+                        {{ form.genre.label_tag }} {{ form.genre }}
+                    </div>
+                    <div class="col-md-6">
+                        {{ form.cinemas.label_tag }} {{ form.cinemas }}
+                    </div>
+
+                    <!-- Affiche -->
+                    <div class="col-12">
+                        {{ form.affiche.label_tag }} {{ form.affiche }}
+                    </div>
+
+                    <!-- Boutons -->
+                    <div class="col-12 d-flex justify-content-start gap-3 mt-4">
+                        <button type="submit" class="btn btn-light">Enregistrer</button>
+                        <a href="{% url 'admin_film_list' %}" class="btn btn-outline-light">Annuler</a>
+                    </div>
+
+                </form>
+
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

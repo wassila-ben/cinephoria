@@ -1,0 +1,41 @@
+{% extends 'cinephoria_webapp/base.html' %}
+{% block title %}Créer un Employé{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-8">
+            <div class="p-4 border rounded bg-body-secondary text-light shadow-sm">
+                <h2 class="mb-4">Création d’un compte employé</h2>
+
+                <form method="post" class="row g-4">
+                    {% csrf_token %}
+                    <div class="col-md-6">
+                        {{ form.email.label_tag }} {{ form.email }}
+                    </div>
+                    <div class="col-md-6">
+                        {{ form.identifiant.label_tag }} {{ form.identifiant }}
+                    </div>
+                    <div class="col-md-6">
+                        {{ form.nom.label_tag }} {{ form.nom }}
+                    </div>
+                    <div class="col-md-6">
+                        {{ form.prenom.label_tag }} {{ form.prenom }}
+                    </div>
+                    <div class="col-md-6">
+                        {{ form.password1.label_tag }} {{ form.password1 }}
+                    </div>
+                    <div class="col-md-6">
+                        {{ form.password2.label_tag }} {{ form.password2 }}
+                    </div>
+                    <div class="col-12 d-flex gap-3 mt-4">
+                        <button type="submit" class="btn btn-light">Créer</button>
+                        <a href="{% url 'admin_dashboard' %}" class="btn btn-outline-light">Annuler</a>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

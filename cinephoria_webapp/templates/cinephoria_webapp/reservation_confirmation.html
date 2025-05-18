@@ -1,0 +1,14 @@
+{% extends 'cinephoria_webapp/base.html' %}
+{% load static %}
+
+{% block title %}
+    Réservation confirmée
+{% endblock %}
+
+{% block content %}
+<div class="container mt-5 text-center">
+    <h2>Merci pour votre réservation !</h2>
+    <p>Un email de confirmation vous a été envoyé.</p>
+    <a href="{% url 'index' %}" class="btn btn-primary mt-3">Retour à l'accueil</a>
+</div>
+{% endblock %}

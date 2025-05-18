@@ -1,0 +1,108 @@
+{% extends 'cinephoria_webapp/base.html' %}
+{% block title %}Espace Administrateur{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <h1 class="mb-4 text-center">Espace Administrateur</h1>
+
+    <!-- Dashboard -->
+    <div class="row mb-5">
+    <div class="col-md-3">
+        <div class="card text-white bg-primary mb-3 shadow">
+            <div class="card-body text-center">
+                <h5 class="card-title">Films</h5>
+                <p class="card-text display-6">{{ nb_films }}</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card text-white bg-success mb-3 shadow">
+            <div class="card-body text-center">
+                <h5 class="card-title">Séances</h5>
+                <p class="card-text display-6">{{ nb_seances }}</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card text-white bg-warning mb-3 shadow">
+            <div class="card-body text-center">
+                <h5 class="card-title">Salles</h5>
+                <p class="card-text display-6">{{ nb_salles }}</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card text-white bg-danger mb-3 shadow">
+            <div class="card-body text-center">
+                <h5 class="card-title">Réservations (7 jours)</h5>
+                <p class="card-text display-6">{{ nb_reservations }}</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+    <!-- Actions -->
+    <div class="row">
+        <div class="col-md-4 mb-4">
+            <a href="{% url 'admin_film_list' %}" class="text-decoration-none">
+                <div class="card h-100 shadow-sm">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">Gérer les films</h5>
+                        <p class="card-text">Ajouter, modifier ou supprimer un film.</p>
+                    </div>
+                </div>
+            </a>
+        </div>
+        <div class="col-md-4 mb-4">
+            <a href="{% url 'admin_seance_list' %}" class="text-decoration-none">
+                <div class="card h-100 shadow-sm">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">Gérer les séances</h5>
+                        <p class="card-text">Programmer ou éditer des séances.</p>
+                    </div>
+                </div>
+            </a>
+        </div>
+        <div class="col-md-4 mb-4">
+            <a href="{% url 'admin_salle_list' %}" class="text-decoration-none">
+                <div class="card h-100 shadow-sm">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">Gérer les salles</h5>
+                        <p class="card-text">Configurer les salles de projection.</p>
+                    </div>
+                </div>
+            </a>
+        </div>
+        <div class="col-md-4 mb-4">
+            <a href="{% url 'admin_employe_create' %}" class="text-decoration-none">
+                <div class="card h-100 shadow-sm">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">Créer un employé</h5>
+                        <p class="card-text">Ajouter un compte employé.</p>
+                    </div>
+                </div>
+            </a>
+        </div>
+        <div class="col-md-4 mb-4">
+            <a href="{% url 'admin_dashboard_reservations' %}" class="text-decoration-none">
+                <div class="card h-100 shadow-sm">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">Dashboard réservations</h5>
+                        <p class="card-text">Consulter les statistiques de réservations.</p>
+                    </div>
+                </div>
+            </a>
+        </div>
+        <div class="col-md-4 mb-4">
+            <a href="{% url 'admin_employe_reset_password' %}" class="text-decoration-none">
+                <div class="card h-100 shadow-sm">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">Réinitialiser mot de passe</h5>
+                        <p class="card-text">Modifier les accès d’un employé.</p>
+                    </div>
+                </div>
+            </a>
+        </div>
+    </div>
+</div>
+{% endblock %}

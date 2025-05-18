@@ -1,0 +1,19 @@
+{% extends 'cinephoria_webapp/base.html' %}
+{% load static %}
+
+{% block title %}
+    Choix des sièges
+{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <h2 class="text-center mb-4 text-uppercase">Choisissez vos sièges</h2>
+    <p>Nombre de places à réserver : {{ nombre_places }}</p>
+
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-success">Confirmer les sièges</button>
+    </form>
+</div>
+{% endblock %}

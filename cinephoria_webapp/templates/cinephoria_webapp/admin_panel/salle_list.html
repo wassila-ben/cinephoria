@@ -1,0 +1,43 @@
+{% extends 'cinephoria_webapp/base.html' %}
+{% block title %}Gestion des Salles{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2 class="fw-bold">Liste des salles</h2>
+        <a href="{% url 'admin_salle_create' %}" class="btn btn-primary">Ajouter une salle</a>
+    </div>
+
+    {% if salles %}
+        <table class="table table-dark table-bordered align-middle">
+            <thead>
+                <tr>
+                    <th>Numéro</th>
+                    <th>Places totales</th>
+                    <th>PMR</th>
+                    <th>Cinéma</th>
+                    <th>Qualité</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for salle in salles %}
+                <tr>
+                    <td>{{ salle.numero_salle }}</td>
+                    <td>{{ salle.total_places }}</td>
+                    <td>{{ salle.places_pmr }}</td>
+                    <td>{{ salle.cinema.nom }}</td>
+                    <td>{{ salle.qualite.type_qualite }}</td>
+                    <td>
+                        <a href="{% url 'admin_salle_edit' salle.id %}" class="btn btn-sm btn-outline-light">Modifier</a>
+                        <a href="{% url 'admin_salle_delete' salle.id %}" class="btn btn-sm btn-outline-danger" onclick="return confirm('Supprimer cette salle ?');">Supprimer</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <div class="alert alert-info">Aucune salle enregistrée.</div>
+    {% endif %}
+</div>
+{% endblock %}

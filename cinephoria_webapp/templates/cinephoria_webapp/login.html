@@ -1,0 +1,65 @@
+{% extends 'cinephoria_webapp/base.html' %}
+{% load static %}
+
+{% block title %}Connexion{% endblock %}
+
+{% block content %}
+<section class="login-block" style="padding-top: 0px;">
+    <div class="container">
+        <div class="row mb-5">
+            <div class="col-md-8 col-xl-6 text-center mx-auto">
+                <h2 class="text-center mb-4 text-uppercase">Connexion</h2>
+                <p class="w-lg-50">Veuillez entrer vos identifiants pour vous connecter.</p>
+            </div>
+        </div>
+        <div class="row d-flex justify-content-center">
+            <div class="col-md-6 col-xl-4">
+                <div class="card mb-5">
+                    <div class="card-body d-flex flex-column align-items-center">
+                        <div class="bs-icon-xl bs-icon-circle bs-icon-primary bs-icon my-4">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 16 16" class="bi bi-person">
+                                <path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zM2 13c0 1 1 1 1 1h10s1 0 1-1-1-4-6-4-6 3-6 4z"></path>
+                            </svg>
+                        </div>
+
+                        {% if messages %}
+                            {% for message in messages %}
+                                <div class="alert alert-{{ message.tags }} w-100">{{ message }}</div>
+                            {% endfor %}
+                        {% endif %}
+
+                        <form method="post" class="w-100">
+                            {% csrf_token %}
+
+                            <div class="mb-3">
+                                {{ form.username.errors }}
+                                <label for="id_username" class="form-label">Email*</label>
+                                <input id="id_username" class="form-control" type="email" name="username" placeholder="Email" autocomplete="email" required>
+                            </div>
+
+                            <div class="mb-3">
+                                {{ form.password.errors }}
+                                <label for="id_password" class="form-label">Mot de passe*</label>
+                                <input id="id_password" class="form-control" type="password" name="password" placeholder="Mot de passe" autocomplete="current-password" required>
+                            </div>
+
+                            <div class="mb-3">
+                                <button class="btn btn-primary d-block w-100" type="submit">Connexion</button>
+                            </div>
+
+                            {% if form.non_field_errors %}
+                                <div class="alert alert-danger w-100">
+                                    {{ form.non_field_errors }}
+                                </div>
+                            {% endif %}
+                        </form>
+
+                        <p class="text-muted">Mot de passe oublié ? <a href="{% url 'password_reset' %}">Réinitialisez-le</a></p>
+                        <p class="text-muted">Pas encore inscrit ? <a href="{% url 'register' %}">Créez un compte</a></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

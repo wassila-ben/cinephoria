@@ -1,0 +1,75 @@
+{% extends 'cinephoria_webapp/base.html' %}
+{% load static %}
+{% load custom_tags %}
+
+{% block title %}
+Cinéphoria - Dernières sorties
+{% endblock %}
+
+{% block content %}
+
+<div class="container my-5">
+    <h2 class="text-center mb-4 text-uppercase">🎬 À l'affiche cette semaine</h2>
+
+    {% if films %}
+        <div class="row row-cols-1 row-cols-sm-2 row-cols-lg-3 g-4">
+            {% for film in films %}
+                <div class="col">
+                    <div class="card h-100 shadow-sm">
+                        <div class="position-relative">
+                            {% if film.affiche %}
+                                <img src="{{ film.affiche.url }}" class="card-img-top" alt="{{ film.titre }}">
+                            {% else %}
+                                <img src="{% static 'img/default_poster.jpg' %}" class="card-img-top" alt="Affiche par défaut">
+                            {% endif %}
+                            {% if film.note %}
+                                <span class="position-absolute top-0 end-0 m-2 badge btn-outline-primary">
+                                    {{ film.note|default:"-" }}/5
+                                </span>
+                            {% endif %}
+                    
+                            {% if film.label_coup_de_coeur %}
+                                <div class="position-absolute bottom-0 start-0 w-100 text-center badge bg-secondary rounded-3 py-2 my-1">
+                                    ❤️ Coup de cœur
+                                </div>
+                            {% endif %}
+                        </div>
+                    
+                        <div class="card-body d-flex flex-column">
+                            <h5 class="card-title">{{ film.titre }}</h5>
+                            <p class="card-text small text-muted">{{ film.genre.nom }}</p>
+                        {% if film_seances_dict|dictkey:film.id %}
+                        <div class="mt-3">
+                            <h6 class="fw-semibold">🎟️ Prochaines séances :</h6>
+                            <div class="d-flex flex-column gap-2">
+                        {% for item in film_seances_dict|dictkey:film.id %}
+                            <div class="border rounded p-2 primary shadow-sm small my-1">
+                            <div class="d-flex justify-content-between align-items-center">
+                            <div>
+                                <span class="fw-semibold">{{ item.date|date:"D d M" }}</span> à 
+                                <span>{{ item.seance.heure_debut|time:"H:i" }}</span>
+                                <span class="text-muted">{{ item.seance.salle.qualite.nom }}</span>
+                            </div>
+                            <div class="text-muted">
+                                <i class="bi bi-geo-alt-fill me-1"></i>{{ item.cinema }}
+                            </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                        </div>
+                    </div>
+                        {% else %}
+                            <p class="text-muted small mt-2">Aucune séance à venir</p>
+                        {% endif %}
+                            <a href="{% url 'details_film' film.id %}" class="btn btn-outline-primary mt-auto">Voir détails</a>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <p class="text-center text-muted mt-4">Aucun film disponible pour cette semaine.</p>
+    {% endif %}
+</div>
+
+{% endblock %}

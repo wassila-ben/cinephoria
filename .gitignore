@@ -1,0 +1,21 @@
+# Fichiers Python
+*.pyc
+__pycache__/
+
+# Environnement virtuel
+venv/
+env/
+
+
+# Paramètres Django
+*.sqlite3
+db.sqlite3
+/media/
+staticfiles/
+
+# Fichiers de logs et cache
+*.log
+*.swp
+
+*.env
+*.env-prod

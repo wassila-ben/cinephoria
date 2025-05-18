@@ -1,0 +1,51 @@
+{% extends 'cinephoria_webapp/base.html' %}
+{% load static %}
+
+{% block title %}
+    {{ film.titre }}
+{% endblock %}
+
+{% block content %}
+<section class="container my-5" data-bs-theme="dark">
+    <div class="row">
+        <div class="col-md-4">
+            <img class="img-fluid rounded" src="{{ film.affiche.url }}" alt="{{ film.titre }}">
+        </div>
+        <div class="col-md-8">
+            <h2 class="text-white">{{ film.titre }}</h2>
+            <p class="text-muted">{{ film.synopsis }}</p>
+            <p class="text-muted">Âge minimum : {{ film.age_minimum }} ans</p>
+            {% if film.label_coup_de_coeur %}
+                <span class="badge bg-warning text-dark mb-2">Coup de cœur</span>
+            {% endif %}
+            <p class="text-muted">Note : {{ film.note|default:"-" }}/5</p>
+        </div>
+    </div>
+
+    <hr class="my-5">
+
+    <h3 class="text-uppercase text-white mb-4">Séances disponibles</h3>
+    {% if film.seance_set.all %}
+        <div class="row row-cols-1 row-cols-md-2 g-4">
+            {% for seance in film.seance_set.all %}
+                <div class="col">
+                    <div class="card bg-dark text-white border-light h-100">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ seance.salle.cinema.nom }} – {{ seance.salle.nom }}</h5>
+                            <p class="card-text">
+                                Jour : {{ seance.get_jour_semaine_display }}<br>
+                                Heure : {{ seance.heure_debut|time:"H:i" }} - {{ seance.heure_fin|time:"H:i" }}<br>
+                                Qualité : <img class="img" src="{{ logos.url }}"><br>
+                                Prix : {{ seance.salle.qualite.prix_seance }} €
+                            </p>
+                            <a href="#" class="btn btn-primary">Réserver cette séance</a>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <p class="text-muted">Aucune séance disponible pour ce film pour le moment.</p>
+    {% endif %}
+</section>
+{% endblock %}

@@ -1,0 +1,25 @@
+{% extends 'cinephoria_webapp/base.html' %}
+{% block title %}Dashboard Réservations{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <h2 class="mb-4 text-center">Réservations par film (7 derniers jours)</h2>
+
+    {% if data %}
+        <div class="row gy-4">
+            {% for item in data %}
+                <div class="col-md-3">
+                    <div class="card text-white bg-{{ item.color }} shadow">
+                        <div class="card-body text-center">
+                            <h5 class="card-title">{{ item.film }}</h5>
+                            <p class="card-text display-6">{{ item.total }}</p>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <div class="alert alert-warning">Aucune réservation trouvée</div>
+    {% endif %}
+</div>
+{% endblock %}

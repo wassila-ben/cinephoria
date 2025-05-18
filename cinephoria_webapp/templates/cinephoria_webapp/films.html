@@ -1,0 +1,95 @@
+{% extends 'cinephoria_webapp/base.html' %}
+{% load static %}
+
+{% block title %}
+    Films
+{% endblock %}
+
+{% block header %}
+    <header class="page-header">
+        <div class="container">
+            <h1 class="page-title">Films</h1>
+        </div>
+    </header>
+{% endblock %}
+
+{% block content %}
+<section class="film-block films-cards" style="padding-top: 60px; padding-bottom: 60px;" data-bs-theme="dark">
+    <h2 class="display-6 text-center m-auto mb-5 mt-0 text-uppercase">Tous les films à l'affiche</h2>
+
+    <div class="container">
+
+        <!-- Filtres -->
+        <form method="get" class="row mb-5">
+            <div class="col-md-4">
+                <label class="form-label text-white">Filtrer par cinéma</label>
+                <select name="cinema" class="form-select">
+                    <option value="">Tous les cinémas</option>
+                    {% for c in cinemas %}
+                        <option value="{{ c.id }}" {% if c.id|stringformat:"s" == request.GET.cinema|stringformat:"s" %}selected{% endif %}>{{ c.nom }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="col-md-4">
+                <label class="form-label text-white">Filtrer par genre</label>
+                <select name="genre" class="form-select">
+                    <option value="">Tous les genres</option>
+                    {% for g in genres %}
+                        <option value="{{ g.id }}" {% if g.id|stringformat:"s" == request.GET.genre %}selected{% endif %}>{{ g.genre }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="col-md-4">
+                <label class="form-label text-white">Filtrer par jour</label>
+                <input type="date" name="jour" class="form-control" value="{{ request.GET.jour }}">
+            </div>
+            <div class="col-12 mt-3 text-end">
+                <button type="submit" class="btn btn-primary">Filtrer</button>
+            </div>
+        </form>
+
+        <!-- Liste des films -->
+        <section class="last-added-block films-cards" style="padding-top: 60px; padding-bottom: 60px;" data-bs-theme="dark">
+            <h2 class="display-6 text-center m-auto mb-5 mt-0 text-uppercase">Derniers films ajoutés</h2>
+            <div class="container">
+                <!-- Start: Last-added-films-heading -->
+                <div class="heading"></div>
+                <!-- End: Last-added-films-heading -->
+                <div class="row">
+                    {% for film in films %}
+                        <div class="col-md-6 col-lg-3 mt-4">
+                            <div class="card border-0">
+                                <a href="{% url 'details_film' film.id %}">
+                                {% if film.affiche %}
+                                    <img class="img-fluid card-img-top scale-on-hover" src="{{ film.affiche.url }}" alt="{{ film.titre }}">
+                                {% else %}
+                                    <img class="img-fluid card-img-top scale-on-hover" src="{% static 'images/placeholder.jpg' %}" alt="Affiche non disponible">
+                                {% endif %}
+                                </a>
+                                <div class="card-body">
+                                    <h6><a href="{% url 'details_film' film.id %}" class="text-decoration-none text-white">{{ film.titre }}</a></h6>
+                                    <p class="text-muted card-text">{{ film.synopsis|truncatewords:20 }}</p>
+                                    <a href="{% url 'details_film' film.id %}" class="btn btn-primary" type="button">Voir Détails</a>
+                                </div>
+                            </div>
+                        </div>
+                    {% empty %}
+                        <p class="text-center text-muted">Aucun film ajouté récemment.</p>
+                    {% endfor %}
+                </div>
+            </div>
+        </section>
+    </div>
+</section>
+
+<style>
+.synopsis {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+</style>
+{% endblock %}

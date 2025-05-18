@@ -1,0 +1,116 @@
+{% extends 'cinephoria_webapp/base.html' %}
+{% load static %}
+
+{% block title %}Créer mon compte{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="heading">
+        <h2 class="text-center mb-4 text-uppercase">Création de votre compte</h2>
+    </div>
+
+    {% if messages %}
+        {% for message in messages %}
+            <div class="alert alert-{{ message.tags }}">{{ message }}</div>
+        {% endfor %}
+    {% endif %}
+
+    <form method="POST" action="{% url 'register' %}" class="shadow-lg p-4" data-bs-theme="dark">
+        {% csrf_token %}
+
+        {% if form.non_field_errors %}
+            <div class="alert alert-danger">
+                {% for error in form.non_field_errors %}
+                    <p>{{ error }}</p>
+                {% endfor %}
+            </div>
+        {% endif %}
+
+        <!-- Email -->
+        <div class="mb-3">
+            <label class="form-label required" for="id_email">Email*</label>
+            <input id="id_email" class="form-control item" type="email" name="email" autocomplete="email" value="{{ form.email.value|default:'' }}" required />
+            {% if form.email.errors %}
+                <div class="text-danger">
+                    {% for error in form.email.errors %}
+                        <p>{{ error }}</p>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        </div>
+
+        <!-- Nom -->
+        <div class="mb-3">
+            <label class="form-label required" for="id_nom">Nom*</label>
+            <input id="id_nom" class="form-control item" type="text" name="nom" maxlength="150" value="{{ form.nom.value|default:'' }}" required />
+            {% if form.nom.errors %}
+                <div class="text-danger">
+                    {% for error in form.nom.errors %}
+                        <p>{{ error }}</p>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        </div>
+
+        <!-- Prénom -->
+        <div class="mb-3">
+            <label class="form-label required" for="id_prenom">Prénom*</label>
+            <input id="id_prenom" class="form-control item" type="text" name="prenom" maxlength="150" value="{{ form.prenom.value|default:'' }}" required />
+            {% if form.prenom.errors %}
+                <div class="text-danger">
+                    {% for error in form.prenom.errors %}
+                        <p>{{ error }}</p>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        </div>
+
+        <!-- Pays -->
+        <div class="mb-3">
+            <label class="form-label required" for="id_pays">Pays*</label>
+            <select id="id_pays" class="form-control item" name="pays" required>
+                <option value="France" {% if form.pays.value == "France" %}selected{% endif %}>France</option>
+                <option value="Belgique" {% if form.pays.value == "Belgique" %}selected{% endif %}>Belgique</option>
+            </select>
+            {% if form.pays.errors %}
+                <div class="text-danger">
+                    {% for error in form.pays.errors %}
+                        <p>{{ error }}</p>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        </div>
+
+        <!-- Mot de passe -->
+        <div class="mb-3">
+            <label class="form-label required" for="password1">Mot de passe*</label>
+            <input id="password1" class="form-control item" type="password" name="password1" minlength="8" autocomplete="new-password" required />
+            {% if form.password1.errors %}
+                <div class="text-danger">
+                    {% for error in form.password1.errors %}
+                        <p>{{ error }}</p>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        </div>
+
+        <!-- Confirmation mot de passe -->
+        <div class="mb-3">
+            <label class="form-label required" for="password2">Confirmation mot de passe*</label>
+            <input id="password2" class="form-control item" type="password" name="password2" autocomplete="new-password" required />
+            {% if form.password2.errors %}
+                <div class="text-danger">
+                    {% for error in form.password2.errors %}
+                        <p>{{ error }}</p>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        </div>
+
+        <!-- Bouton de soumission -->
+        <div class="mb-3 mt-4">
+            <button class="btn btn-primary btn-lg d-block w-100" type="submit">Créer mon compte</button>
+        </div>
+    </form>
+</div>
+{% endblock %}

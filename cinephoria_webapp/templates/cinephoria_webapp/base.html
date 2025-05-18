@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+{% load static %}
+<html data-bs-theme="dark" data-bs-forced-theme="dark">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no" />
+    <title>{% block title %}Cinéphoria{% endblock %}</title>
+    <meta name="description" content="Cinéphoria, le Cinéma engagé" />
+
+    <!--  Bootstrap CSS local -->
+    <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.min.css' %}">
+
+    <!-- Mes styles personnalisés -->
+    <link rel="stylesheet" href="{% static 'css/bs-theme-overrides.css' %}">
+    <link rel="stylesheet" href="{% static 'css/Navbar-Centered-Links-icons.css' %}">
+
+    <!--  Bootstrap Icons (CDN) -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css"/>
+</head>
+
+<body>
+    <main class="page">
+
+    <!--  Navbar -->
+    <nav class="navbar navbar-expand-md bg-body py-3">
+        <div class="container">
+            <a class="navbar-brand d-flex align-items-center" href="{% url 'index' %}">
+                <img src="{% static 'img/cinephoria_logo.svg' %}" width="120" height="60" alt="Cinéphoria"/>
+            </a>
+            <button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarContent" style="border-style: none">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarContent">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <a class="nav-link text-uppercase {% if request.resolver_match.url_name == 'index' %}active{% endif %}" href="{% url 'index' %}">Accueil</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-uppercase {% if request.resolver_match.url_name == 'films' %}active{% endif %}" href="{% url 'films' %}">Films</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-uppercase {% if request.resolver_match.url_name == 'reservation' %}active{% endif %}" href="{% url 'reservation' %}">Réservation</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-uppercase" href="#">Contact</a>
+                    </li>
+                </ul>
+
+                <!-- Menu utilisateur -->
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"><i class="bi bi-person-circle fs-4"></i></a>
+                        <ul class="dropdown-menu dropdown-menu-end">
+                        {% if user.is_authenticated %}
+                            <li><a class="dropdown-item" href="#">Mes informations</a></li>
+                            {% if user.is_staff %}
+                                <li><a class="dropdown-item" href="#">Espace employé</a></li>
+                            {% endif %}
+                            {% if user.is_superuser %}
+                                <li><a class="dropdown-item" href="{% url 'admin_dashboard' %}">Administration</a></li>
+                            {% endif %}
+                            <li><hr class="dropdown-divider" /></li>
+                            <li>
+                                <form method="post" action="{% url 'logout' %}" class="d-inline">
+                                    {% csrf_token %}
+                                    <button class="dropdown-item" type="submit">Se déconnecter</button>
+                                </form>
+                            </li>
+                        {% else %}
+                            <li><a class="dropdown-item" href="{% url 'login' %}">Se connecter</a></li>
+                            <li><a class="dropdown-item" href="{% url 'register' %}">Créer un compte</a></li>
+                        {% endif %}
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div class="container mt-3">
+    {% if messages %}
+        {% for message in messages %}
+            <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+                {{ message }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        {% endfor %}
+    {% endif %}
+    </div>  
+
+    <!--  Contenu principal -->
+    <section>{% block content %}{% endblock %}</section>
+
+    <!--  Footer -->
+    <footer class="bg-dark text-light py-5 mt-5">
+        <div class="container">
+            <div class="row gy-4 justify-content-between">
+                <div class="col-12">
+                    <h5 class="text-uppercase mb-4 text-center text-md-start">Votre Cinéma</h5>
+                    {% if cinema %}
+                        <div class="text-center text-md-start">
+                            <p class="mb-1 fw-bold">{{ cinema.nom }}</p>
+                            <p class="mb-1"><i class="bi bi-geo-alt-fill me-1 text-danger"></i>{{ cinema.adresse }}</p>
+                            <p class="mb-1">{{ cinema.cp }} {{ cinema.ville }}</p>
+                            <p class="mb-0"><i class="bi bi-telephone-fill me-1 text-info"></i>{{ cinema.telephone }}</p>
+                        </div>
+                    {% elif cinemas %}
+                        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+                            {% for c in cinemas|slice:":7" %}
+                            <div class="col">
+                                <div class="border rounded-4 p-3 h-100 bg-secondary bg-opacity-10 hover-shadow transition">
+                                    <p class="mb-1 fw-bold">{{ c.nom }}</p>
+                                    <p class="mb-1"><i class="bi bi-geo-alt-fill me-1 text-danger"></i>{{ c.adresse }}</p>
+                                    <p class="mb-1">{{ c.cp }} {{ c.ville }}</p>
+                                    <p class="mb-0 small text-muted"><i class="bi bi-telephone-fill me-1 text-info"></i>{{ c.telephone }}</p>
+                                </div>
+                            </div>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        <p class="text-muted text-center">Aucun cinéma disponible actuellement.</p>
+                    {% endif %}
+                </div>
+
+                <div class="mt-5">
+                    <form method="post" action="{% url 'choisir_cinema' %}" class="d-flex flex-column flex-md-row align-items-center gap-3">
+                        {% csrf_token %}
+                        <label for="cinema_id" class="form-label m-0 text-light">Choisir un autre cinéma :</label>
+                        <select name="cinema_id" id="cinema_id" class="form-select w-auto">
+                            <option value="all" {% if not cinema %}selected{% endif %}>Tous les cinémas</option>
+                            {% for c in cinemas %}
+                                <option value="{{ c.id }}" {% if cinema and c.id == cinema.id %}selected{% endif %}>
+                                    {{ c.nom }} - {{ c.ville }}
+                                </option>
+                            {% endfor %}
+                        </select>
+                        <button type="submit" class="btn btn-outline-light btn-sm">Valider</button>
+                    </form>
+                </div>
+            </div>
+
+            <hr class="border-secondary my-4" />
+            <div class="d-flex flex-column flex-md-row justify-content-between align-items-center text-center text-md-start">
+                <img src="{% static 'img/cinephoria_logo_blanc.svg' %}" width="120" height="28" alt="Logo Cinéphoria"/>
+                <p class="mb-0 mt-3 mt-md-0 small">© Cinéphoria 2025 - Tous droits réservés</p>
+            </div>
+        </div>
+    </footer>
+
+    </main>
+
+    <!--  Bootstrap JS via CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Script JS -->
+    <script src="{% static 'js/theme.js' %}"></script>
+</body>
+</html>
