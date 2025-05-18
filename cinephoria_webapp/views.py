@@ -12,7 +12,7 @@ from django.contrib.auth.decorators import login_required
 from django.utils.http import url_has_allowed_host_and_scheme
 
 # TEST CI/CD - OK
-print("Déclenchement pipeline")
+print("Déclenchement pipeline CI/CD")
 
 
 
