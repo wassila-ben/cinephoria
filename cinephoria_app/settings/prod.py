@@ -57,6 +57,5 @@ CONTENT_SECURITY_POLICY = {
     }
 }
 
-print("🔍 DEBUG =", settings.DEBUG)
 
 

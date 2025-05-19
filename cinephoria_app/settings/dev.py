@@ -1,5 +1,4 @@
 from .base import *
-from django.conf import settings
 
 
 # SECURITY WARNING: don't run with debug turned on in production!
@@ -28,4 +27,3 @@ STATICFILES_DIRS = [BASE_DIR / 'static']
 STATIC_ROOT = BASE_DIR / 'staticfiles'
 MEDIA_ROOT = BASE_DIR / 'media' 
 
-print("🔍 DEBUG =", settings.DEBUG)
