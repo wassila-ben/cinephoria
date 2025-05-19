@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Espace Employé – Cinéphoria</title>
+    <link rel="stylesheet" href="dashboard.css">
+</head>
+<body>
+    <header>
+        <h1>Espace Employé</h1>
+        <a class="link-web" href="http://localhost:8000/intranet/" target="_blank">🔗 Retour site web</a>
+    </header>
+
+    <main>
+        <section>
+            <h2>Déclarer un incident</h2>
+            <form id="incident-form">
+                <select id="salle-id" class="select-field" required>
+                    <option value="">-- Choisir une salle --</option>
+                </select>
+                <input type="number" id="siege-id" placeholder="ID du siège (optionnel)">
+                <select id="type-materiel" class="select-field" required>
+                    <option value="">-- Type de matériel --</option>
+                    <option value="siège">Siège</option>
+                    <option value="écran">Écran</option>
+                    <option value="porte">Porte</option>
+                    <option value="moquette">Moquette</option>
+                    <option value="son">Son</option>
+                    <option value="éclairage">Éclairage</option>
+                    <option value="autre">Autre</option>
+                </select>
+                <input type="text" id="type-incident" placeholder="Type d'incident (cassé, éteint, etc.)" required>
+                <textarea id="description" placeholder="Description détaillée..." required></textarea>
+                <button type="submit">🚨 Signaler l’incident</button>
+            </form>
+            <div id="incident-response"></div>
+            
+        </section>
+
+        <section>
+            <h2>Incidents signalés</h2>
+            <div id="incident-list" class="card-list"></div>
+        </section>
+    </main>
+
+    <script src="dashboard.js"></script>
+</body>
+</html>

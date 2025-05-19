@@ -268,6 +268,7 @@ class Avis(models.Model):
     note = models.FloatField(default=1.0, validators=[MinValueValidator(1.0), MaxValueValidator(5.0)])
     commentaire = models.TextField(default='Pas de commentaire')
     date = models.DateField(auto_now_add=True)
+    validé = models.BooleanField(default=False) 
 
     def __str__(self):
         return f"Avis de {self.utilisateur.identifiant} sur {self.film.titre}"
@@ -288,15 +289,30 @@ class LogActivite(models.Model):
 
 class Incident(models.Model):
     utilisateur = models.ForeignKey(Utilisateur, on_delete=models.CASCADE)
-    siege = models.ForeignKey(Siege, on_delete=models.CASCADE)
+    salle = models.ForeignKey(Salle, on_delete=models.CASCADE,null=True, blank=True)  
+    siege = models.ForeignKey(Siege, on_delete=models.SET_NULL, null=True, blank=True)  
     type_incident = models.CharField(max_length=100, default="Type inconnu")
-    type_materiel = models.CharField(max_length=100, default="Matériel inconnu")
+    type_materiel = models.CharField(
+        max_length=100,
+        choices=[
+            ('siège', 'Siège'),
+            ('écran', 'Écran'),
+            ('porte', 'Porte'),
+            ('moquette', 'Moquette'),
+            ('son', 'Son'),
+            ('éclairage', 'Éclairage'),
+            ('autre', 'Autre'),
+        ],
+        default='autre'
+    )
     description = models.TextField(default="Description non disponible")
     date = models.DateField(auto_now_add=True)
     statut = models.CharField(max_length=50, default="Ouvert")
 
     def __str__(self):
-        return f"Incident {self.type_incident} - {self.utilisateur.identifiant}"
+        cible = f"Siège {self.siege.numero_siege}" if self.siege else "Salle"
+        return f"{self.type_incident} ({self.type_materiel}) - {cible}"
+
 
 class Contact(models.Model):
     utilisateur = models.ForeignKey(Utilisateur, on_delete=models.CASCADE)

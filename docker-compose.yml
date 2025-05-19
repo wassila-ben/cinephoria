@@ -10,8 +10,8 @@ services:
   web:
     build: 
       context: .
-      args:
-        DJANGO_ENV: dev
+    environment:
+        - DJANGO_ENV=dev
     command: python manage.py runserver 0.0.0.0:8000
     volumes:
       - .:/app

@@ -1,6 +1,7 @@
 from .base import *
 import os
 import dj_database_url
+from django.conf import settings
 
 
 # prod avec Heroku
@@ -56,6 +57,6 @@ CONTENT_SECURITY_POLICY = {
     }
 }
 
-
+print("🔍 DEBUG =", settings.DEBUG)
 
 

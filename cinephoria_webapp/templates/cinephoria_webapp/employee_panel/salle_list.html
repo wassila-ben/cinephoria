@@ -1,0 +1,48 @@
+{% extends 'cinephoria_webapp/base.html' %}
+{% block title %}Gestion des Salles{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2 class="fw-bold">Gestion des Salles</h2>
+        <a href="{% url 'employee_salle_create' %}" class="btn btn-primary">Ajouter une salle</a>
+    </div>
+
+    {% if salles %}
+    <div class="table-responsive rounded shadow-sm">
+        <table class="table table-bordered align-middle bg-white">
+            <thead class="table-light">
+                <tr>
+                    <th>Nom</th>
+                    <th>Cinéma</th>
+                    <th>Qualité</th>
+                    <th>Capacité</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for salle in salles %}
+                <tr>
+                    <td>{{ salle.nom }}</td>
+                    <td>{{ salle.cinema.nom }}</td>
+                    <td>{{ salle.qualite.nom }}</td>
+                    <td>{{ salle.capacite }}</td>
+                    <td>
+                        <div class="d-flex gap-2">
+                            <a href="{% url 'employee_salle_update' salle.id %}" class="btn btn-outline-primary btn-sm w-100">Modifier</a>
+                            <form method="post" action="{% url 'employee_salle_delete' salle.id %}" onsubmit="return confirm('Confirmer la suppression ?');">
+                                {% csrf_token %}
+                                <button type="submit" class="btn btn-outline-danger btn-sm w-100">Supprimer</button>
+                            </form>
+                        </div>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    {% else %}
+        <div class="alert alert-warning text-center">Aucune salle enregistrée pour le moment.</div>
+    {% endif %}
+</div>
+{% endblock %}

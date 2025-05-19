@@ -19,3 +19,6 @@ staticfiles/
 
 *.env
 *.env-prod
+
+# cinephoria-electron
+node_modules/

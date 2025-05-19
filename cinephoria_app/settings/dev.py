@@ -1,7 +1,10 @@
 from .base import *
+from django.conf import settings
+
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
+
 ALLOWED_HOSTS = ['0.0.0.0', 'localhost', '127.0.0.1']
 
 SECRET_KEY = os.getenv("SECRET_KEY")
@@ -9,11 +12,11 @@ SECRET_KEY = os.getenv("SECRET_KEY")
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': os.getenv("POSTGRES_DB"),
-        'USER': os.getenv("POSTGRES_USER"),
-        'PASSWORD': os.getenv("POSTGRES_PASSWORD"),
-        'HOST': os.getenv("POSTGRES_HOST"),
-        'PORT': os.getenv("POSTGRES_PORT"),
+        'NAME': os.getenv("POSTGRES_DB", "cinema"),
+        'USER': os.getenv("POSTGRES_USER", "admin"),
+        'PASSWORD': os.getenv("POSTGRES_PASSWORD", "admin123"),
+        'HOST': os.getenv("DB_HOST", "db"),
+        'PORT': "5432",
     }
 }
 
@@ -24,3 +27,5 @@ MEDIA_URL = '/media/'
 STATICFILES_DIRS = [BASE_DIR / 'static']
 STATIC_ROOT = BASE_DIR / 'staticfiles'
 MEDIA_ROOT = BASE_DIR / 'media' 
+
+print("🔍 DEBUG =", settings.DEBUG)

@@ -1,0 +1,122 @@
+body {
+    font-family: 'Segoe UI', sans-serif;
+    background: #1e1e1e;
+    color: #f0f0f0;
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    background: #2a2a2a;
+    padding: 1rem 2rem;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.4);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+header h1 {
+    font-size: 1.5rem;
+    margin: 0;
+}
+
+.link-web {
+    color: #4aa5f0;
+    text-decoration: none;
+    font-size: 0.9rem;
+}
+
+main {
+    padding: 2rem;
+    max-width: 900px;
+    margin: auto;
+}
+
+section {
+    margin-bottom: 3rem;
+}
+
+h2 {
+    margin-bottom: 1rem;
+    color: #ffffff;
+}
+
+form input,
+form textarea {
+    display: block;
+    width: 100%;
+    margin-bottom: 1rem;
+    padding: 0.75rem;
+    border: 1px solid #555;
+    border-radius: 6px;
+    font-size: 1rem;
+    background: #2c2c2c;
+    color: #f0f0f0;
+}
+
+form button {
+    padding: 0.75rem 1.5rem;
+    background: #3d3d3d;
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    font-size: 1rem;
+    cursor: pointer;
+}
+
+form button:hover {
+    background: #575757;
+}
+
+.card-list ul {
+    list-style: none;
+    padding: 0;
+}
+
+.card-list li {
+    background: #2c2c2c;
+    margin-bottom: 1rem;
+    padding: 1rem;
+    border-radius: 6px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.4);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.card-list li.resolu {
+    opacity: 0.5;
+}
+
+.card-list button {
+    background: #444;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    color: white;
+}
+
+.card-list button:hover {
+    background: #666;
+}
+
+#incident-response {
+    margin-top: 0.5rem;
+    font-weight: bold;
+    color: #7cf07c;
+}
+
+.select-field {
+    width: 100%;
+    padding: 0.75rem;
+    margin-bottom: 1rem;
+    border: 1px solid #555;
+    border-radius: 6px;
+    font-size: 1rem;
+    background-color: #2c2c2c;
+    color: #f0f0f0;
+    appearance: none;
+}
+

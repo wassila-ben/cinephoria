@@ -55,7 +55,7 @@
                         {% if user.is_authenticated %}
                             <li><a class="dropdown-item" href="#">Mes informations</a></li>
                             {% if user.is_staff %}
-                                <li><a class="dropdown-item" href="#">Espace employé</a></li>
+                                <li><a class="dropdown-item" href="{% url 'employee_dashboard' %}">Intranet</a></li>
                             {% endif %}
                             {% if user.is_superuser %}
                                 <li><a class="dropdown-item" href="{% url 'admin_dashboard' %}">Administration</a></li>
@@ -86,7 +86,18 @@
             </div>
         {% endfor %}
     {% endif %}
-    </div>  
+    </div class="conatainer">  
+    {% if request.user.is_authenticated %}
+    {% if request.user.is_superuser %}
+        <div class="alert alert-danger text-center mb-0">
+            Vous êtes connecté en tant qu’administrateur.
+        </div>
+    {% elif request.user.is_staff %}
+        <div class="alert alert-info text-center mb-0">
+            Vous êtes connecté en tant qu’employé.
+        </div>
+    {% endif %}
+{% endif %}
 
     <!--  Contenu principal -->
     <section>{% block content %}{% endblock %}</section>

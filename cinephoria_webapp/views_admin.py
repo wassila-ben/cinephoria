@@ -1,26 +1,14 @@
-from django.contrib.auth.decorators import user_passes_test
-from django.shortcuts import render
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
-from .forms_admin import FilmForm, SeanceForm, SalleForm, EmployeCreationForm
+from .forms_admin import FilmForm, SeanceForm, SalleForm, EmployeCreationForm, ResetEmployePasswordForm
 from .models import Film, Seance, Salle, Utilisateur
-from django.shortcuts import redirect, get_object_or_404
 from cinephoria_webapp.mongo_utils import get_reservations_last_7_days
-
-def superuser_required(view_func):
-    def _wrapped_view(request, *args, **kwargs):
-        if not request.user.is_authenticated:
-            messages.warning(request, "Veuillez vous connecter pour accéder à cette page.")
-            return redirect('login')  
-        if not request.user.is_superuser:
-            messages.error(request, "Accès refusé : vous n'avez pas les droits d'administration.")
-            return redirect('index')  
-        return view_func(request, *args, **kwargs)
-    return _wrapped_view
+from cinephoria_webapp.decorators import admin_required
 
 
-@superuser_required
 @login_required
+@admin_required
 def admin_dashboard(request):
     nb_films = Film.objects.count()
     nb_seances = Seance.objects.count()
@@ -40,13 +28,14 @@ def admin_dashboard(request):
 
 
 @login_required
-@superuser_required
+@admin_required
 def film_list(request):
     films = Film.objects.all()
     return render(request, 'cinephoria_webapp/admin_panel/film_list.html', {'films': films})
 
+
 @login_required
-@superuser_required
+@admin_required
 def film_create(request):
     if request.method == 'POST':
         form = FilmForm(request.POST, request.FILES)
@@ -61,8 +50,9 @@ def film_create(request):
         form = FilmForm()
     return render(request, 'cinephoria_webapp/admin_panel/film_form.html', {'form': form})
 
+
 @login_required
-@superuser_required
+@admin_required
 def film_update(request, film_id):
     film = get_object_or_404(Film, id=film_id)
     if request.method == 'POST':
@@ -78,22 +68,25 @@ def film_update(request, film_id):
         form = FilmForm(instance=film)
     return render(request, 'cinephoria_webapp/admin_panel/film_form.html', {'form': form})
 
+
 @login_required
-@superuser_required
+@admin_required
 def film_delete(request, film_id):
     film = get_object_or_404(Film, id=film_id)
     film.delete()
     messages.success(request, "Film supprimé.")
     return redirect('admin_film_list')
 
-@superuser_required
+
 @login_required
+@admin_required
 def seance_list(request):
     seances = Seance.objects.select_related('film', 'salle').all()
     return render(request, 'cinephoria_webapp/admin_panel/seance_list.html', {'seances': seances})
 
-@superuser_required
+
 @login_required
+@admin_required
 def seance_create(request):
     if request.method == 'POST':
         form = SeanceForm(request.POST)
@@ -105,8 +98,9 @@ def seance_create(request):
         form = SeanceForm()
     return render(request, 'cinephoria_webapp/admin_panel/seance_form.html', {'form': form})
 
-@superuser_required
+
 @login_required
+@admin_required
 def seance_update(request, seance_id):
     seance = get_object_or_404(Seance, id=seance_id)
     if request.method == 'POST':
@@ -119,22 +113,25 @@ def seance_update(request, seance_id):
         form = SeanceForm(instance=seance)
     return render(request, 'cinephoria_webapp/admin_panel/seance_form.html', {'form': form})
 
-@superuser_required
+
 @login_required
+@admin_required
 def seance_delete(request, seance_id):
     seance = get_object_or_404(Seance, id=seance_id)
     seance.delete()
     messages.success(request, "Séance supprimée.")
     return redirect('admin_seance_list')
 
-@superuser_required
+
 @login_required
+@admin_required
 def salle_list(request):
     salles = Salle.objects.select_related('cinema', 'qualite').all()
     return render(request, 'cinephoria_webapp/admin_panel/salle_list.html', {'salles': salles})
 
-@superuser_required
+
 @login_required
+@admin_required
 def salle_create(request):
     form = SalleForm(request.POST or None)
     if request.method == 'POST' and form.is_valid():
@@ -143,8 +140,9 @@ def salle_create(request):
         return redirect('admin_salle_list')
     return render(request, 'cinephoria_webapp/admin_panel/salle_form.html', {'form': form})
 
-@superuser_required
+
 @login_required
+@admin_required
 def salle_update(request, salle_id):
     salle = get_object_or_404(Salle, id=salle_id)
     form = SalleForm(request.POST or None, instance=salle)
@@ -154,16 +152,18 @@ def salle_update(request, salle_id):
         return redirect('admin_salle_list')
     return render(request, 'cinephoria_webapp/admin_panel/salle_form.html', {'form': form})
 
-@superuser_required
+
 @login_required
+@admin_required
 def salle_delete(request, salle_id):
     salle = get_object_or_404(Salle, id=salle_id)
     salle.delete()
     messages.success(request, "Salle supprimée.")
     return redirect('admin_salle_list')
 
-@superuser_required
+
 @login_required
+@admin_required
 def employe_create(request):
     if request.method == 'POST':
         form = EmployeCreationForm(request.POST)
@@ -175,10 +175,9 @@ def employe_create(request):
         form = EmployeCreationForm()
     return render(request, 'cinephoria_webapp/admin_panel/employe_form.html', {'form': form})
 
-from .forms_admin import ResetEmployePasswordForm
 
-@superuser_required
 @login_required
+@admin_required
 def employe_reset_password(request):
     if request.method == 'POST':
         form = ResetEmployePasswordForm(request.POST)
@@ -193,8 +192,9 @@ def employe_reset_password(request):
         form = ResetEmployePasswordForm()
     return render(request, 'cinephoria_webapp/admin_panel/employe_reset.html', {'form': form})
 
-@superuser_required
+
 @login_required
+@admin_required
 def dashboard_reservations(request):
     raw_data = get_reservations_last_7_days()
     data = []

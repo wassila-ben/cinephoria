@@ -1,0 +1,24 @@
+{% extends 'cinephoria_webapp/base.html' %}
+
+{% block title %}Espace Employé{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <h2 class="fw-bold text-center mb-4">🎬 Tableau de bord Employé</h2>
+
+    <div class="row g-4">
+        <div class="col-md-6">
+            <a href="{% url 'employee_film_list' %}" class="btn btn-outline-primary w-100 p-3">Gérer les films</a>
+        </div>
+        <div class="col-md-6">
+            <a href="{% url 'employee_seance_list' %}" class="btn btn-outline-primary w-100 p-3">Gérer les séances</a>
+        </div>
+        <div class="col-md-6">
+            <a href="{% url 'employee_salle_list' %}" class="btn btn-outline-primary w-100 p-3">Gérer les salles</a>
+        </div>
+        <div class="col-md-6">
+            <a href="{% url 'employee_review_list' %}" class="btn btn-outline-primary w-100 p-3">Modérer les avis</a>
+        </div>
+    </div>
+</div>
+{% endblock %}
