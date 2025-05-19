@@ -26,6 +26,7 @@ jobs:
           --health-retries 5
 
     env:
+      CI: true
       DJANGO_SETTINGS_MODULE: cinephoria_app.settings.prod
       DATABASE_URL: postgres://postgres:postgres@localhost:5432/cinephoria_test
       DEBUG: False
