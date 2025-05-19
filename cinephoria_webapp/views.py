@@ -10,6 +10,9 @@ from django.contrib.auth.decorators import login_required
 from django.db.models import Avg
 from django.contrib.auth.decorators import login_required
 from django.utils.http import url_has_allowed_host_and_scheme
+from django.core.mail import send_mail
+from django.http import HttpResponse
+from django.conf import settings
 
 
 
@@ -299,3 +302,4 @@ def choix_sieges(request):
 @login_required
 def reservation_confirmation(request):
     return render(request, 'cinephoria_webapp/reservation_confirmation.html')
+

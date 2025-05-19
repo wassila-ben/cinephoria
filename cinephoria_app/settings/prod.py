@@ -9,12 +9,14 @@ ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS', '127.0.0.1,localhost').split(',')
 
 
 SECRET_KEY = os.getenv("SECRET_KEY")
+if not SECRET_KEY:
+    raise Exception("SECRET_KEY manquant dans les variables d'environnement")
 
-DEBUG = os.getenv('DEBUG', 'False') == 'True'
+DEBUG = False
 
 STATIC_URL = '/static/'
 STATIC_ROOT = BASE_DIR / 'staticfiles'     # dossier collecté par collectstatic
-STATICFILES_DIRS = [BASE_DIR / 'static']   # dossier où sont tes fichiers persos
+STATICFILES_DIRS = [BASE_DIR / 'static']   
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
@@ -31,13 +33,22 @@ if DATABASE_URL and DATABASE_URL.startswith("postgres"):
         'default': dj_database_url.parse(DATABASE_URL, conn_max_age=600)
     }
 else:
-    print(" Pas de DATABASE_URL valide. Utilisation de SQLite.")
+    print(" DATABASE_URL manquant ou invalide. Utilisation de SQLite.",file=sys.stderr)
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.sqlite3',
             'NAME': BASE_DIR / 'db.sqlite3',
         }
     }
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = os.getenv('EMAIL_USER')
+EMAIL_HOST_PASSWORD = os.getenv('EMAIL_PASS')
+DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
+
 
 
 SECURE_HSTS_SECONDS = 3600

@@ -4,6 +4,7 @@ from django.urls import path
 from django.conf import settings
 from django.conf.urls.static import static
 from cinephoria_webapp import views_admin, views_employee, views_api
+from .views import test_email_view
 
 
 urlpatterns = [
