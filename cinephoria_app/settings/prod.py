@@ -67,6 +67,7 @@ CONTENT_SECURITY_POLICY = {
         'frame-src': ("'none'",),
     }
 }
+
 print("Chargement des settings PROD")
 
 
