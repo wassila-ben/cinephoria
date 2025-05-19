@@ -79,7 +79,7 @@ jobs:
           echo " password ${HEROKU_API_KEY}" >> ~/.netrc
           chmod 600 ~/.netrc
         env:
-          DJANGO_SETTINGS_MODULE: settings.prod
+          DJANGO_SETTINGS_MODULE: cinephoria_app.setting.prod
           HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
           HEROKU_EMAIL: ${{ secrets.HEROKU_EMAIL }}
 
