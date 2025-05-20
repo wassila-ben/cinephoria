@@ -34,41 +34,11 @@
       "genre": "Animation"
     }
   },
-  {
-    "model": "cinephoria_webapp.utilisateur",
-    "pk": 1,
-    "fields": {
-      "pk": 1,
-      "email": "cinephoria.project+admin@gmail.com",
-      "identifiant": "admin",
-      "nom": "Admin",
-      "prenom": "Cinéphoria",
-      "is_active": true,
-      "is_staff": true,
-      "is_superuser": true,
-      "password": "pbkdf2_sha256$260000$dummy$hash"
-    }
-  },
-  {
-    "model": "cinephoria_webapp.utilisateur",
-    "pk": 2,
-    "fields": {
-      "pk": 2,
-      "email": "cinephoria.project+staff1@gmail.com",
-      "identifiant": "staff1",
-      "nom": "Employé",
-      "prenom": "Cinéphoria",
-      "is_active": true,
-      "is_staff": true,
-      "is_superuser": false,
-      "password": "pbkdf2_sha256$260000$dummy$hash"
-    }
-  },
+  
   {
     "model": "cinephoria_webapp.cinema",
     "pk": 1,
     "fields": {
-      "pk": 1,
       "nom": "Cinéphoria Paris",
       "ville": "Paris",
       "adresse": "1 rue du cinéma",
@@ -83,7 +53,6 @@
     "model": "cinephoria_webapp.cinema",
     "pk": 2,
     "fields": {
-      "pk": 2,
       "nom": "Cinéphoria Nantes",
       "ville": "Nantes",
       "adresse": "1 rue du cinéma",
@@ -98,7 +67,6 @@
     "model": "cinephoria_webapp.cinema",
     "pk": 3,
     "fields": {
-      "pk": 3,
       "nom": "Cinéphoria Toulouse",
       "ville": "Toulouse",
       "adresse": "1 rue du cinéma",
@@ -113,7 +81,6 @@
     "model": "cinephoria_webapp.cinema",
     "pk": 4,
     "fields": {
-      "pk": 4,
       "nom": "Cinéphoria Bordeaux",
       "ville": "Bordeaux",
       "adresse": "1 rue du cinéma",
@@ -128,7 +95,6 @@
     "model": "cinephoria_webapp.cinema",
     "pk": 5,
     "fields": {
-      "pk": 5,
       "nom": "Cinéphoria Lille",
       "ville": "Lille",
       "adresse": "1 rue du cinéma",
@@ -143,7 +109,6 @@
     "model": "cinephoria_webapp.cinema",
     "pk": 6,
     "fields": {
-      "pk": 6,
       "nom": "Cinéphoria Charleroi",
       "ville": "Charleroi",
       "pays": "Belgique",
@@ -158,7 +123,6 @@
     "model": "cinephoria_webapp.cinema",
     "pk": 7,
     "fields": {
-      "pk": 7,
       "nom": "Cinéphoria Liège",
       "ville": "Liège",
       "pays": "Belgique",
@@ -361,9 +325,10 @@
       "label_coup_de_coeur": false,
       "note": 4.0,
       "genre": 1,
-      "dernier_modificateur": 1,
+      "dernier_modificateur": null,
       "date_ajout": "2025-05-14",
       "date_sortie": "2025-05-01",
+      "date_derniere_modification": "2025-05-19T00:00:00Z",
       "cinemas": [
         1,
         2,
@@ -382,9 +347,10 @@
       "label_coup_de_coeur": false,
       "note": 4.0,
       "genre": 3,
-      "dernier_modificateur": 1,
+      "dernier_modificateur": null,
       "date_ajout": "2025-05-14",
       "date_sortie": "2025-05-01",
+      "date_derniere_modification": "2025-05-19T00:00:00Z",
       "cinemas": [
         1,
         2,
@@ -403,9 +369,10 @@
       "label_coup_de_coeur": true,
       "note": 4.0,
       "genre": 2,
-      "dernier_modificateur": 1,
+      "dernier_modificateur": null,
       "date_ajout": "2025-05-14",
       "date_sortie": "2025-05-01",
+      "date_derniere_modification": "2025-05-19T00:00:00Z",
       "cinemas": [
         1,
         2,
@@ -424,9 +391,10 @@
       "label_coup_de_coeur": false,
       "note": 4.0,
       "genre": 2,
-      "dernier_modificateur": 1,
+      "dernier_modificateur": null,
       "date_ajout": "2025-05-14",
       "date_sortie": "2025-05-01",
+      "date_derniere_modification": "2025-05-19T00:00:00Z",
       "cinemas": [
         1,
         2,
@@ -445,9 +413,10 @@
       "label_coup_de_coeur": false,
       "note": 4.0,
       "genre": 4,
-      "dernier_modificateur": 1,
+      "dernier_modificateur": null,
       "date_ajout": "2025-05-14",
       "date_sortie": "2025-05-01",
+      "date_derniere_modification": "2025-05-19T00:00:00Z",
       "cinemas": [
         1,
         2,
@@ -466,9 +435,10 @@
       "label_coup_de_coeur": true,
       "note": 4.0,
       "genre": 4,
-      "dernier_modificateur": 1,
+      "dernier_modificateur": null,
       "date_ajout": "2025-05-14",
       "date_sortie": "2025-05-01",
+      "date_derniere_modification": "2025-05-19T00:00:00Z",
       "cinemas": [
         1,
         2,
@@ -487,9 +457,10 @@
       "label_coup_de_coeur": false,
       "note": 4.0,
       "genre": 4,
-      "dernier_modificateur": 1,
+      "dernier_modificateur": null,
       "date_ajout": "2025-05-14",
       "date_sortie": "2025-05-01",
+      "date_derniere_modification": "2025-05-19T00:00:00Z",
       "cinemas": [
         1,
         2,
@@ -508,9 +479,10 @@
       "label_coup_de_coeur": false,
       "note": 4.0,
       "genre": 5,
-      "dernier_modificateur": 1,
+      "dernier_modificateur": null,
       "date_ajout": "2025-05-14",
       "date_sortie": "2025-05-01",
+      "date_derniere_modification": "2025-05-19T00:00:00Z",
       "cinemas": [
         1,
         2,
@@ -529,9 +501,10 @@
       "label_coup_de_coeur": true,
       "note": 4.0,
       "genre": 1,
-      "dernier_modificateur": 1,
+      "dernier_modificateur": null,
       "date_ajout": "2025-05-14",
       "date_sortie": "2025-05-01",
+      "date_derniere_modification": "2025-05-19T00:00:00Z",
       "cinemas": [
         1,
         2,
@@ -550,9 +523,10 @@
       "label_coup_de_coeur": false,
       "note": 4.0,
       "genre": 2,
-      "dernier_modificateur": 1,
+      "dernier_modificateur": null,
       "date_ajout": "2025-05-14",
       "date_sortie": "2025-05-01",
+      "date_derniere_modification": "2025-05-19T00:00:00Z",
       "cinemas": [
         1,
         2,
@@ -571,9 +545,10 @@
       "label_coup_de_coeur": false,
       "note": 4.0,
       "genre": 1,
-      "dernier_modificateur": 1,
+      "dernier_modificateur": null,
       "date_ajout": "2025-05-14",
       "date_sortie": "2025-05-01",
+      "date_derniere_modification": "2025-05-19T00:00:00Z",
       "cinemas": [
         1,
         2,
@@ -592,9 +567,10 @@
       "label_coup_de_coeur": true,
       "note": 4.0,
       "genre": 1,
-      "dernier_modificateur": 1,
+      "dernier_modificateur": null,
       "date_ajout": "2025-05-14",
       "date_sortie": "2025-05-01",
+      "date_derniere_modification": "2025-05-19T00:00:00Z",
       "cinemas": [
         1,
         2,
@@ -613,9 +589,10 @@
       "label_coup_de_coeur": false,
       "note": 4.0,
       "genre": 2,
-      "dernier_modificateur": 1,
+      "dernier_modificateur": null,
       "date_ajout": "2025-05-14",
       "date_sortie": "2025-05-01",
+      "date_derniere_modification": "2025-05-19T00:00:00Z",
       "cinemas": [
         1,
         2,
@@ -634,9 +611,10 @@
       "label_coup_de_coeur": false,
       "note": 4.0,
       "genre": 2,
-      "dernier_modificateur": 1,
+      "dernier_modificateur": null,
       "date_ajout": "2025-05-14",
       "date_sortie": "2025-05-01",
+      "date_derniere_modification": "2025-05-19T00:00:00Z",
       "cinemas": [
         1,
         2,
