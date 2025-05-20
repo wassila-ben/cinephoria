@@ -1,6 +1,6 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
-from .models import Utilisateur, Seance, Reservation, ReservationSiege, Siege
+from .models import Utilisateur, Seance, Reservation, ReservationSiege, Siege, Avis
 from django.core.exceptions import ValidationError
 from django.contrib.auth import get_user_model
 
@@ -71,3 +71,12 @@ class SiegeSelectionForm(forms.Form):
                 required=True,
                 label="Choisissez vos sièges"
             )
+
+class AvisForm(forms.ModelForm):
+    class Meta:
+        model = Avis
+        fields = ['note', 'commentaire']
+        widgets = {
+            'note': forms.NumberInput(attrs={'min': 1, 'max': 5}),
+            'commentaire': forms.Textarea(attrs={'rows': 3}),
+        }

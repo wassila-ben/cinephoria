@@ -1,7 +1,7 @@
-from django.db.models.signals import post_save
+from django.db.models.signals import post_save, post_delete
 from django.dispatch import receiver
 from datetime import datetime
-from .models import Reservation
+from .models import Reservation, Avis
 from cinephoria_webapp.mongo_utils import get_mongo_collection
 from django.conf import settings
 from rest_framework.authtoken.models import Token
@@ -25,3 +25,8 @@ def ajouter_reservation_mongo(sender, instance, created, **kwargs):
 def create_auth_token(sender, instance=None, created=False, **kwargs):
     if created:
         Token.objects.get_or_create(user=instance)
+
+@receiver(post_save, sender=Avis)
+@receiver(post_delete, sender=Avis)
+def update_film_note_on_avis_change(sender, instance, **kwargs):
+    instance.film.calculer_note_moyenne()
