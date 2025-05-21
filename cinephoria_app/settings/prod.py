@@ -86,7 +86,9 @@ CLOUDINARY_STORAGE = {
     'API_SECRET': os.getenv('CLOUDINARY_API_SECRET'),
 }
 
-default_storage._wrapped = MediaCloudinaryStorage()
+if os.getenv("CI") != "true":  # on ne force PAS pendant les tests
+    from cloudinary_storage.storage import MediaCloudinaryStorage
+    default_storage._wrapped = MediaCloudinaryStorage()
 
 print("Chargement des settings PROD")
 
