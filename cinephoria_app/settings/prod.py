@@ -70,6 +70,12 @@ CONTENT_SECURITY_POLICY = {
         'frame-src': ("'none'",),
     }
 }
+
+
+# Redéfinir MEDIA_URL uniquement si nécessaire
+MEDIA_URL = f"https://res.cloudinary.com/{os.getenv('CLOUDINARY_CLOUD_NAME')}/"
+
+
 DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
 
 CLOUDINARY_STORAGE = {
@@ -77,10 +83,6 @@ CLOUDINARY_STORAGE = {
     'API_KEY': os.getenv('CLOUDINARY_API_KEY'),
     'API_SECRET': os.getenv('CLOUDINARY_API_SECRET'),
 }
-
-# Redéfinir MEDIA_URL uniquement si nécessaire
-MEDIA_URL = f"https://res.cloudinary.com/{os.getenv('CLOUDINARY_CLOUD_NAME')}/"
-
 print("Chargement des settings PROD")
 
 
