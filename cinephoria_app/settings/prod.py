@@ -20,7 +20,7 @@ STATIC_URL = '/static/'
 STATIC_ROOT = BASE_DIR / 'staticfiles'     # dossier collecté par collectstatic
 STATICFILES_DIRS = [BASE_DIR / 'static']   
 
-MEDIA_URL = f"https://res.cloudinary.com/{os.getenv('CLOUDINARY_CLOUD_NAME')}/"
+
 
 # WhiteNoise & Cloudinary
 MIDDLEWARE.insert(1, 'whitenoise.middleware.WhiteNoiseMiddleware')
