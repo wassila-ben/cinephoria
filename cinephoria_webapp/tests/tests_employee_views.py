@@ -124,7 +124,7 @@ class EmployeeViewsTests(TestCase):
         response = self.client.get(reverse('employee_review_validate', args=[self.avis.id]))
         self.assertEqual(response.status_code, 302)
         self.avis.refresh_from_db()
-        self.assertTrue(self.avis.validé)
+        self.assertTrue(self.avis.valide)
 
     def test_review_delete(self):
         response = self.client.get(reverse('employee_review_delete', args=[self.avis.id]))
