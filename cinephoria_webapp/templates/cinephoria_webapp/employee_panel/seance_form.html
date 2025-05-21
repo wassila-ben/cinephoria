@@ -2,36 +2,62 @@
 {% block title %}{{ form.instance.pk|yesno:"Modifier une séance,Ajouter une séance" }}{% endblock %}
 
 {% block content %}
-<div class="container py-5">
-    <h2 class="fw-bold mb-4">
-        {% if form.instance.pk %}
-            Modifier une séance
-        {% else %}
-            Ajouter une séance
-        {% endif %}
-    </h2>
+<div class="container py-5 text-white">
+    <div class="row justify-content-center">
+        <div class="col-lg-8">
+            <div class="p-4 border rounded bg-dark shadow-sm">
+                <h2 class="mb-4">
+                    {% if form.instance.pk %}
+                        Modifier une séance
+                    {% else %}
+                        Ajouter une séance
+                    {% endif %}
+                </h2>
 
-    <form method="post" class="bg-white p-4 shadow-sm rounded">
-        {% csrf_token %}
-        {{ form.non_field_errors }}
-        
-        {% for field in form %}
-            <div class="mb-3">
-                <label for="{{ field.id_for_label }}" class="form-label">{{ field.label }}</label>
-                {{ field }}
-                {% if field.help_text %}
-                    <div class="form-text">{{ field.help_text }}</div>
-                {% endif %}
-                {% for error in field.errors %}
-                    <div class="text-danger small">{{ error }}</div>
-                {% endfor %}
+                <form method="post" class="row g-4">
+                    {% csrf_token %}
+
+                    <div class="col-md-6">
+                        <label for="{{ form.film.id_for_label }}" class="form-label">Film</label>
+                        {{ form.film }}
+                    </div>
+
+                    <div class="col-md-6">
+                        <label for="{{ form.salle.id_for_label }}" class="form-label">Salle</label>
+                        {{ form.salle }}
+                    </div>
+
+                    <div class="col-md-6">
+                        <label for="{{ form.heure_debut.id_for_label }}" class="form-label">Heure de début</label>
+                        {{ form.heure_debut }}
+                    </div>
+
+                    <div class="col-md-6">
+                        <label class="form-label d-block">Jours de diffusion</label>
+                        <div class="row">
+                            {% for checkbox in form.jours_diffusion %}
+                                <div class="col-6">
+                                    <div class="form-check">
+                                        {{ checkbox.tag }}
+                                        <label class="form-check-label" for="{{ checkbox.id_for_label }}">
+                                            {{ checkbox.choice_label }}
+                                        </label>
+                                    </div>
+                                </div>
+                            {% endfor %}
+                        </div>
+                        {% for error in form.jours_diffusion.errors %}
+                            <div class="text-danger small">{{ error }}</div>
+                        {% endfor %}
+                    </div>
+
+                    <div class="col-12 d-flex gap-3 mt-4">
+                        <button type="submit" class="btn btn-outline-light">Enregistrer</button>
+                        <a href="{% url 'employee_seance_list' %}" class="btn btn-outline-secondary">Annuler</a>
+                    </div>
+                </form>
             </div>
-        {% endfor %}
-
-        <button type="submit" class="btn btn-success">
-            {% if form.instance.pk %}Enregistrer les modifications{% else %}Ajouter la séance{% endif %}
-        </button>
-        <a href="{% url 'employee_seance_list' %}" class="btn btn-secondary">Annuler</a>
-    </form>
+        </div>
+    </div>
 </div>
 {% endblock %}

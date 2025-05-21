@@ -33,12 +33,13 @@
                         <div class="card-body">
                             <h5 class="card-title">{{ seance.salle.cinema.nom }} – {{ seance.salle.nom }}</h5>
                             <p class="card-text">
-                                Jour : {{ seance.get_jour_semaine_display }}<br>
+                                Jour : {{ seance.get_jours_affichage|join:", " }}<br>
                                 Heure : {{ seance.heure_debut|time:"H:i" }} - {{ seance.heure_fin|time:"H:i" }}<br>
                                 Qualité : <img class="img" src="{{ logos.url }}"><br>
                                 Prix : {{ seance.salle.qualite.prix_seance }} €
                             </p>
-                            <a href="#" class="btn btn-primary">Réserver cette séance</a>
+                            <a href="{% url 'reservation' %}?seance_id={{ seance.id }}" class="btn btn-primary">Réserver une séance</a>
+
                         </div>
                     </div>
                 </div>

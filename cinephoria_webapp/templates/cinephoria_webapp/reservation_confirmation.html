@@ -2,13 +2,41 @@
 {% load static %}
 
 {% block title %}
-    Réservation confirmée
+Confirmation de votre réservation
 {% endblock %}
 
 {% block content %}
-<div class="container mt-5 text-center">
-    <h2>Merci pour votre réservation !</h2>
-    <p>Un email de confirmation vous a été envoyé.</p>
-    <a href="{% url 'index' %}" class="btn btn-primary mt-3">Retour à l'accueil</a>
+<div class="container mt-5 text-white">
+
+    <h2 class="mb-4">Confirmation de votre réservation</h2>
+
+    {% if reservation %}
+        <div class="mb-4">
+            <p><strong>Film :</strong> {{ reservation.seance.film.titre }}</p>
+            <p><strong>Cinéma :</strong> {{ reservation.seance.salle.cinema.nom }}</p>
+            <p><strong>Salle :</strong> {{ reservation.seance.salle.numero_salle }}</p>
+            <p><strong>Date :</strong> {{ jour_reel|date:"l d F Y" }} à {{ heure }}</p>
+            <p><strong>Nombre de places :</strong> {{ reservation.nombre_places }}</p>
+            <p><strong>Prix total :</strong> {{ reservation.prix_total|floatformat:"-2" }} €</p>
+        </div>
+
+        <h4>Vos billets</h4>
+        <div class="row">
+            {% for billet in billets %}
+            <div class="col-md-4 mb-4">
+                <div class="card bg-dark text-white">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">Billet n° {{ billet.numero_billet }}</h5>
+                        <img src="{{ billet.qr_code.url }}" alt="QR Code" class="img-fluid mt-3" style="max-width: 200px;">
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <p class="text-danger">Aucune réservation trouvée.</p>
+    {% endif %}
+
+    <a href="{% url 'index' %}" class="btn btn-primary mt-4">Retour à l'accueil</a>
 </div>
 {% endblock %}

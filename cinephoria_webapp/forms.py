@@ -1,6 +1,6 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
-from .models import Utilisateur, Seance, Reservation, ReservationSiege, Siege, Avis
+from .models import Utilisateur, Seance, Reservation, ReservationSiege, Siege, Avis, Film, Cinema
 from django.core.exceptions import ValidationError
 from django.contrib.auth import get_user_model
 
@@ -51,26 +51,71 @@ class SeanceForm(forms.ModelForm):
         model = Seance
         fields = '__all__'
 
-class ReservationForm(forms.ModelForm):
-    class Meta:
-        model = Reservation
-        fields = ['seance', 'nombre_places']
+
+class ChoixSeanceForm(forms.Form):
+    seance = forms.ModelChoiceField(queryset=Seance.objects.select_related('film', 'salle__cinema'), label="Sélectionnez une séance")
+
+
+class ReservationForm(forms.Form):
+    film = forms.ModelChoiceField(
+        queryset=Film.objects.all(),
+        label="Film",
+        widget=forms.Select(attrs={'class': 'form-control', 'id': 'id_film'})
+    )
+
+    cinema = forms.CharField(required=True, widget=forms.HiddenInput(attrs={'id': 'id_cinema'}))
+    jour = forms.CharField(required=True, widget=forms.HiddenInput(attrs={'id': 'id_jour'}))
+    heure = forms.CharField(required=True, widget=forms.HiddenInput(attrs={'id': 'id_heure'}))
+
+    nombre_places = forms.IntegerField(
+        label="Nombre de places",
+        min_value=1,
+        widget=forms.NumberInput(attrs={'class': 'form-control'})
+    )
+
+    places_pmr = forms.BooleanField(
+        label="Places PMR",
+        required=False,
+        widget=forms.CheckboxInput(attrs={'class': 'form-check-input'})
+    )
 
 class SiegeSelectionForm(forms.Form):
-    def __init__(self, *args, **kwargs):
-        seance = kwargs.pop('seance', None)
-        super().__init__(*args, **kwargs)
-        if seance:
-            # Filtrer les sièges libres pour cette séance
-            reserved_sieges = ReservationSiege.objects.filter(reservation__seance=seance).values_list('siege_id', flat=True)
-            sieges_disponibles = Siege.objects.exclude(id__in=reserved_sieges)
+    sieges = forms.CharField(widget=forms.HiddenInput())
 
-            self.fields['sieges'] = forms.ModelMultipleChoiceField(
-                queryset=sieges_disponibles,
-                widget=forms.CheckboxSelectMultiple,
-                required=True,
-                label="Choisissez vos sièges"
-            )
+    def __init__(self, *args, **kwargs):
+        self.seance = kwargs.pop('seance', None)
+        self.places_pmr = kwargs.pop('places_pmr', False)  # ✅ ici
+        super().__init__(*args, **kwargs)
+
+    def clean_sieges(self):
+        ids_str = self.cleaned_data['sieges']
+        try:
+            ids = [int(i) for i in ids_str.split(',') if i.strip()]
+        except ValueError:
+            raise ValidationError("Format invalide pour les sièges.")
+
+        sieges_qs = Siege.objects.filter(id__in=ids)
+
+        if sieges_qs.count() != len(ids):
+            raise ValidationError("Un ou plusieurs sièges sélectionnés sont invalides.")
+
+        if self.seance:
+            sieges_salle = set(self.seance.salle.sieges.values_list('id', flat=True))
+            if not all(s.id in sieges_salle for s in sieges_qs):
+                raise ValidationError("Certains sièges ne sont pas dans la salle de cette séance.")
+
+        # Vérifie la sélection PMR
+        pmr_count = sum(1 for s in sieges_qs if s.place_pmr)
+
+        if self.places_pmr:
+            if pmr_count == 0:
+                raise ValidationError("Vous avez demandé des places PMR, mais aucun siège PMR n'a été sélectionné.")
+        else:
+            if pmr_count > 0:
+                raise ValidationError("Vous n'avez pas demandé de place PMR, mais vous en avez sélectionné une.")
+
+        return sieges_qs
+
 
 class AvisForm(forms.ModelForm):
     class Meta:
@@ -80,3 +125,36 @@ class AvisForm(forms.ModelForm):
             'note': forms.NumberInput(attrs={'min': 1, 'max': 5}),
             'commentaire': forms.Textarea(attrs={'rows': 3}),
         }
+
+class SeanceSelectorForm(forms.Form):
+    film = forms.ModelChoiceField(
+        queryset=Film.objects.all(),
+        label="Film",
+        required=True,
+        widget=forms.Select(attrs={"class": "form-control"})
+    )
+
+    cinema = forms.ModelChoiceField(
+        queryset=Cinema.objects.none(),  # Initialement vide
+        label="Cinéma",
+        required=False,
+        widget=forms.Select(attrs={"class": "form-control"})
+    )
+
+    jour = forms.DateField(
+        required=False,
+        label="Jour",
+        widget=forms.DateInput(attrs={
+            "type": "date",
+            "class": "form-control"
+        })
+    )
+
+    heure = forms.TimeField(
+        required=False,
+        label="Heure",
+        widget=forms.TimeInput(attrs={
+            "type": "time",
+            "class": "form-control"
+        })
+    )

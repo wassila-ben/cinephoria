@@ -8,6 +8,7 @@ from django.db.models.signals import post_save, post_delete
 from django.dispatch import receiver
 import os
 import qrcode
+import uuid
 
 # Custom user manager
 class CustomUserManager(BaseUserManager):
@@ -122,6 +123,43 @@ class Salle(models.Model):
     qualite = models.ForeignKey(Qualite, on_delete=models.CASCADE)
     cinema = models.ForeignKey('Cinema', on_delete=models.CASCADE, related_name='salles')
 
+    def save(self, *args, **kwargs):
+        is_new = self.pk is None
+        super().save(*args, **kwargs)
+        if is_new:
+            self.generer_sieges()
+
+    def generer_sieges(self):
+        RANGEES = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H']
+        sieges_max_par_rangee = 10
+        pmr_ratio = 0.05
+
+        total_places = self.total_places
+        pmr_places = self.places_pmr or int(total_places * pmr_ratio)
+
+        count = 0
+        pmr_assigned = 0
+        rangee_index = 0
+
+        while count < total_places:
+            current_rangee = RANGEES[rangee_index % len(RANGEES)]
+            for num in range(1, sieges_max_par_rangee + 1):
+                if count >= total_places:
+                    break
+
+                is_pmr = pmr_assigned < pmr_places
+                if is_pmr:
+                    pmr_assigned += 1
+
+                Siege.objects.create(
+                    salle=self,
+                    numero_siege=num,
+                    rangee=current_rangee,
+                    place_pmr=is_pmr
+                )
+                count += 1
+            rangee_index += 1
+
     def __str__(self):
         return f"Salle {self.numero_salle} - {self.cinema.nom}"
     
@@ -164,6 +202,11 @@ class Seance(models.Model):
 
     def cinema(self):
         return self.salle.cinema
+    
+    def get_jours_affichage(self):
+        jours_dict = dict(self.JOURS_SEMAINE)
+        return [jours_dict.get(j, "Inconnu") for j in self.jours_diffusion]
+
 
 class Siege(models.Model):
     salle = models.ForeignKey(Salle, on_delete=models.CASCADE, related_name="sieges")
@@ -221,7 +264,11 @@ class ReservationSiege(models.Model):
 
 class Billet(models.Model):
     reservation = models.ForeignKey(Reservation, on_delete=models.CASCADE)
-    numero_billet = models.CharField(max_length=20, unique=True, default="000000")
+    
+    def generate_unique_billet_number():
+        return str(uuid.uuid4().hex[:10]).upper()
+
+    numero_billet = models.CharField(max_length=20, unique=True, default=generate_unique_billet_number)
     qr_code = models.ImageField(upload_to='qrcodes/', blank=True)
 
     def __str__(self):

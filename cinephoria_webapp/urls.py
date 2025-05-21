@@ -32,6 +32,9 @@ urlpatterns = [
     path("choisir_cinema/", views.choisir_cinema, name="choisir_cinema"),
 
     path('reservation/', views.reservation, name='reservation'),
+    path('api/seance-infos/', views_api.get_seance_infos, name='get_seance_infos'),
+    path('reservation/choix_sièges/', views.choix_sieges, name='choix_sieges'),
+    path('reservation/confirmation/', views.reservation_confirmation, name='reservation_confirmation'),
 
     # espace Admin
     path('admin-panel/', views_admin.admin_dashboard, name='admin_dashboard'),

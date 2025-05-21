@@ -1,17 +1,163 @@
 {% extends 'cinephoria_webapp/base.html' %}
 {% load static %}
 
-{% block title%}
-{% comment %} titre du film {% endcomment %}
+{% block title %}
+Réserver un film
 {% endblock %}
 
 {% block content %}
-<div class="container mt-5">
-    <h2>Réservez votre place</h2>
-    <form method="post">
+<div class="container mt-5 text-white">
+
+    <h2 class="mb-4">Réservez votre place</h2>
+
+    {% if form.errors %}
+    <div class="alert alert-danger">
+        <ul class="mb-0">
+            {% for field, errors in form.errors.items %}
+                {% for error in errors %}
+                    <li>{{ error }}</li>
+                {% endfor %}
+            {% endfor %}
+        </ul>
+    </div>
+    {% endif %}
+
+    <form method="post" id="reservationForm">
         {% csrf_token %}
-        {{ form.as_p }}
+
+        <!-- FILM -->
+        <div class="mb-3">
+            {{ form.film.label_tag }} {{ form.film }}
+        </div>
+
+        <!-- CINÉMA -->
+        <div class="mb-3">
+            <label for="cinemaSelect">Cinéma</label>
+            <select id="cinemaSelect" class="form-control"></select>
+            {{ form.cinema }}
+        </div>
+
+        <!-- JOUR -->
+        <div class="mb-3">
+            <label for="jourSelect">Jour</label>
+            <select id="jourSelect" class="form-control"></select>
+            {{ form.jour }}
+        </div>
+
+        <!-- HEURE -->
+        <div class="mb-3">
+            <label for="heureSelect">Heure</label>
+            <select id="heureSelect" class="form-control"></select>
+            {{ form.heure }}
+        </div>
+
+        <!-- NOMBRE DE PLACES -->
+        <div class="mb-3">
+            {{ form.nombre_places.label_tag }} {{ form.nombre_places }}
+        </div>
+
+        <!-- PMR -->
+        <div class="mb-3 form-check">
+            {{ form.places_pmr }} {{ form.places_pmr.label_tag }}
+        </div>
+
         <button type="submit" class="btn btn-primary">Réserver</button>
     </form>
+
+    <!-- Section dynamique -->
+    <div id="filmDetails" class="mt-5 d-none">
+        <h4>Détails du film sélectionné</h4>
+        <div class="row mb-4">
+            <div class="col-md-4">
+                <img id="filmAffiche" src="" class="img-fluid rounded" alt="Affiche">
+            </div>
+            <div class="col-md-8">
+                <p><strong>Titre :</strong> <span id="filmTitre"></span></p>
+                <p><strong>Synopsis :</strong> <span id="filmSynopsis"></span></p>
+                <p><strong>Cinéma :</strong> <span id="filmCinema"></span></p>
+                <p><strong>Qualité :</strong> <span id="filmQualite"></span></p>
+                <p><strong>Jour :</strong> <span id="filmJour"></span></p>
+                <p><strong>Heure :</strong> <span id="filmHeure"></span></p>
+            </div>
+        </div>
+    </div>
+
 </div>
+{% endblock %}
+
+{% block script %}
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+    console.log("filmSelect:", document.getElementById("id_film"));
+    const filmSelect = document.getElementById("id_film");
+    const cinemaSelect = document.getElementById("cinemaSelect");
+    const jourSelect = document.getElementById("jourSelect");
+    const heureSelect = document.getElementById("heureSelect");
+
+    const hiddenCinema = document.getElementById("id_cinema");
+    const hiddenJour = document.getElementById("id_jour");
+    const hiddenHeure = document.getElementById("id_heure");
+
+    function syncHidden() {
+        hiddenCinema.value = cinemaSelect.value;
+        hiddenJour.value = jourSelect.value;
+        hiddenHeure.value = heureSelect.value;
+    }
+
+    filmSelect.addEventListener("change", async () => {
+        const filmId = filmSelect.value;
+        if (!filmId) return;
+
+        const res = await fetch(`/api/seance-infos/?film_id=${filmId}`);
+        const data = await res.json();
+
+        // CINÉMA
+        cinemaSelect.innerHTML = "";
+        data.cinemas.forEach(c => {
+            const opt = document.createElement("option");
+            opt.value = c.id;
+            opt.textContent = c.nom;
+            cinemaSelect.appendChild(opt);
+        });
+
+        // JOUR
+        jourSelect.innerHTML = "";
+        data.jours.forEach(j => {
+            const opt = document.createElement("option");
+            opt.value = j.value;
+            opt.textContent = j.label;
+            jourSelect.appendChild(opt);
+        });
+
+        // HEURE
+        heureSelect.innerHTML = "";
+        data.horaires.forEach(h => {
+            const opt = document.createElement("option");
+            opt.value = h;
+            opt.textContent = h;
+            heureSelect.appendChild(opt);
+        });
+
+        // Détails film
+        document.getElementById("filmDetails").classList.remove("d-none");
+        document.getElementById("filmTitre").textContent = data.titre || "";
+        document.getElementById("filmSynopsis").textContent = data.synopsis || "";
+        document.getElementById("filmCinema").textContent = data.cinema || "";
+        document.getElementById("filmQualite").textContent = data.qualite || "";
+        document.getElementById("filmJour").textContent = data.jour || "";
+        document.getElementById("filmHeure").textContent = data.heure || "";
+        document.getElementById("filmAffiche").src = data.affiche || "";
+
+        syncHidden();
+    });
+
+    cinemaSelect.addEventListener("change", syncHidden);
+    jourSelect.addEventListener("change", syncHidden);
+    heureSelect.addEventListener("change", syncHidden);
+
+    if (filmSelect.value) {
+        filmSelect.dispatchEvent(new Event("change"));
+    }
+});
+</script>
 {% endblock %}

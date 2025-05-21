@@ -5,6 +5,7 @@ from .forms_admin import FilmForm, SeanceForm, SalleForm, EmployeCreationForm, R
 from .models import Film, Seance, Salle, Utilisateur
 from cinephoria_webapp.mongo_utils import get_reservations_last_7_days
 from cinephoria_webapp.decorators import admin_required
+from datetime import datetime, timedelta
 
 
 @login_required
@@ -91,8 +92,24 @@ def seance_create(request):
     if request.method == 'POST':
         form = SeanceForm(request.POST)
         if form.is_valid():
-            form.save()
-            messages.success(request, "Séance ajoutée.")
+            film = form.cleaned_data['film']
+            salle = form.cleaned_data['salle']
+            heure_debut = form.cleaned_data['heure_debut']
+            jours = [int(j) for j in form.cleaned_data['jours_diffusion']]
+            
+            for jour in jours:
+                debut_dt = datetime.combine(datetime.today(), heure_debut)
+                heure_fin = (debut_dt + timedelta(minutes=film.duree)).time()
+
+                Seance.objects.create(
+                    film=film,
+                    salle=salle,
+                    heure_debut=heure_debut,
+                    heure_fin=heure_fin,
+                    jours_diffusion=[jour]
+                )
+
+            messages.success(request, f"{len(jours)} séance(s) créée(s).")
             return redirect('admin_seance_list')
     else:
         form = SeanceForm()

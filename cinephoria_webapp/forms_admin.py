@@ -20,16 +20,20 @@ class FilmForm(forms.ModelForm):
         }
 
 class SeanceForm(forms.ModelForm):
+    jours_diffusion = forms.MultipleChoiceField(
+        choices=Seance.JOURS_SEMAINE,
+        widget=forms.CheckboxSelectMultiple(attrs={'class': 'form-check-input'}),
+        required=True,
+        label="Jours de diffusion"
+    )
+
     class Meta:
         model = Seance
-        fields = '__all__'
+        fields = ['film', 'salle', 'heure_debut', 'jours_diffusion']
         widgets = {
             'film': forms.Select(attrs={'class': 'form-select'}),
             'salle': forms.Select(attrs={'class': 'form-select'}),
             'heure_debut': forms.TimeInput(attrs={'class': 'form-control', 'type': 'time'}),
-            'jours_diffusion': forms.SelectMultiple(
-                attrs={'class': 'form-select', 'size': 5}
-            ),
         }
 
 

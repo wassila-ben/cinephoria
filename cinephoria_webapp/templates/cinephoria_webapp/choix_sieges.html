@@ -1,19 +1,71 @@
 {% extends 'cinephoria_webapp/base.html' %}
-{% load static %}
-
-{% block title %}
-    Choix des sièges
-{% endblock %}
+{% block title %}Choix des sièges{% endblock %}
 
 {% block content %}
-<div class="container mt-5">
-    <h2 class="text-center mb-4 text-uppercase">Choisissez vos sièges</h2>
-    <p>Nombre de places à réserver : {{ nombre_places }}</p>
+<div class="container mt-5 text-white">
+    <h2 class="mb-4">Sélectionnez vos sièges</h2>
 
     <form method="post">
         {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit" class="btn btn-success">Confirmer les sièges</button>
+
+        <div class="siege-grid">
+        {% for rangee, sieges in sieges_by_rangee.items %}
+            <div class="mb-3">
+                <strong class="text-white">Rangée {{ rangee }}</strong><br>
+                {% for s in sieges %}
+                {% if s.reserve %}
+                <span class="btn btn-sm btn-danger disabled mb-1">{{ s.numero }}</span>
+                {% else %}
+                <label class="btn btn-outline-light btn-sm mb-1 position-relative">
+                    <input type="checkbox" name="sieges" value="{{ s.id }}" autocomplete="off" class="d-none">
+                    {{ s.numero }}
+                </label>
+                {% endif %}
+                {% endfor %}
+        </div>
+        {% endfor %}
+        </div>
+
+        <div class="alert alert-info mt-3">
+            <strong>Prix total :</strong> {{ prix_total }} €<br>
+            ({{ prix_unitaires }} € × {{ nombre_places }} place{{ nombre_places|pluralize }})
+        </div>
+
+        <button type="submit" class="btn btn-primary mt-3">Confirmer les sièges</button>
     </form>
 </div>
+{% endblock %}
+
+{% block script %}
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+    const maxSeats = Number("{{ nombre_places|default_if_none:0 }}");
+    const selectedSeats = new Set();
+
+    document.querySelectorAll('input[name="sieges"]').forEach(input => {
+        const label = input.closest("label");
+
+        label.addEventListener("click", e => {
+            e.preventDefault();  // empêche le comportement par défaut du label
+            const seatId = input.value;
+
+            if (selectedSeats.has(seatId)) {
+                selectedSeats.delete(seatId);
+                label.classList.remove("btn-primary");
+                label.classList.add("btn-outline-light");
+                input.checked = false;
+            } else {
+            if (selectedSeats.size >= maxSeats) {
+                alert(`Vous pouvez sélectionner jusqu’à ${maxSeats} siège(s).`);
+                return;
+            }
+            selectedSeats.add(seatId);
+            label.classList.remove("btn-outline-light");
+            label.classList.add("btn-primary");
+            input.checked = true;
+            }
+        });
+    });
+});
+</script>
 {% endblock %}

@@ -1,7 +1,7 @@
 from django.shortcuts import render, get_object_or_404, redirect
-from .models import Film, Cinema, Avis, Seance, Reservation, Genre, Utilisateur, ReservationSiege
+from .models import Film, Cinema, Avis, Seance, Reservation, Genre, Utilisateur, ReservationSiege, Siege, Billet
 from datetime import datetime, timedelta
-from .forms import CustomUserCreationForm, CustomAuthenticationForm, ReservationForm, SiegeSelectionForm
+from .forms import CustomUserCreationForm, CustomAuthenticationForm, ReservationForm, SiegeSelectionForm, ChoixSeanceForm
 from django.contrib import messages
 from django.utils import timezone
 from django.utils.dateparse import parse_date
@@ -13,6 +13,9 @@ from django.utils.http import url_has_allowed_host_and_scheme
 from django.core.mail import send_mail
 from django.http import HttpResponse
 from django.conf import settings
+import json
+from django.core.serializers.json import DjangoJSONEncoder
+
 
 
 
@@ -192,7 +195,7 @@ def films_view(request):
 
     cinema_id = request.GET.get('cinema')
     genre_id = request.GET.get('genre')
-    jour = request.GET.get('jour')
+    jour = request.GET.get('jour')  # format attendu : "YYYY-MM-DD"
 
     if cinema_id:
         films = films.filter(seance__salle__cinema__id=cinema_id).distinct()
@@ -204,9 +207,10 @@ def films_view(request):
         try:
             jour_date = parse_date(jour)
             if jour_date:
-                films = films.filter(seance__heure_debut__date=jour_date).distinct()
+                jour_index = jour_date.weekday()  # 0 = Lundi, ..., 6 = Dimanche
+                films = films.filter(seance__jours_diffusion__contains=[jour_index]).distinct()
         except ValueError:
-            pass  # Si le jour est invalide, on ignore le filtre
+            pass
 
     return render(request, 'cinephoria_webapp/films.html', {
         'films': films,
@@ -224,82 +228,162 @@ def choisir_cinema(request):
     return redirect('index')
 
 
+
 @login_required
 def reservation(request):
-    if request.method == 'POST':
-        step = request.POST.get('step')
-        
-        if step == '1':
-            # Création du formulaire de réservation
-            form = ReservationForm(request.POST)
-            if form.is_valid():
-                reservation_data = {
-                    'seance_id': form.cleaned_data['seance'].id,
-                    'nombre_places': form.cleaned_data['nombre_places'],
-                    }
-                request.session['reservation_data'] = reservation_data
-                return redirect('choix_sieges')
-        else:
-            form = ReservationForm()
-        return render(request, 'cinephoria_webapp/reservation.html', {'form': form})
+    seance_id = request.GET.get('seance_id')
+    selected_seance = None
+    film = None
+    seance = None
 
+    if seance_id:
+        try:
+            selected_seance = Seance.objects.select_related('film', 'salle', 'salle__cinema').get(id=seance_id)
+            film = selected_seance.film
+        except Seance.DoesNotExist:
+            messages.warning(request, "Séance introuvable.")
+            return redirect('films_view')
+
+    # Pré-sélections par défaut
+    selected_film_id = request.POST.get("film") if request.method == "POST" else None
+    selected_jour = request.POST.get("jour") if request.method == "POST" else None
+    selected_heure = request.POST.get("heure") if request.method == "POST" else None
+    selected_cinema = request.POST.get("cinema") if request.method == "POST" else None
+
+    if request.method == 'POST':
+        form = ReservationForm(request.POST)
+        if form.is_valid():
+            if not (selected_film_id and selected_jour and selected_heure):
+                messages.error(request, "Veuillez remplir tous les champs requis.")
+            else:
+                try:
+                    film = Film.objects.get(id=selected_film_id)
+                    heure_obj = datetime.strptime(selected_heure, "%H:%M").time()
+                    jour_obj = datetime.strptime(selected_jour, "%Y-%m-%d").date()
+
+                    seance = Seance.objects.filter(
+                        film=film,
+                        heure_debut=heure_obj,
+                        jours_diffusion__contains=[jour_obj.weekday()]
+                    ).first()
+
+                    if not seance:
+                        messages.error(request, "Aucune séance ne correspond à votre sélection.")
+                    else:
+                        request.session['reservation_data'] = {
+                            'seance_id': seance.id,
+                            'nombre_places': form.cleaned_data['nombre_places'],
+                            'places_pmr': form.cleaned_data.get('places_pmr', False),
+                        }
+                        return redirect('choix_sieges')
+
+                except (Film.DoesNotExist, ValueError):
+                    messages.error(request, "Sélection invalide.")
+        else:
+            messages.error(request, "Veuillez corriger les erreurs du formulaire.")
     else:
-        form = ReservationForm()
-        return render(request, 'cinephoria_webapp/reservation.html', {'form': form})
+        form = ReservationForm(initial={'seance': selected_seance})
+
+    return render(request, 'cinephoria_webapp/reservation.html', {
+        'form': form,
+        'film': film,
+        'seance': seance or selected_seance,
+        'films': Film.objects.all(),
+        'selected_film_id': selected_film_id,
+        'selected_jour': selected_jour,
+        'selected_heure': selected_heure,
+        'selected_cinema': selected_cinema,
+    })
+
 
 @login_required
 def choix_sieges(request):
-    reservation_data = request.session.get('reservation_data')
-    if not reservation_data:
+    data = request.session.get('reservation_data')
+    if not data:
         return redirect('reservation')
 
-    seance_id = reservation_data['seance_id']
-    seance = get_object_or_404(Seance, id=seance_id)
-    nombre_places = reservation_data['nombre_places']
+    seance = get_object_or_404(Seance, id=data['seance_id'])
+    nombre_places = data['nombre_places']
+    places_pmr = data.get('places_pmr', False)
+
+    sieges = seance.salle.sieges.all().order_by('rangee', 'numero_siege')
+    sieges_disponibles = [s for s in sieges if not ReservationSiege.objects.filter(reservation__seance=seance, siege=s).exists()]
 
     if request.method == 'POST':
-        form = SiegeSelectionForm(request.POST, seance=seance)
-        if form.is_valid():
-            sieges = form.cleaned_data['sieges']
-
-            if len(sieges) != nombre_places:
-                form.add_error('sieges', f"Vous devez sélectionner exactement {nombre_places} sièges.")
+        selected_ids = request.POST.getlist('sieges')
+        if len(selected_ids) != nombre_places:
+            messages.error(request, f"Veuillez sélectionner exactement {nombre_places} sièges.")
+        else:
+            selected = Siege.objects.filter(id__in=selected_ids)
+            if places_pmr and not any(s.place_pmr for s in selected):
+                messages.error(request, "Vous avez demandé des places PMR mais n’en avez pas sélectionné.")
+            elif not places_pmr and any(s.place_pmr for s in selected):
+                messages.error(request, "Vous avez sélectionné un siège PMR sans l’avoir demandé.")
             else:
-                # Vérifie si les sièges sont déjà réservés pour cette séance
-                sieges_deja_reserves = ReservationSiege.objects.filter(
-                    reservation__seance=seance,
-                    siege__in=sieges
-                ).exists()
+                reservation = Reservation.objects.create(
+                    utilisateur=request.user,
+                    seance=seance,
+                    nombre_places=nombre_places
+                )
+                for siege in selected:
+                    ReservationSiege.objects.create(reservation=reservation, siege=siege)
+                    Billet.objects.create(reservation=reservation)
 
-                if sieges_deja_reserves:
-                    form.add_error('sieges', "Un ou plusieurs sièges sélectionnés sont déjà réservés. Veuillez en choisir d'autres.")
-                else:
-                    # Création de la réservation
-                    reservation = Reservation.objects.create(
-                        utilisateur=request.user.utilisateur,
-                        seance=seance,
-                        nombre_places=nombre_places,
-                    )
-                    # Calcul du prix
-                    reservation.calculer_prix()
+                reservation.calculer_prix()
+                return redirect('reservation_confirmation')
 
-                    # Lier les sièges à la réservation
-                    for siege in sieges:
-                        ReservationSiege.objects.create(
-                            reservation=reservation,
-                            siege=siege
-                        )
+    # Regroupe les sièges par rangée
+    sieges_by_rangee = {}
+    for s in sieges:
+        sieges_by_rangee.setdefault(s.rangee, []).append({
+            'id': s.id,
+            'numero': s.numero_siege,
+            'reserve': ReservationSiege.objects.filter(reservation__seance=seance, siege=s).exists(),
+            'pmr': s.place_pmr,
+        })
 
-                    return redirect('reservation_confirmation')
-    else:
-        form = SiegeSelectionForm(seance=seance)
+        print("sieges_by_rangee=", sieges_by_rangee)
+    
+    prix_unitaires = seance.salle.qualite.prix_seance
+    prix_total = prix_unitaires * nombre_places
 
     return render(request, 'cinephoria_webapp/choix_sieges.html', {
-        'form': form,
-        'nombre_places': nombre_places
+        'sieges_by_rangee': sieges_by_rangee,
+        'seance': seance,
+        'nombre_places': nombre_places,
+        'places_pmr': places_pmr,
+        'prix_unitaires': prix_unitaires,
+        'prix_total': prix_total,
     })
 
 @login_required
 def reservation_confirmation(request):
-    return render(request, 'cinephoria_webapp/reservation_confirmation.html')
+    reservation = Reservation.objects.filter(utilisateur=request.user).order_by('-id').first()
 
+    if not reservation:
+        messages.error(request, "Aucune réservation trouvée.")
+        return redirect('index')
+
+    # cherche la date réelle de la séance
+    seance = reservation.seance
+    now = timezone.now()
+    today = now.date()
+    current_weekday = today.weekday()
+
+    # cherche le prochain jour correspondant à la séance
+    jour_reel = None
+    for i in range(7):
+        candidate = today + timedelta(days=i)
+        if candidate.weekday() in seance.jours_diffusion:
+            jour_reel = candidate
+            break
+
+    billets = reservation.billet_set.all()
+    context = {
+        "reservation": reservation,
+        "billets": billets,
+        "jour_reel": jour_reel,
+        "heure": seance.heure_debut,
+    }
+
+    return render(request, 'cinephoria_webapp/reservation_confirmation.html', context)
