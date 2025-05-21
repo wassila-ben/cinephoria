@@ -3,31 +3,36 @@
     "model": "cinephoria_webapp.genre",
     "fields": {
       "genre": "Science-fiction"
-    }
+    },
+    "pk": 1
   },
   {
     "model": "cinephoria_webapp.genre",
     "fields": {
       "genre": "Comédie"
-    }
+    },
+    "pk": 2
   },
   {
     "model": "cinephoria_webapp.genre",
     "fields": {
       "genre": "Drame"
-    }
+    },
+    "pk": 3
   },
   {
     "model": "cinephoria_webapp.genre",
     "fields": {
       "genre": "Fantastique"
-    }
+    },
+    "pk": 4
   },
   {
     "model": "cinephoria_webapp.genre",
     "fields": {
       "genre": "Animation"
-    }
+    },
+    "pk": 5
   },
   {
     "model": "cinephoria_webapp.cinema",
@@ -40,7 +45,8 @@
       "telephone": "01 23 45 67 89",
       "horaire_ouverture": "10:00",
       "horaire_fermeture": "23:00"
-    }
+    },
+    "pk": 1
   },
   {
     "model": "cinephoria_webapp.cinema",
@@ -53,7 +59,8 @@
       "telephone": "01 23 45 67 89",
       "horaire_ouverture": "10:00",
       "horaire_fermeture": "23:00"
-    }
+    },
+    "pk": 2
   },
   {
     "model": "cinephoria_webapp.cinema",
@@ -66,7 +73,8 @@
       "telephone": "01 23 45 67 89",
       "horaire_ouverture": "10:00",
       "horaire_fermeture": "23:00"
-    }
+    },
+    "pk": 3
   },
   {
     "model": "cinephoria_webapp.cinema",
@@ -79,7 +87,8 @@
       "telephone": "01 23 45 67 89",
       "horaire_ouverture": "10:00",
       "horaire_fermeture": "23:00"
-    }
+    },
+    "pk": 4
   },
   {
     "model": "cinephoria_webapp.cinema",
@@ -92,7 +101,8 @@
       "telephone": "01 23 45 67 89",
       "horaire_ouverture": "10:00",
       "horaire_fermeture": "23:00"
-    }
+    },
+    "pk": 5
   },
   {
     "model": "cinephoria_webapp.cinema",
@@ -105,7 +115,8 @@
       "telephone": "01 23 45 67 89",
       "horaire_ouverture": "10:00",
       "horaire_fermeture": "23:00"
-    }
+    },
+    "pk": 6
   },
   {
     "model": "cinephoria_webapp.cinema",
@@ -118,34 +129,35 @@
       "telephone": "01 23 45 67 89",
       "horaire_ouverture": "10:00",
       "horaire_fermeture": "23:00"
+    },
+    "pk": 7
+  },
+  {
+    "model": "cinephoria_webapp.qualite",
+    "pk": 1,
+    "fields": {
+      "type_qualite": "4K",
+      "prix_seance": 14.5,
+      "logo_qualite": "default/logo.png"
     }
   },
   {
-  "model": "cinephoria_webapp.qualite",
-  "pk": 1,
-  "fields": {
-    "type_qualite": "4K",
-    "prix_seance": 14.5,
-    "logo_qualite": "default/logo.png"
-  }
+    "model": "cinephoria_webapp.qualite",
+    "pk": 2,
+    "fields": {
+      "type_qualite": "3D",
+      "prix_seance": 13.0,
+      "logo_qualite": "default/logo.png"
+    }
   },
   {
-  "model": "cinephoria_webapp.qualite",
-  "pk": 2,
-  "fields": {
-    "type_qualite": "3D",
-    "prix_seance": 13.0,
-    "logo_qualite": "default/logo.png"
-  }
-  },
-  {
-  "model": "cinephoria_webapp.qualite",
-  "pk": 3,
-  "fields": {
-    "type_qualite": "Standard",
-    "prix_seance": 10.0,
-    "logo_qualite": "default/logo.png"
-  }
+    "model": "cinephoria_webapp.qualite",
+    "pk": 3,
+    "fields": {
+      "type_qualite": "Standard",
+      "prix_seance": 10.0,
+      "logo_qualite": "default/logo.png"
+    }
   },
   {
     "model": "cinephoria_webapp.salle",
@@ -155,7 +167,8 @@
       "places_pmr": 2,
       "qualite": 2,
       "cinema": 1
-    }
+    },
+    "pk": 1
   },
   {
     "model": "cinephoria_webapp.salle",
@@ -165,7 +178,8 @@
       "places_pmr": 2,
       "qualite": 3,
       "cinema": 1
-    }
+    },
+    "pk": 2
   },
   {
     "model": "cinephoria_webapp.salle",
@@ -175,7 +189,8 @@
       "places_pmr": 2,
       "qualite": 2,
       "cinema": 2
-    }
+    },
+    "pk": 3
   },
   {
     "model": "cinephoria_webapp.salle",
@@ -185,7 +200,8 @@
       "places_pmr": 2,
       "qualite": 3,
       "cinema": 2
-    }
+    },
+    "pk": 4
   },
   {
     "model": "cinephoria_webapp.salle",
@@ -195,7 +211,8 @@
       "places_pmr": 2,
       "qualite": 2,
       "cinema": 3
-    }
+    },
+    "pk": 5
   },
   {
     "model": "cinephoria_webapp.salle",
@@ -205,7 +222,8 @@
       "places_pmr": 2,
       "qualite": 3,
       "cinema": 3
-    }
+    },
+    "pk": 6
   },
   {
     "model": "cinephoria_webapp.salle",
@@ -215,7 +233,8 @@
       "places_pmr": 2,
       "qualite": 2,
       "cinema": 4
-    }
+    },
+    "pk": 7
   },
   {
     "model": "cinephoria_webapp.salle",
@@ -225,7 +244,8 @@
       "places_pmr": 2,
       "qualite": 3,
       "cinema": 4
-    }
+    },
+    "pk": 8
   },
   {
     "model": "cinephoria_webapp.salle",
@@ -235,7 +255,8 @@
       "places_pmr": 2,
       "qualite": 2,
       "cinema": 5
-    }
+    },
+    "pk": 9
   },
   {
     "model": "cinephoria_webapp.salle",
@@ -245,7 +266,8 @@
       "places_pmr": 2,
       "qualite": 3,
       "cinema": 5
-    }
+    },
+    "pk": 10
   },
   {
     "model": "cinephoria_webapp.salle",
@@ -255,7 +277,8 @@
       "places_pmr": 2,
       "qualite": 2,
       "cinema": 6
-    }
+    },
+    "pk": 11
   },
   {
     "model": "cinephoria_webapp.salle",
@@ -265,7 +288,8 @@
       "places_pmr": 2,
       "qualite": 3,
       "cinema": 6
-    }
+    },
+    "pk": 12
   },
   {
     "model": "cinephoria_webapp.salle",
@@ -275,7 +299,8 @@
       "places_pmr": 2,
       "qualite": 2,
       "cinema": 7
-    }
+    },
+    "pk": 13
   },
   {
     "model": "cinephoria_webapp.salle",
@@ -285,7 +310,8 @@
       "places_pmr": 2,
       "qualite": 3,
       "cinema": 7
-    }
+    },
+    "pk": 14
   },
   {
     "model": "cinephoria_webapp.film",
@@ -306,7 +332,8 @@
         2,
         3
       ]
-    }
+    },
+    "pk": 1
   },
   {
     "model": "cinephoria_webapp.film",
@@ -327,7 +354,8 @@
         2,
         3
       ]
-    }
+    },
+    "pk": 2
   },
   {
     "model": "cinephoria_webapp.film",
@@ -348,7 +376,8 @@
         2,
         3
       ]
-    }
+    },
+    "pk": 3
   },
   {
     "model": "cinephoria_webapp.film",
@@ -369,7 +398,8 @@
         2,
         3
       ]
-    }
+    },
+    "pk": 4
   },
   {
     "model": "cinephoria_webapp.film",
@@ -390,7 +420,8 @@
         2,
         3
       ]
-    }
+    },
+    "pk": 5
   },
   {
     "model": "cinephoria_webapp.film",
@@ -411,7 +442,8 @@
         2,
         3
       ]
-    }
+    },
+    "pk": 6
   },
   {
     "model": "cinephoria_webapp.film",
@@ -432,7 +464,8 @@
         2,
         3
       ]
-    }
+    },
+    "pk": 7
   },
   {
     "model": "cinephoria_webapp.film",
@@ -453,7 +486,8 @@
         2,
         3
       ]
-    }
+    },
+    "pk": 8
   },
   {
     "model": "cinephoria_webapp.film",
@@ -474,7 +508,8 @@
         2,
         3
       ]
-    }
+    },
+    "pk": 9
   },
   {
     "model": "cinephoria_webapp.film",
@@ -495,7 +530,8 @@
         2,
         3
       ]
-    }
+    },
+    "pk": 10
   },
   {
     "model": "cinephoria_webapp.film",
@@ -516,7 +552,8 @@
         2,
         3
       ]
-    }
+    },
+    "pk": 11
   },
   {
     "model": "cinephoria_webapp.film",
@@ -537,7 +574,8 @@
         2,
         3
       ]
-    }
+    },
+    "pk": 12
   },
   {
     "model": "cinephoria_webapp.film",
@@ -558,7 +596,8 @@
         2,
         3
       ]
-    }
+    },
+    "pk": 13
   },
   {
     "model": "cinephoria_webapp.film",
@@ -579,7 +618,8 @@
         2,
         3
       ]
-    }
+    },
+    "pk": 14
   },
   {
     "model": "cinephoria_webapp.seance",
@@ -590,7 +630,8 @@
       "jours_diffusion": [
         4
       ]
-    }
+    },
+    "pk": 1
   },
   {
     "model": "cinephoria_webapp.seance",
@@ -601,7 +642,8 @@
       "jours_diffusion": [
         5
       ]
-    }
+    },
+    "pk": 2
   },
   {
     "model": "cinephoria_webapp.seance",
@@ -612,7 +654,8 @@
       "jours_diffusion": [
         6
       ]
-    }
+    },
+    "pk": 3
   },
   {
     "model": "cinephoria_webapp.seance",
@@ -623,7 +666,8 @@
       "jours_diffusion": [
         4
       ]
-    }
+    },
+    "pk": 4
   },
   {
     "model": "cinephoria_webapp.seance",
@@ -634,7 +678,8 @@
       "jours_diffusion": [
         5
       ]
-    }
+    },
+    "pk": 5
   },
   {
     "model": "cinephoria_webapp.seance",
@@ -645,7 +690,8 @@
       "jours_diffusion": [
         6
       ]
-    }
+    },
+    "pk": 6
   },
   {
     "model": "cinephoria_webapp.seance",
@@ -656,7 +702,8 @@
       "jours_diffusion": [
         4
       ]
-    }
+    },
+    "pk": 7
   },
   {
     "model": "cinephoria_webapp.seance",
@@ -667,7 +714,8 @@
       "jours_diffusion": [
         5
       ]
-    }
+    },
+    "pk": 8
   },
   {
     "model": "cinephoria_webapp.seance",
@@ -678,7 +726,8 @@
       "jours_diffusion": [
         6
       ]
-    }
+    },
+    "pk": 9
   },
   {
     "model": "cinephoria_webapp.seance",
@@ -689,7 +738,8 @@
       "jours_diffusion": [
         4
       ]
-    }
+    },
+    "pk": 10
   },
   {
     "model": "cinephoria_webapp.seance",
@@ -700,7 +750,8 @@
       "jours_diffusion": [
         5
       ]
-    }
+    },
+    "pk": 11
   },
   {
     "model": "cinephoria_webapp.seance",
@@ -711,7 +762,8 @@
       "jours_diffusion": [
         6
       ]
-    }
+    },
+    "pk": 12
   },
   {
     "model": "cinephoria_webapp.seance",
@@ -722,7 +774,8 @@
       "jours_diffusion": [
         4
       ]
-    }
+    },
+    "pk": 13
   },
   {
     "model": "cinephoria_webapp.seance",
@@ -733,7 +786,8 @@
       "jours_diffusion": [
         5
       ]
-    }
+    },
+    "pk": 14
   },
   {
     "model": "cinephoria_webapp.seance",
@@ -744,7 +798,8 @@
       "jours_diffusion": [
         6
       ]
-    }
+    },
+    "pk": 15
   },
   {
     "model": "cinephoria_webapp.seance",
@@ -755,7 +810,8 @@
       "jours_diffusion": [
         4
       ]
-    }
+    },
+    "pk": 16
   },
   {
     "model": "cinephoria_webapp.seance",
@@ -766,7 +822,8 @@
       "jours_diffusion": [
         5
       ]
-    }
+    },
+    "pk": 17
   },
   {
     "model": "cinephoria_webapp.seance",
@@ -777,7 +834,8 @@
       "jours_diffusion": [
         6
       ]
-    }
+    },
+    "pk": 18
   },
   {
     "model": "cinephoria_webapp.seance",
@@ -788,7 +846,8 @@
       "jours_diffusion": [
         4
       ]
-    }
+    },
+    "pk": 19
   },
   {
     "model": "cinephoria_webapp.seance",
@@ -799,7 +858,8 @@
       "jours_diffusion": [
         5
       ]
-    }
+    },
+    "pk": 20
   },
   {
     "model": "cinephoria_webapp.seance",
@@ -810,7 +870,8 @@
       "jours_diffusion": [
         6
       ]
-    }
+    },
+    "pk": 21
   },
   {
     "model": "cinephoria_webapp.seance",
@@ -821,7 +882,8 @@
       "jours_diffusion": [
         4
       ]
-    }
+    },
+    "pk": 22
   },
   {
     "model": "cinephoria_webapp.seance",
@@ -832,7 +894,8 @@
       "jours_diffusion": [
         5
       ]
-    }
+    },
+    "pk": 23
   },
   {
     "model": "cinephoria_webapp.seance",
@@ -843,7 +906,8 @@
       "jours_diffusion": [
         6
       ]
-    }
+    },
+    "pk": 24
   },
   {
     "model": "cinephoria_webapp.seance",
@@ -854,7 +918,8 @@
       "jours_diffusion": [
         4
       ]
-    }
+    },
+    "pk": 25
   },
   {
     "model": "cinephoria_webapp.seance",
@@ -865,7 +930,8 @@
       "jours_diffusion": [
         5
       ]
-    }
+    },
+    "pk": 26
   },
   {
     "model": "cinephoria_webapp.seance",
@@ -876,7 +942,8 @@
       "jours_diffusion": [
         6
       ]
-    }
+    },
+    "pk": 27
   },
   {
     "model": "cinephoria_webapp.seance",
@@ -887,7 +954,8 @@
       "jours_diffusion": [
         4
       ]
-    }
+    },
+    "pk": 28
   },
   {
     "model": "cinephoria_webapp.seance",
@@ -898,7 +966,8 @@
       "jours_diffusion": [
         5
       ]
-    }
+    },
+    "pk": 29
   },
   {
     "model": "cinephoria_webapp.seance",
@@ -909,7 +978,8 @@
       "jours_diffusion": [
         6
       ]
-    }
+    },
+    "pk": 30
   },
   {
     "model": "cinephoria_webapp.seance",
@@ -920,7 +990,8 @@
       "jours_diffusion": [
         4
       ]
-    }
+    },
+    "pk": 31
   },
   {
     "model": "cinephoria_webapp.seance",
@@ -931,7 +1002,8 @@
       "jours_diffusion": [
         5
       ]
-    }
+    },
+    "pk": 32
   },
   {
     "model": "cinephoria_webapp.seance",
@@ -942,7 +1014,8 @@
       "jours_diffusion": [
         6
       ]
-    }
+    },
+    "pk": 33
   },
   {
     "model": "cinephoria_webapp.seance",
@@ -953,7 +1026,8 @@
       "jours_diffusion": [
         4
       ]
-    }
+    },
+    "pk": 34
   },
   {
     "model": "cinephoria_webapp.seance",
@@ -964,7 +1038,8 @@
       "jours_diffusion": [
         5
       ]
-    }
+    },
+    "pk": 35
   },
   {
     "model": "cinephoria_webapp.seance",
@@ -975,7 +1050,8 @@
       "jours_diffusion": [
         6
       ]
-    }
+    },
+    "pk": 36
   },
   {
     "model": "cinephoria_webapp.seance",
@@ -986,7 +1062,8 @@
       "jours_diffusion": [
         4
       ]
-    }
+    },
+    "pk": 37
   },
   {
     "model": "cinephoria_webapp.seance",
@@ -997,7 +1074,8 @@
       "jours_diffusion": [
         5
       ]
-    }
+    },
+    "pk": 38
   },
   {
     "model": "cinephoria_webapp.seance",
@@ -1008,7 +1086,8 @@
       "jours_diffusion": [
         6
       ]
-    }
+    },
+    "pk": 39
   },
   {
     "model": "cinephoria_webapp.seance",
@@ -1019,7 +1098,8 @@
       "jours_diffusion": [
         4
       ]
-    }
+    },
+    "pk": 40
   },
   {
     "model": "cinephoria_webapp.seance",
@@ -1030,7 +1110,8 @@
       "jours_diffusion": [
         5
       ]
-    }
+    },
+    "pk": 41
   },
   {
     "model": "cinephoria_webapp.seance",
@@ -1041,6 +1122,7 @@
       "jours_diffusion": [
         6
       ]
-    }
+    },
+    "pk": 42
   }
 ]
