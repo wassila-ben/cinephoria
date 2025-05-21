@@ -9,7 +9,9 @@
 <section class="container my-5" data-bs-theme="dark">
     <div class="row">
         <div class="col-md-4">
-            <img class="img-fluid rounded" src="{{ film.affiche.url }}" alt="{{ film.titre }}">
+            {% if film.affiche %}
+                <img class="img-fluid rounded" src="{{ film.affiche.url }}" alt="{{ film.titre }}">
+            {% endif %}
         </div>
         <div class="col-md-8">
             <h2 class="text-white">{{ film.titre }}</h2>
