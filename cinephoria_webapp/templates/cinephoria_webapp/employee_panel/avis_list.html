@@ -7,7 +7,7 @@
 
     {% if avis %}
     <div class="table-responsive">
-        <table class="table table-bordered bg-white">
+        <table class="table table-bordered bg-dark">
             <thead class="table-light">
                 <tr>
                     <th>Utilisateur</th>
@@ -26,14 +26,14 @@
                     <td>{{ a.note }}</td>
                     <td>{{ a.commentaire }}</td>
                     <td>
-                        {% if a.validé %}
+                        {% if a.valide %}
                             <span class="text-success">Validé</span>
                         {% else %}
                             <span class="text-warning">En attente</span>
                         {% endif %}
                     </td>
                     <td class="d-flex gap-2">
-                        {% if not a.validé %}
+                        {% if not a.valide %}
                         <a href="{% url 'employee_review_validate' a.id %}" class="btn btn-success btn-sm">Valider</a>
                         {% endif %}
                         <a href="{% url 'employee_review_delete' a.id %}" class="btn btn-danger btn-sm"

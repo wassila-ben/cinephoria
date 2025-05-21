@@ -315,7 +315,7 @@ class Avis(models.Model):
     note = models.FloatField(default=1.0, validators=[MinValueValidator(1.0), MaxValueValidator(5.0)])
     commentaire = models.TextField(default='Pas de commentaire')
     date = models.DateField(auto_now_add=True)
-    validé = models.BooleanField(default=False) 
+    valide = models.BooleanField(default=False) 
 
     def __str__(self):
         return f"Avis de {self.utilisateur.identifiant} sur {self.film.titre}"

@@ -179,7 +179,7 @@ def employee_review_list(request):
 @employee_required
 def employee_review_validate(request, avis_id):
     avis = get_object_or_404(Avis, id=avis_id)
-    avis.validé = True
+    avis.valide = True
     avis.save()
     messages.success(request, "Avis validé.")
     return redirect('employee_review_list')
