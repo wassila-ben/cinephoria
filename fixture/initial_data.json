@@ -1,69 +1,36 @@
 [
   {
     "model": "cinephoria_webapp.genre",
-    "pk": 1,
     "fields": {
       "genre": "Science-fiction"
     }
   },
   {
     "model": "cinephoria_webapp.genre",
-    "pk": 2,
     "fields": {
       "genre": "Comédie"
     }
   },
   {
     "model": "cinephoria_webapp.genre",
-    "pk": 3,
     "fields": {
       "genre": "Drame"
     }
   },
   {
     "model": "cinephoria_webapp.genre",
-    "pk": 4,
     "fields": {
       "genre": "Fantastique"
     }
   },
   {
     "model": "cinephoria_webapp.genre",
-    "pk": 5,
     "fields": {
       "genre": "Animation"
     }
   },
   {
-    "model": "cinephoria_webapp.qualite",
-    "pk": 1,
-    "fields": {
-      "type_qualite": "4K",
-      "prix_seance": 14.5,
-      "logo_qualite": ""
-    }
-  },
-  {
-    "model": "cinephoria_webapp.qualite",
-    "pk": 2,
-    "fields": {
-      "type_qualite": "3D",
-      "prix_seance": 13.0,
-      "logo_qualite": ""
-    }
-  },
-  {
-    "model": "cinephoria_webapp.qualite",
-    "pk": 3,
-    "fields": {
-      "type_qualite": "Standard",
-      "prix_seance": 10.0,
-      "logo_qualite": ""
-    }
-  },
-  {
     "model": "cinephoria_webapp.cinema",
-    "pk": 1,
     "fields": {
       "nom": "Cinéphoria Paris",
       "ville": "Paris",
@@ -77,7 +44,6 @@
   },
   {
     "model": "cinephoria_webapp.cinema",
-    "pk": 2,
     "fields": {
       "nom": "Cinéphoria Nantes",
       "ville": "Nantes",
@@ -91,7 +57,6 @@
   },
   {
     "model": "cinephoria_webapp.cinema",
-    "pk": 3,
     "fields": {
       "nom": "Cinéphoria Toulouse",
       "ville": "Toulouse",
@@ -104,2452 +69,494 @@
     }
   },
   {
+    "model": "cinephoria_webapp.cinema",
+    "fields": {
+      "nom": "Cinéphoria Bordeaux",
+      "ville": "Bordeaux",
+      "adresse": "1 rue du cinéma",
+      "cp": "75000",
+      "pays": "France",
+      "telephone": "01 23 45 67 89",
+      "horaire_ouverture": "10:00",
+      "horaire_fermeture": "23:00"
+    }
+  },
+  {
+    "model": "cinephoria_webapp.cinema",
+    "fields": {
+      "nom": "Cinéphoria Lille",
+      "ville": "Lille",
+      "adresse": "1 rue du cinéma",
+      "cp": "75000",
+      "pays": "France",
+      "telephone": "01 23 45 67 89",
+      "horaire_ouverture": "10:00",
+      "horaire_fermeture": "23:00"
+    }
+  },
+  {
+    "model": "cinephoria_webapp.cinema",
+    "fields": {
+      "nom": "Cinéphoria Charleroi",
+      "ville": "Charleroi",
+      "pays": "Belgique",
+      "adresse": "1 rue du cinéma",
+      "cp": "75000",
+      "telephone": "01 23 45 67 89",
+      "horaire_ouverture": "10:00",
+      "horaire_fermeture": "23:00"
+    }
+  },
+  {
+    "model": "cinephoria_webapp.cinema",
+    "fields": {
+      "nom": "Cinéphoria Liège",
+      "ville": "Liège",
+      "pays": "Belgique",
+      "adresse": "1 rue du cinéma",
+      "cp": "75000",
+      "telephone": "01 23 45 67 89",
+      "horaire_ouverture": "10:00",
+      "horaire_fermeture": "23:00"
+    }
+  },
+  {
+    "model": "cinephoria_webapp.qualite",
+    "fields": {
+      "type_qualite": "4K",
+      "prix_seance": 14.5,
+      "logo_qualite": "default/logo.png"
+    }
+  },
+  {
+    "model": "cinephoria_webapp.qualite",
+    "fields": {
+      "type_qualite": "3D",
+      "prix_seance": 13.0,
+      "logo_qualite": "default/logo.png"
+    }
+  },
+  {
+    "model": "cinephoria_webapp.qualite",
+    "fields": {
+      "type_qualite": "Standard",
+      "prix_seance": 10.0,
+      "logo_qualite": "default/logo.png"
+    }
+  },
+  {
     "model": "cinephoria_webapp.salle",
-    "pk": 1,
     "fields": {
       "numero_salle": "1",
-      "total_places": 80,
-      "places_pmr": 8,
-      "qualite": 1,
+      "total_places": 40,
+      "places_pmr": 2,
+      "qualite": 2,
       "cinema": 1
     }
   },
   {
     "model": "cinephoria_webapp.salle",
-    "pk": 2,
+    "fields": {
+      "numero_salle": "2",
+      "total_places": 40,
+      "places_pmr": 2,
+      "qualite": 3,
+      "cinema": 1
+    }
+  },
+  {
+    "model": "cinephoria_webapp.salle",
     "fields": {
       "numero_salle": "1",
-      "total_places": 80,
-      "places_pmr": 8,
-      "qualite": 1,
+      "total_places": 40,
+      "places_pmr": 2,
+      "qualite": 2,
       "cinema": 2
     }
   },
   {
     "model": "cinephoria_webapp.salle",
-    "pk": 3,
+    "fields": {
+      "numero_salle": "2",
+      "total_places": 40,
+      "places_pmr": 2,
+      "qualite": 3,
+      "cinema": 2
+    }
+  },
+  {
+    "model": "cinephoria_webapp.salle",
     "fields": {
       "numero_salle": "1",
-      "total_places": 80,
-      "places_pmr": 8,
-      "qualite": 1,
+      "total_places": 40,
+      "places_pmr": 2,
+      "qualite": 2,
       "cinema": 3
     }
   },
   {
-    "model": "cinephoria_webapp.siege",
-    "pk": 1,
+    "model": "cinephoria_webapp.salle",
     "fields": {
-      "rangee": "A",
-      "numero_siege": 1,
-      "place_pmr": false,
-      "salle": 1
+      "numero_salle": "2",
+      "total_places": 40,
+      "places_pmr": 2,
+      "qualite": 3,
+      "cinema": 3
     }
   },
   {
-    "model": "cinephoria_webapp.siege",
-    "pk": 2,
+    "model": "cinephoria_webapp.salle",
     "fields": {
-      "rangee": "A",
-      "numero_siege": 2,
-      "place_pmr": false,
-      "salle": 1
+      "numero_salle": "1",
+      "total_places": 40,
+      "places_pmr": 2,
+      "qualite": 2,
+      "cinema": 4
     }
   },
   {
-    "model": "cinephoria_webapp.siege",
-    "pk": 3,
+    "model": "cinephoria_webapp.salle",
     "fields": {
-      "rangee": "A",
-      "numero_siege": 3,
-      "place_pmr": false,
-      "salle": 1
+      "numero_salle": "2",
+      "total_places": 40,
+      "places_pmr": 2,
+      "qualite": 3,
+      "cinema": 4
     }
   },
   {
-    "model": "cinephoria_webapp.siege",
-    "pk": 4,
+    "model": "cinephoria_webapp.salle",
     "fields": {
-      "rangee": "A",
-      "numero_siege": 4,
-      "place_pmr": false,
-      "salle": 1
+      "numero_salle": "1",
+      "total_places": 40,
+      "places_pmr": 2,
+      "qualite": 2,
+      "cinema": 5
     }
   },
   {
-    "model": "cinephoria_webapp.siege",
-    "pk": 5,
+    "model": "cinephoria_webapp.salle",
     "fields": {
-      "rangee": "A",
-      "numero_siege": 5,
-      "place_pmr": false,
-      "salle": 1
+      "numero_salle": "2",
+      "total_places": 40,
+      "places_pmr": 2,
+      "qualite": 3,
+      "cinema": 5
     }
   },
   {
-    "model": "cinephoria_webapp.siege",
-    "pk": 6,
+    "model": "cinephoria_webapp.salle",
     "fields": {
-      "rangee": "A",
-      "numero_siege": 6,
-      "place_pmr": false,
-      "salle": 1
+      "numero_salle": "1",
+      "total_places": 40,
+      "places_pmr": 2,
+      "qualite": 2,
+      "cinema": 6
     }
   },
   {
-    "model": "cinephoria_webapp.siege",
-    "pk": 7,
+    "model": "cinephoria_webapp.salle",
     "fields": {
-      "rangee": "A",
-      "numero_siege": 7,
-      "place_pmr": false,
-      "salle": 1
+      "numero_salle": "2",
+      "total_places": 40,
+      "places_pmr": 2,
+      "qualite": 3,
+      "cinema": 6
     }
   },
   {
-    "model": "cinephoria_webapp.siege",
-    "pk": 8,
+    "model": "cinephoria_webapp.salle",
     "fields": {
-      "rangee": "A",
-      "numero_siege": 8,
-      "place_pmr": false,
-      "salle": 1
+      "numero_salle": "1",
+      "total_places": 40,
+      "places_pmr": 2,
+      "qualite": 2,
+      "cinema": 7
     }
   },
   {
-    "model": "cinephoria_webapp.siege",
-    "pk": 9,
+    "model": "cinephoria_webapp.salle",
     "fields": {
-      "rangee": "A",
-      "numero_siege": 9,
-      "place_pmr": false,
-      "salle": 1
-    }
-  },
-  {
-    "model": "cinephoria_webapp.siege",
-    "pk": 10,
-    "fields": {
-      "rangee": "A",
-      "numero_siege": 10,
-      "place_pmr": false,
-      "salle": 1
-    }
-  },
-  {
-    "model": "cinephoria_webapp.siege",
-    "pk": 11,
-    "fields": {
-      "rangee": "B",
-      "numero_siege": 1,
-      "place_pmr": false,
-      "salle": 1
-    }
-  },
-  {
-    "model": "cinephoria_webapp.siege",
-    "pk": 12,
-    "fields": {
-      "rangee": "B",
-      "numero_siege": 2,
-      "place_pmr": false,
-      "salle": 1
-    }
-  },
-  {
-    "model": "cinephoria_webapp.siege",
-    "pk": 13,
-    "fields": {
-      "rangee": "B",
-      "numero_siege": 3,
-      "place_pmr": false,
-      "salle": 1
-    }
-  },
-  {
-    "model": "cinephoria_webapp.siege",
-    "pk": 14,
-    "fields": {
-      "rangee": "B",
-      "numero_siege": 4,
-      "place_pmr": false,
-      "salle": 1
-    }
-  },
-  {
-    "model": "cinephoria_webapp.siege",
-    "pk": 15,
-    "fields": {
-      "rangee": "B",
-      "numero_siege": 5,
-      "place_pmr": false,
-      "salle": 1
-    }
-  },
-  {
-    "model": "cinephoria_webapp.siege",
-    "pk": 16,
-    "fields": {
-      "rangee": "B",
-      "numero_siege": 6,
-      "place_pmr": false,
-      "salle": 1
-    }
-  },
-  {
-    "model": "cinephoria_webapp.siege",
-    "pk": 17,
-    "fields": {
-      "rangee": "B",
-      "numero_siege": 7,
-      "place_pmr": false,
-      "salle": 1
-    }
-  },
-  {
-    "model": "cinephoria_webapp.siege",
-    "pk": 18,
-    "fields": {
-      "rangee": "B",
-      "numero_siege": 8,
-      "place_pmr": false,
-      "salle": 1
-    }
-  },
-  {
-    "model": "cinephoria_webapp.siege",
-    "pk": 19,
-    "fields": {
-      "rangee": "B",
-      "numero_siege": 9,
-      "place_pmr": false,
-      "salle": 1
-    }
-  },
-  {
-    "model": "cinephoria_webapp.siege",
-    "pk": 20,
-    "fields": {
-      "rangee": "B",
-      "numero_siege": 10,
-      "place_pmr": false,
-      "salle": 1
-    }
-  },
-  {
-    "model": "cinephoria_webapp.siege",
-    "pk": 21,
-    "fields": {
-      "rangee": "C",
-      "numero_siege": 1,
-      "place_pmr": false,
-      "salle": 1
-    }
-  },
-  {
-    "model": "cinephoria_webapp.siege",
-    "pk": 22,
-    "fields": {
-      "rangee": "C",
-      "numero_siege": 2,
-      "place_pmr": false,
-      "salle": 1
-    }
-  },
-  {
-    "model": "cinephoria_webapp.siege",
-    "pk": 23,
-    "fields": {
-      "rangee": "C",
-      "numero_siege": 3,
-      "place_pmr": false,
-      "salle": 1
-    }
-  },
-  {
-    "model": "cinephoria_webapp.siege",
-    "pk": 24,
-    "fields": {
-      "rangee": "C",
-      "numero_siege": 4,
-      "place_pmr": false,
-      "salle": 1
-    }
-  },
-  {
-    "model": "cinephoria_webapp.siege",
-    "pk": 25,
-    "fields": {
-      "rangee": "C",
-      "numero_siege": 5,
-      "place_pmr": false,
-      "salle": 1
-    }
-  },
-  {
-    "model": "cinephoria_webapp.siege",
-    "pk": 26,
-    "fields": {
-      "rangee": "C",
-      "numero_siege": 6,
-      "place_pmr": false,
-      "salle": 1
-    }
-  },
-  {
-    "model": "cinephoria_webapp.siege",
-    "pk": 27,
-    "fields": {
-      "rangee": "C",
-      "numero_siege": 7,
-      "place_pmr": false,
-      "salle": 1
-    }
-  },
-  {
-    "model": "cinephoria_webapp.siege",
-    "pk": 28,
-    "fields": {
-      "rangee": "C",
-      "numero_siege": 8,
-      "place_pmr": false,
-      "salle": 1
-    }
-  },
-  {
-    "model": "cinephoria_webapp.siege",
-    "pk": 29,
-    "fields": {
-      "rangee": "C",
-      "numero_siege": 9,
-      "place_pmr": false,
-      "salle": 1
-    }
-  },
-  {
-    "model": "cinephoria_webapp.siege",
-    "pk": 30,
-    "fields": {
-      "rangee": "C",
-      "numero_siege": 10,
-      "place_pmr": false,
-      "salle": 1
-    }
-  },
-  {
-    "model": "cinephoria_webapp.siege",
-    "pk": 31,
-    "fields": {
-      "rangee": "D",
-      "numero_siege": 1,
-      "place_pmr": false,
-      "salle": 1
-    }
-  },
-  {
-    "model": "cinephoria_webapp.siege",
-    "pk": 32,
-    "fields": {
-      "rangee": "D",
-      "numero_siege": 2,
-      "place_pmr": false,
-      "salle": 1
-    }
-  },
-  {
-    "model": "cinephoria_webapp.siege",
-    "pk": 33,
-    "fields": {
-      "rangee": "D",
-      "numero_siege": 3,
-      "place_pmr": false,
-      "salle": 1
-    }
-  },
-  {
-    "model": "cinephoria_webapp.siege",
-    "pk": 34,
-    "fields": {
-      "rangee": "D",
-      "numero_siege": 4,
-      "place_pmr": false,
-      "salle": 1
-    }
-  },
-  {
-    "model": "cinephoria_webapp.siege",
-    "pk": 35,
-    "fields": {
-      "rangee": "D",
-      "numero_siege": 5,
-      "place_pmr": false,
-      "salle": 1
-    }
-  },
-  {
-    "model": "cinephoria_webapp.siege",
-    "pk": 36,
-    "fields": {
-      "rangee": "D",
-      "numero_siege": 6,
-      "place_pmr": false,
-      "salle": 1
-    }
-  },
-  {
-    "model": "cinephoria_webapp.siege",
-    "pk": 37,
-    "fields": {
-      "rangee": "D",
-      "numero_siege": 7,
-      "place_pmr": false,
-      "salle": 1
-    }
-  },
-  {
-    "model": "cinephoria_webapp.siege",
-    "pk": 38,
-    "fields": {
-      "rangee": "D",
-      "numero_siege": 8,
-      "place_pmr": false,
-      "salle": 1
-    }
-  },
-  {
-    "model": "cinephoria_webapp.siege",
-    "pk": 39,
-    "fields": {
-      "rangee": "D",
-      "numero_siege": 9,
-      "place_pmr": false,
-      "salle": 1
-    }
-  },
-  {
-    "model": "cinephoria_webapp.siege",
-    "pk": 40,
-    "fields": {
-      "rangee": "D",
-      "numero_siege": 10,
-      "place_pmr": false,
-      "salle": 1
-    }
-  },
-  {
-    "model": "cinephoria_webapp.siege",
-    "pk": 41,
-    "fields": {
-      "rangee": "E",
-      "numero_siege": 1,
-      "place_pmr": false,
-      "salle": 1
-    }
-  },
-  {
-    "model": "cinephoria_webapp.siege",
-    "pk": 42,
-    "fields": {
-      "rangee": "E",
-      "numero_siege": 2,
-      "place_pmr": false,
-      "salle": 1
-    }
-  },
-  {
-    "model": "cinephoria_webapp.siege",
-    "pk": 43,
-    "fields": {
-      "rangee": "E",
-      "numero_siege": 3,
-      "place_pmr": false,
-      "salle": 1
-    }
-  },
-  {
-    "model": "cinephoria_webapp.siege",
-    "pk": 44,
-    "fields": {
-      "rangee": "E",
-      "numero_siege": 4,
-      "place_pmr": false,
-      "salle": 1
-    }
-  },
-  {
-    "model": "cinephoria_webapp.siege",
-    "pk": 45,
-    "fields": {
-      "rangee": "E",
-      "numero_siege": 5,
-      "place_pmr": false,
-      "salle": 1
-    }
-  },
-  {
-    "model": "cinephoria_webapp.siege",
-    "pk": 46,
-    "fields": {
-      "rangee": "E",
-      "numero_siege": 6,
-      "place_pmr": false,
-      "salle": 1
-    }
-  },
-  {
-    "model": "cinephoria_webapp.siege",
-    "pk": 47,
-    "fields": {
-      "rangee": "E",
-      "numero_siege": 7,
-      "place_pmr": false,
-      "salle": 1
-    }
-  },
-  {
-    "model": "cinephoria_webapp.siege",
-    "pk": 48,
-    "fields": {
-      "rangee": "E",
-      "numero_siege": 8,
-      "place_pmr": false,
-      "salle": 1
-    }
-  },
-  {
-    "model": "cinephoria_webapp.siege",
-    "pk": 49,
-    "fields": {
-      "rangee": "E",
-      "numero_siege": 9,
-      "place_pmr": false,
-      "salle": 1
-    }
-  },
-  {
-    "model": "cinephoria_webapp.siege",
-    "pk": 50,
-    "fields": {
-      "rangee": "E",
-      "numero_siege": 10,
-      "place_pmr": false,
-      "salle": 1
-    }
-  },
-  {
-    "model": "cinephoria_webapp.siege",
-    "pk": 51,
-    "fields": {
-      "rangee": "F",
-      "numero_siege": 1,
-      "place_pmr": false,
-      "salle": 1
-    }
-  },
-  {
-    "model": "cinephoria_webapp.siege",
-    "pk": 52,
-    "fields": {
-      "rangee": "F",
-      "numero_siege": 2,
-      "place_pmr": false,
-      "salle": 1
-    }
-  },
-  {
-    "model": "cinephoria_webapp.siege",
-    "pk": 53,
-    "fields": {
-      "rangee": "F",
-      "numero_siege": 3,
-      "place_pmr": false,
-      "salle": 1
-    }
-  },
-  {
-    "model": "cinephoria_webapp.siege",
-    "pk": 54,
-    "fields": {
-      "rangee": "F",
-      "numero_siege": 4,
-      "place_pmr": false,
-      "salle": 1
-    }
-  },
-  {
-    "model": "cinephoria_webapp.siege",
-    "pk": 55,
-    "fields": {
-      "rangee": "F",
-      "numero_siege": 5,
-      "place_pmr": false,
-      "salle": 1
-    }
-  },
-  {
-    "model": "cinephoria_webapp.siege",
-    "pk": 56,
-    "fields": {
-      "rangee": "F",
-      "numero_siege": 6,
-      "place_pmr": false,
-      "salle": 1
-    }
-  },
-  {
-    "model": "cinephoria_webapp.siege",
-    "pk": 57,
-    "fields": {
-      "rangee": "F",
-      "numero_siege": 7,
-      "place_pmr": false,
-      "salle": 1
-    }
-  },
-  {
-    "model": "cinephoria_webapp.siege",
-    "pk": 58,
-    "fields": {
-      "rangee": "F",
-      "numero_siege": 8,
-      "place_pmr": false,
-      "salle": 1
-    }
-  },
-  {
-    "model": "cinephoria_webapp.siege",
-    "pk": 59,
-    "fields": {
-      "rangee": "F",
-      "numero_siege": 9,
-      "place_pmr": false,
-      "salle": 1
-    }
-  },
-  {
-    "model": "cinephoria_webapp.siege",
-    "pk": 60,
-    "fields": {
-      "rangee": "F",
-      "numero_siege": 10,
-      "place_pmr": false,
-      "salle": 1
-    }
-  },
-  {
-    "model": "cinephoria_webapp.siege",
-    "pk": 61,
-    "fields": {
-      "rangee": "G",
-      "numero_siege": 1,
-      "place_pmr": false,
-      "salle": 1
-    }
-  },
-  {
-    "model": "cinephoria_webapp.siege",
-    "pk": 62,
-    "fields": {
-      "rangee": "G",
-      "numero_siege": 2,
-      "place_pmr": false,
-      "salle": 1
-    }
-  },
-  {
-    "model": "cinephoria_webapp.siege",
-    "pk": 63,
-    "fields": {
-      "rangee": "G",
-      "numero_siege": 3,
-      "place_pmr": false,
-      "salle": 1
-    }
-  },
-  {
-    "model": "cinephoria_webapp.siege",
-    "pk": 64,
-    "fields": {
-      "rangee": "G",
-      "numero_siege": 4,
-      "place_pmr": false,
-      "salle": 1
-    }
-  },
-  {
-    "model": "cinephoria_webapp.siege",
-    "pk": 65,
-    "fields": {
-      "rangee": "G",
-      "numero_siege": 5,
-      "place_pmr": false,
-      "salle": 1
-    }
-  },
-  {
-    "model": "cinephoria_webapp.siege",
-    "pk": 66,
-    "fields": {
-      "rangee": "G",
-      "numero_siege": 6,
-      "place_pmr": false,
-      "salle": 1
-    }
-  },
-  {
-    "model": "cinephoria_webapp.siege",
-    "pk": 67,
-    "fields": {
-      "rangee": "G",
-      "numero_siege": 7,
-      "place_pmr": false,
-      "salle": 1
-    }
-  },
-  {
-    "model": "cinephoria_webapp.siege",
-    "pk": 68,
-    "fields": {
-      "rangee": "G",
-      "numero_siege": 8,
-      "place_pmr": false,
-      "salle": 1
-    }
-  },
-  {
-    "model": "cinephoria_webapp.siege",
-    "pk": 69,
-    "fields": {
-      "rangee": "G",
-      "numero_siege": 9,
-      "place_pmr": false,
-      "salle": 1
-    }
-  },
-  {
-    "model": "cinephoria_webapp.siege",
-    "pk": 70,
-    "fields": {
-      "rangee": "G",
-      "numero_siege": 10,
-      "place_pmr": false,
-      "salle": 1
-    }
-  },
-  {
-    "model": "cinephoria_webapp.siege",
-    "pk": 71,
-    "fields": {
-      "rangee": "H",
-      "numero_siege": 1,
-      "place_pmr": false,
-      "salle": 1
-    }
-  },
-  {
-    "model": "cinephoria_webapp.siege",
-    "pk": 72,
-    "fields": {
-      "rangee": "H",
-      "numero_siege": 2,
-      "place_pmr": false,
-      "salle": 1
-    }
-  },
-  {
-    "model": "cinephoria_webapp.siege",
-    "pk": 73,
-    "fields": {
-      "rangee": "H",
-      "numero_siege": 3,
-      "place_pmr": true,
-      "salle": 1
-    }
-  },
-  {
-    "model": "cinephoria_webapp.siege",
-    "pk": 74,
-    "fields": {
-      "rangee": "H",
-      "numero_siege": 4,
-      "place_pmr": true,
-      "salle": 1
-    }
-  },
-  {
-    "model": "cinephoria_webapp.siege",
-    "pk": 75,
-    "fields": {
-      "rangee": "H",
-      "numero_siege": 5,
-      "place_pmr": true,
-      "salle": 1
-    }
-  },
-  {
-    "model": "cinephoria_webapp.siege",
-    "pk": 76,
-    "fields": {
-      "rangee": "H",
-      "numero_siege": 6,
-      "place_pmr": true,
-      "salle": 1
-    }
-  },
-  {
-    "model": "cinephoria_webapp.siege",
-    "pk": 77,
-    "fields": {
-      "rangee": "H",
-      "numero_siege": 7,
-      "place_pmr": true,
-      "salle": 1
-    }
-  },
-  {
-    "model": "cinephoria_webapp.siege",
-    "pk": 78,
-    "fields": {
-      "rangee": "H",
-      "numero_siege": 8,
-      "place_pmr": true,
-      "salle": 1
-    }
-  },
-  {
-    "model": "cinephoria_webapp.siege",
-    "pk": 79,
-    "fields": {
-      "rangee": "H",
-      "numero_siege": 9,
-      "place_pmr": true,
-      "salle": 1
-    }
-  },
-  {
-    "model": "cinephoria_webapp.siege",
-    "pk": 80,
-    "fields": {
-      "rangee": "H",
-      "numero_siege": 10,
-      "place_pmr": true,
-      "salle": 1
-    }
-  },
-  {
-    "model": "cinephoria_webapp.siege",
-    "pk": 81,
-    "fields": {
-      "rangee": "A",
-      "numero_siege": 1,
-      "place_pmr": false,
-      "salle": 2
-    }
-  },
-  {
-    "model": "cinephoria_webapp.siege",
-    "pk": 82,
-    "fields": {
-      "rangee": "A",
-      "numero_siege": 2,
-      "place_pmr": false,
-      "salle": 2
-    }
-  },
-  {
-    "model": "cinephoria_webapp.siege",
-    "pk": 83,
-    "fields": {
-      "rangee": "A",
-      "numero_siege": 3,
-      "place_pmr": false,
-      "salle": 2
-    }
-  },
-  {
-    "model": "cinephoria_webapp.siege",
-    "pk": 84,
-    "fields": {
-      "rangee": "A",
-      "numero_siege": 4,
-      "place_pmr": false,
-      "salle": 2
-    }
-  },
-  {
-    "model": "cinephoria_webapp.siege",
-    "pk": 85,
-    "fields": {
-      "rangee": "A",
-      "numero_siege": 5,
-      "place_pmr": false,
-      "salle": 2
-    }
-  },
-  {
-    "model": "cinephoria_webapp.siege",
-    "pk": 86,
-    "fields": {
-      "rangee": "A",
-      "numero_siege": 6,
-      "place_pmr": false,
-      "salle": 2
-    }
-  },
-  {
-    "model": "cinephoria_webapp.siege",
-    "pk": 87,
-    "fields": {
-      "rangee": "A",
-      "numero_siege": 7,
-      "place_pmr": false,
-      "salle": 2
-    }
-  },
-  {
-    "model": "cinephoria_webapp.siege",
-    "pk": 88,
-    "fields": {
-      "rangee": "A",
-      "numero_siege": 8,
-      "place_pmr": false,
-      "salle": 2
-    }
-  },
-  {
-    "model": "cinephoria_webapp.siege",
-    "pk": 89,
-    "fields": {
-      "rangee": "A",
-      "numero_siege": 9,
-      "place_pmr": false,
-      "salle": 2
-    }
-  },
-  {
-    "model": "cinephoria_webapp.siege",
-    "pk": 90,
-    "fields": {
-      "rangee": "A",
-      "numero_siege": 10,
-      "place_pmr": false,
-      "salle": 2
-    }
-  },
-  {
-    "model": "cinephoria_webapp.siege",
-    "pk": 91,
-    "fields": {
-      "rangee": "B",
-      "numero_siege": 1,
-      "place_pmr": false,
-      "salle": 2
-    }
-  },
-  {
-    "model": "cinephoria_webapp.siege",
-    "pk": 92,
-    "fields": {
-      "rangee": "B",
-      "numero_siege": 2,
-      "place_pmr": false,
-      "salle": 2
-    }
-  },
-  {
-    "model": "cinephoria_webapp.siege",
-    "pk": 93,
-    "fields": {
-      "rangee": "B",
-      "numero_siege": 3,
-      "place_pmr": false,
-      "salle": 2
-    }
-  },
-  {
-    "model": "cinephoria_webapp.siege",
-    "pk": 94,
-    "fields": {
-      "rangee": "B",
-      "numero_siege": 4,
-      "place_pmr": false,
-      "salle": 2
-    }
-  },
-  {
-    "model": "cinephoria_webapp.siege",
-    "pk": 95,
-    "fields": {
-      "rangee": "B",
-      "numero_siege": 5,
-      "place_pmr": false,
-      "salle": 2
-    }
-  },
-  {
-    "model": "cinephoria_webapp.siege",
-    "pk": 96,
-    "fields": {
-      "rangee": "B",
-      "numero_siege": 6,
-      "place_pmr": false,
-      "salle": 2
-    }
-  },
-  {
-    "model": "cinephoria_webapp.siege",
-    "pk": 97,
-    "fields": {
-      "rangee": "B",
-      "numero_siege": 7,
-      "place_pmr": false,
-      "salle": 2
-    }
-  },
-  {
-    "model": "cinephoria_webapp.siege",
-    "pk": 98,
-    "fields": {
-      "rangee": "B",
-      "numero_siege": 8,
-      "place_pmr": false,
-      "salle": 2
-    }
-  },
-  {
-    "model": "cinephoria_webapp.siege",
-    "pk": 99,
-    "fields": {
-      "rangee": "B",
-      "numero_siege": 9,
-      "place_pmr": false,
-      "salle": 2
-    }
-  },
-  {
-    "model": "cinephoria_webapp.siege",
-    "pk": 100,
-    "fields": {
-      "rangee": "B",
-      "numero_siege": 10,
-      "place_pmr": false,
-      "salle": 2
-    }
-  },
-  {
-    "model": "cinephoria_webapp.siege",
-    "pk": 101,
-    "fields": {
-      "rangee": "C",
-      "numero_siege": 1,
-      "place_pmr": false,
-      "salle": 2
-    }
-  },
-  {
-    "model": "cinephoria_webapp.siege",
-    "pk": 102,
-    "fields": {
-      "rangee": "C",
-      "numero_siege": 2,
-      "place_pmr": false,
-      "salle": 2
-    }
-  },
-  {
-    "model": "cinephoria_webapp.siege",
-    "pk": 103,
-    "fields": {
-      "rangee": "C",
-      "numero_siege": 3,
-      "place_pmr": false,
-      "salle": 2
-    }
-  },
-  {
-    "model": "cinephoria_webapp.siege",
-    "pk": 104,
-    "fields": {
-      "rangee": "C",
-      "numero_siege": 4,
-      "place_pmr": false,
-      "salle": 2
-    }
-  },
-  {
-    "model": "cinephoria_webapp.siege",
-    "pk": 105,
-    "fields": {
-      "rangee": "C",
-      "numero_siege": 5,
-      "place_pmr": false,
-      "salle": 2
-    }
-  },
-  {
-    "model": "cinephoria_webapp.siege",
-    "pk": 106,
-    "fields": {
-      "rangee": "C",
-      "numero_siege": 6,
-      "place_pmr": false,
-      "salle": 2
-    }
-  },
-  {
-    "model": "cinephoria_webapp.siege",
-    "pk": 107,
-    "fields": {
-      "rangee": "C",
-      "numero_siege": 7,
-      "place_pmr": false,
-      "salle": 2
-    }
-  },
-  {
-    "model": "cinephoria_webapp.siege",
-    "pk": 108,
-    "fields": {
-      "rangee": "C",
-      "numero_siege": 8,
-      "place_pmr": false,
-      "salle": 2
-    }
-  },
-  {
-    "model": "cinephoria_webapp.siege",
-    "pk": 109,
-    "fields": {
-      "rangee": "C",
-      "numero_siege": 9,
-      "place_pmr": false,
-      "salle": 2
-    }
-  },
-  {
-    "model": "cinephoria_webapp.siege",
-    "pk": 110,
-    "fields": {
-      "rangee": "C",
-      "numero_siege": 10,
-      "place_pmr": false,
-      "salle": 2
-    }
-  },
-  {
-    "model": "cinephoria_webapp.siege",
-    "pk": 111,
-    "fields": {
-      "rangee": "D",
-      "numero_siege": 1,
-      "place_pmr": false,
-      "salle": 2
-    }
-  },
-  {
-    "model": "cinephoria_webapp.siege",
-    "pk": 112,
-    "fields": {
-      "rangee": "D",
-      "numero_siege": 2,
-      "place_pmr": false,
-      "salle": 2
-    }
-  },
-  {
-    "model": "cinephoria_webapp.siege",
-    "pk": 113,
-    "fields": {
-      "rangee": "D",
-      "numero_siege": 3,
-      "place_pmr": false,
-      "salle": 2
-    }
-  },
-  {
-    "model": "cinephoria_webapp.siege",
-    "pk": 114,
-    "fields": {
-      "rangee": "D",
-      "numero_siege": 4,
-      "place_pmr": false,
-      "salle": 2
-    }
-  },
-  {
-    "model": "cinephoria_webapp.siege",
-    "pk": 115,
-    "fields": {
-      "rangee": "D",
-      "numero_siege": 5,
-      "place_pmr": false,
-      "salle": 2
-    }
-  },
-  {
-    "model": "cinephoria_webapp.siege",
-    "pk": 116,
-    "fields": {
-      "rangee": "D",
-      "numero_siege": 6,
-      "place_pmr": false,
-      "salle": 2
-    }
-  },
-  {
-    "model": "cinephoria_webapp.siege",
-    "pk": 117,
-    "fields": {
-      "rangee": "D",
-      "numero_siege": 7,
-      "place_pmr": false,
-      "salle": 2
-    }
-  },
-  {
-    "model": "cinephoria_webapp.siege",
-    "pk": 118,
-    "fields": {
-      "rangee": "D",
-      "numero_siege": 8,
-      "place_pmr": false,
-      "salle": 2
-    }
-  },
-  {
-    "model": "cinephoria_webapp.siege",
-    "pk": 119,
-    "fields": {
-      "rangee": "D",
-      "numero_siege": 9,
-      "place_pmr": false,
-      "salle": 2
-    }
-  },
-  {
-    "model": "cinephoria_webapp.siege",
-    "pk": 120,
-    "fields": {
-      "rangee": "D",
-      "numero_siege": 10,
-      "place_pmr": false,
-      "salle": 2
-    }
-  },
-  {
-    "model": "cinephoria_webapp.siege",
-    "pk": 121,
-    "fields": {
-      "rangee": "E",
-      "numero_siege": 1,
-      "place_pmr": false,
-      "salle": 2
-    }
-  },
-  {
-    "model": "cinephoria_webapp.siege",
-    "pk": 122,
-    "fields": {
-      "rangee": "E",
-      "numero_siege": 2,
-      "place_pmr": false,
-      "salle": 2
-    }
-  },
-  {
-    "model": "cinephoria_webapp.siege",
-    "pk": 123,
-    "fields": {
-      "rangee": "E",
-      "numero_siege": 3,
-      "place_pmr": false,
-      "salle": 2
-    }
-  },
-  {
-    "model": "cinephoria_webapp.siege",
-    "pk": 124,
-    "fields": {
-      "rangee": "E",
-      "numero_siege": 4,
-      "place_pmr": false,
-      "salle": 2
-    }
-  },
-  {
-    "model": "cinephoria_webapp.siege",
-    "pk": 125,
-    "fields": {
-      "rangee": "E",
-      "numero_siege": 5,
-      "place_pmr": false,
-      "salle": 2
-    }
-  },
-  {
-    "model": "cinephoria_webapp.siege",
-    "pk": 126,
-    "fields": {
-      "rangee": "E",
-      "numero_siege": 6,
-      "place_pmr": false,
-      "salle": 2
-    }
-  },
-  {
-    "model": "cinephoria_webapp.siege",
-    "pk": 127,
-    "fields": {
-      "rangee": "E",
-      "numero_siege": 7,
-      "place_pmr": false,
-      "salle": 2
-    }
-  },
-  {
-    "model": "cinephoria_webapp.siege",
-    "pk": 128,
-    "fields": {
-      "rangee": "E",
-      "numero_siege": 8,
-      "place_pmr": false,
-      "salle": 2
-    }
-  },
-  {
-    "model": "cinephoria_webapp.siege",
-    "pk": 129,
-    "fields": {
-      "rangee": "E",
-      "numero_siege": 9,
-      "place_pmr": false,
-      "salle": 2
-    }
-  },
-  {
-    "model": "cinephoria_webapp.siege",
-    "pk": 130,
-    "fields": {
-      "rangee": "E",
-      "numero_siege": 10,
-      "place_pmr": false,
-      "salle": 2
-    }
-  },
-  {
-    "model": "cinephoria_webapp.siege",
-    "pk": 131,
-    "fields": {
-      "rangee": "F",
-      "numero_siege": 1,
-      "place_pmr": false,
-      "salle": 2
-    }
-  },
-  {
-    "model": "cinephoria_webapp.siege",
-    "pk": 132,
-    "fields": {
-      "rangee": "F",
-      "numero_siege": 2,
-      "place_pmr": false,
-      "salle": 2
-    }
-  },
-  {
-    "model": "cinephoria_webapp.siege",
-    "pk": 133,
-    "fields": {
-      "rangee": "F",
-      "numero_siege": 3,
-      "place_pmr": false,
-      "salle": 2
-    }
-  },
-  {
-    "model": "cinephoria_webapp.siege",
-    "pk": 134,
-    "fields": {
-      "rangee": "F",
-      "numero_siege": 4,
-      "place_pmr": false,
-      "salle": 2
-    }
-  },
-  {
-    "model": "cinephoria_webapp.siege",
-    "pk": 135,
-    "fields": {
-      "rangee": "F",
-      "numero_siege": 5,
-      "place_pmr": false,
-      "salle": 2
-    }
-  },
-  {
-    "model": "cinephoria_webapp.siege",
-    "pk": 136,
-    "fields": {
-      "rangee": "F",
-      "numero_siege": 6,
-      "place_pmr": false,
-      "salle": 2
-    }
-  },
-  {
-    "model": "cinephoria_webapp.siege",
-    "pk": 137,
-    "fields": {
-      "rangee": "F",
-      "numero_siege": 7,
-      "place_pmr": false,
-      "salle": 2
-    }
-  },
-  {
-    "model": "cinephoria_webapp.siege",
-    "pk": 138,
-    "fields": {
-      "rangee": "F",
-      "numero_siege": 8,
-      "place_pmr": false,
-      "salle": 2
-    }
-  },
-  {
-    "model": "cinephoria_webapp.siege",
-    "pk": 139,
-    "fields": {
-      "rangee": "F",
-      "numero_siege": 9,
-      "place_pmr": false,
-      "salle": 2
-    }
-  },
-  {
-    "model": "cinephoria_webapp.siege",
-    "pk": 140,
-    "fields": {
-      "rangee": "F",
-      "numero_siege": 10,
-      "place_pmr": false,
-      "salle": 2
-    }
-  },
-  {
-    "model": "cinephoria_webapp.siege",
-    "pk": 141,
-    "fields": {
-      "rangee": "G",
-      "numero_siege": 1,
-      "place_pmr": false,
-      "salle": 2
-    }
-  },
-  {
-    "model": "cinephoria_webapp.siege",
-    "pk": 142,
-    "fields": {
-      "rangee": "G",
-      "numero_siege": 2,
-      "place_pmr": false,
-      "salle": 2
-    }
-  },
-  {
-    "model": "cinephoria_webapp.siege",
-    "pk": 143,
-    "fields": {
-      "rangee": "G",
-      "numero_siege": 3,
-      "place_pmr": false,
-      "salle": 2
-    }
-  },
-  {
-    "model": "cinephoria_webapp.siege",
-    "pk": 144,
-    "fields": {
-      "rangee": "G",
-      "numero_siege": 4,
-      "place_pmr": false,
-      "salle": 2
-    }
-  },
-  {
-    "model": "cinephoria_webapp.siege",
-    "pk": 145,
-    "fields": {
-      "rangee": "G",
-      "numero_siege": 5,
-      "place_pmr": false,
-      "salle": 2
-    }
-  },
-  {
-    "model": "cinephoria_webapp.siege",
-    "pk": 146,
-    "fields": {
-      "rangee": "G",
-      "numero_siege": 6,
-      "place_pmr": false,
-      "salle": 2
-    }
-  },
-  {
-    "model": "cinephoria_webapp.siege",
-    "pk": 147,
-    "fields": {
-      "rangee": "G",
-      "numero_siege": 7,
-      "place_pmr": false,
-      "salle": 2
-    }
-  },
-  {
-    "model": "cinephoria_webapp.siege",
-    "pk": 148,
-    "fields": {
-      "rangee": "G",
-      "numero_siege": 8,
-      "place_pmr": false,
-      "salle": 2
-    }
-  },
-  {
-    "model": "cinephoria_webapp.siege",
-    "pk": 149,
-    "fields": {
-      "rangee": "G",
-      "numero_siege": 9,
-      "place_pmr": false,
-      "salle": 2
-    }
-  },
-  {
-    "model": "cinephoria_webapp.siege",
-    "pk": 150,
-    "fields": {
-      "rangee": "G",
-      "numero_siege": 10,
-      "place_pmr": false,
-      "salle": 2
-    }
-  },
-  {
-    "model": "cinephoria_webapp.siege",
-    "pk": 151,
-    "fields": {
-      "rangee": "H",
-      "numero_siege": 1,
-      "place_pmr": false,
-      "salle": 2
-    }
-  },
-  {
-    "model": "cinephoria_webapp.siege",
-    "pk": 152,
-    "fields": {
-      "rangee": "H",
-      "numero_siege": 2,
-      "place_pmr": false,
-      "salle": 2
-    }
-  },
-  {
-    "model": "cinephoria_webapp.siege",
-    "pk": 153,
-    "fields": {
-      "rangee": "H",
-      "numero_siege": 3,
-      "place_pmr": true,
-      "salle": 2
-    }
-  },
-  {
-    "model": "cinephoria_webapp.siege",
-    "pk": 154,
-    "fields": {
-      "rangee": "H",
-      "numero_siege": 4,
-      "place_pmr": true,
-      "salle": 2
-    }
-  },
-  {
-    "model": "cinephoria_webapp.siege",
-    "pk": 155,
-    "fields": {
-      "rangee": "H",
-      "numero_siege": 5,
-      "place_pmr": true,
-      "salle": 2
-    }
-  },
-  {
-    "model": "cinephoria_webapp.siege",
-    "pk": 156,
-    "fields": {
-      "rangee": "H",
-      "numero_siege": 6,
-      "place_pmr": true,
-      "salle": 2
-    }
-  },
-  {
-    "model": "cinephoria_webapp.siege",
-    "pk": 157,
-    "fields": {
-      "rangee": "H",
-      "numero_siege": 7,
-      "place_pmr": true,
-      "salle": 2
-    }
-  },
-  {
-    "model": "cinephoria_webapp.siege",
-    "pk": 158,
-    "fields": {
-      "rangee": "H",
-      "numero_siege": 8,
-      "place_pmr": true,
-      "salle": 2
-    }
-  },
-  {
-    "model": "cinephoria_webapp.siege",
-    "pk": 159,
-    "fields": {
-      "rangee": "H",
-      "numero_siege": 9,
-      "place_pmr": true,
-      "salle": 2
-    }
-  },
-  {
-    "model": "cinephoria_webapp.siege",
-    "pk": 160,
-    "fields": {
-      "rangee": "H",
-      "numero_siege": 10,
-      "place_pmr": true,
-      "salle": 2
-    }
-  },
-  {
-    "model": "cinephoria_webapp.siege",
-    "pk": 161,
-    "fields": {
-      "rangee": "A",
-      "numero_siege": 1,
-      "place_pmr": false,
-      "salle": 3
-    }
-  },
-  {
-    "model": "cinephoria_webapp.siege",
-    "pk": 162,
-    "fields": {
-      "rangee": "A",
-      "numero_siege": 2,
-      "place_pmr": false,
-      "salle": 3
-    }
-  },
-  {
-    "model": "cinephoria_webapp.siege",
-    "pk": 163,
-    "fields": {
-      "rangee": "A",
-      "numero_siege": 3,
-      "place_pmr": false,
-      "salle": 3
-    }
-  },
-  {
-    "model": "cinephoria_webapp.siege",
-    "pk": 164,
-    "fields": {
-      "rangee": "A",
-      "numero_siege": 4,
-      "place_pmr": false,
-      "salle": 3
-    }
-  },
-  {
-    "model": "cinephoria_webapp.siege",
-    "pk": 165,
-    "fields": {
-      "rangee": "A",
-      "numero_siege": 5,
-      "place_pmr": false,
-      "salle": 3
-    }
-  },
-  {
-    "model": "cinephoria_webapp.siege",
-    "pk": 166,
-    "fields": {
-      "rangee": "A",
-      "numero_siege": 6,
-      "place_pmr": false,
-      "salle": 3
-    }
-  },
-  {
-    "model": "cinephoria_webapp.siege",
-    "pk": 167,
-    "fields": {
-      "rangee": "A",
-      "numero_siege": 7,
-      "place_pmr": false,
-      "salle": 3
-    }
-  },
-  {
-    "model": "cinephoria_webapp.siege",
-    "pk": 168,
-    "fields": {
-      "rangee": "A",
-      "numero_siege": 8,
-      "place_pmr": false,
-      "salle": 3
-    }
-  },
-  {
-    "model": "cinephoria_webapp.siege",
-    "pk": 169,
-    "fields": {
-      "rangee": "A",
-      "numero_siege": 9,
-      "place_pmr": false,
-      "salle": 3
-    }
-  },
-  {
-    "model": "cinephoria_webapp.siege",
-    "pk": 170,
-    "fields": {
-      "rangee": "A",
-      "numero_siege": 10,
-      "place_pmr": false,
-      "salle": 3
-    }
-  },
-  {
-    "model": "cinephoria_webapp.siege",
-    "pk": 171,
-    "fields": {
-      "rangee": "B",
-      "numero_siege": 1,
-      "place_pmr": false,
-      "salle": 3
-    }
-  },
-  {
-    "model": "cinephoria_webapp.siege",
-    "pk": 172,
-    "fields": {
-      "rangee": "B",
-      "numero_siege": 2,
-      "place_pmr": false,
-      "salle": 3
-    }
-  },
-  {
-    "model": "cinephoria_webapp.siege",
-    "pk": 173,
-    "fields": {
-      "rangee": "B",
-      "numero_siege": 3,
-      "place_pmr": false,
-      "salle": 3
-    }
-  },
-  {
-    "model": "cinephoria_webapp.siege",
-    "pk": 174,
-    "fields": {
-      "rangee": "B",
-      "numero_siege": 4,
-      "place_pmr": false,
-      "salle": 3
-    }
-  },
-  {
-    "model": "cinephoria_webapp.siege",
-    "pk": 175,
-    "fields": {
-      "rangee": "B",
-      "numero_siege": 5,
-      "place_pmr": false,
-      "salle": 3
-    }
-  },
-  {
-    "model": "cinephoria_webapp.siege",
-    "pk": 176,
-    "fields": {
-      "rangee": "B",
-      "numero_siege": 6,
-      "place_pmr": false,
-      "salle": 3
-    }
-  },
-  {
-    "model": "cinephoria_webapp.siege",
-    "pk": 177,
-    "fields": {
-      "rangee": "B",
-      "numero_siege": 7,
-      "place_pmr": false,
-      "salle": 3
-    }
-  },
-  {
-    "model": "cinephoria_webapp.siege",
-    "pk": 178,
-    "fields": {
-      "rangee": "B",
-      "numero_siege": 8,
-      "place_pmr": false,
-      "salle": 3
-    }
-  },
-  {
-    "model": "cinephoria_webapp.siege",
-    "pk": 179,
-    "fields": {
-      "rangee": "B",
-      "numero_siege": 9,
-      "place_pmr": false,
-      "salle": 3
-    }
-  },
-  {
-    "model": "cinephoria_webapp.siege",
-    "pk": 180,
-    "fields": {
-      "rangee": "B",
-      "numero_siege": 10,
-      "place_pmr": false,
-      "salle": 3
-    }
-  },
-  {
-    "model": "cinephoria_webapp.siege",
-    "pk": 181,
-    "fields": {
-      "rangee": "C",
-      "numero_siege": 1,
-      "place_pmr": false,
-      "salle": 3
-    }
-  },
-  {
-    "model": "cinephoria_webapp.siege",
-    "pk": 182,
-    "fields": {
-      "rangee": "C",
-      "numero_siege": 2,
-      "place_pmr": false,
-      "salle": 3
-    }
-  },
-  {
-    "model": "cinephoria_webapp.siege",
-    "pk": 183,
-    "fields": {
-      "rangee": "C",
-      "numero_siege": 3,
-      "place_pmr": false,
-      "salle": 3
-    }
-  },
-  {
-    "model": "cinephoria_webapp.siege",
-    "pk": 184,
-    "fields": {
-      "rangee": "C",
-      "numero_siege": 4,
-      "place_pmr": false,
-      "salle": 3
-    }
-  },
-  {
-    "model": "cinephoria_webapp.siege",
-    "pk": 185,
-    "fields": {
-      "rangee": "C",
-      "numero_siege": 5,
-      "place_pmr": false,
-      "salle": 3
-    }
-  },
-  {
-    "model": "cinephoria_webapp.siege",
-    "pk": 186,
-    "fields": {
-      "rangee": "C",
-      "numero_siege": 6,
-      "place_pmr": false,
-      "salle": 3
-    }
-  },
-  {
-    "model": "cinephoria_webapp.siege",
-    "pk": 187,
-    "fields": {
-      "rangee": "C",
-      "numero_siege": 7,
-      "place_pmr": false,
-      "salle": 3
-    }
-  },
-  {
-    "model": "cinephoria_webapp.siege",
-    "pk": 188,
-    "fields": {
-      "rangee": "C",
-      "numero_siege": 8,
-      "place_pmr": false,
-      "salle": 3
-    }
-  },
-  {
-    "model": "cinephoria_webapp.siege",
-    "pk": 189,
-    "fields": {
-      "rangee": "C",
-      "numero_siege": 9,
-      "place_pmr": false,
-      "salle": 3
-    }
-  },
-  {
-    "model": "cinephoria_webapp.siege",
-    "pk": 190,
-    "fields": {
-      "rangee": "C",
-      "numero_siege": 10,
-      "place_pmr": false,
-      "salle": 3
-    }
-  },
-  {
-    "model": "cinephoria_webapp.siege",
-    "pk": 191,
-    "fields": {
-      "rangee": "D",
-      "numero_siege": 1,
-      "place_pmr": false,
-      "salle": 3
-    }
-  },
-  {
-    "model": "cinephoria_webapp.siege",
-    "pk": 192,
-    "fields": {
-      "rangee": "D",
-      "numero_siege": 2,
-      "place_pmr": false,
-      "salle": 3
-    }
-  },
-  {
-    "model": "cinephoria_webapp.siege",
-    "pk": 193,
-    "fields": {
-      "rangee": "D",
-      "numero_siege": 3,
-      "place_pmr": false,
-      "salle": 3
-    }
-  },
-  {
-    "model": "cinephoria_webapp.siege",
-    "pk": 194,
-    "fields": {
-      "rangee": "D",
-      "numero_siege": 4,
-      "place_pmr": false,
-      "salle": 3
-    }
-  },
-  {
-    "model": "cinephoria_webapp.siege",
-    "pk": 195,
-    "fields": {
-      "rangee": "D",
-      "numero_siege": 5,
-      "place_pmr": false,
-      "salle": 3
-    }
-  },
-  {
-    "model": "cinephoria_webapp.siege",
-    "pk": 196,
-    "fields": {
-      "rangee": "D",
-      "numero_siege": 6,
-      "place_pmr": false,
-      "salle": 3
-    }
-  },
-  {
-    "model": "cinephoria_webapp.siege",
-    "pk": 197,
-    "fields": {
-      "rangee": "D",
-      "numero_siege": 7,
-      "place_pmr": false,
-      "salle": 3
-    }
-  },
-  {
-    "model": "cinephoria_webapp.siege",
-    "pk": 198,
-    "fields": {
-      "rangee": "D",
-      "numero_siege": 8,
-      "place_pmr": false,
-      "salle": 3
-    }
-  },
-  {
-    "model": "cinephoria_webapp.siege",
-    "pk": 199,
-    "fields": {
-      "rangee": "D",
-      "numero_siege": 9,
-      "place_pmr": false,
-      "salle": 3
-    }
-  },
-  {
-    "model": "cinephoria_webapp.siege",
-    "pk": 200,
-    "fields": {
-      "rangee": "D",
-      "numero_siege": 10,
-      "place_pmr": false,
-      "salle": 3
-    }
-  },
-  {
-    "model": "cinephoria_webapp.siege",
-    "pk": 201,
-    "fields": {
-      "rangee": "E",
-      "numero_siege": 1,
-      "place_pmr": false,
-      "salle": 3
-    }
-  },
-  {
-    "model": "cinephoria_webapp.siege",
-    "pk": 202,
-    "fields": {
-      "rangee": "E",
-      "numero_siege": 2,
-      "place_pmr": false,
-      "salle": 3
-    }
-  },
-  {
-    "model": "cinephoria_webapp.siege",
-    "pk": 203,
-    "fields": {
-      "rangee": "E",
-      "numero_siege": 3,
-      "place_pmr": false,
-      "salle": 3
-    }
-  },
-  {
-    "model": "cinephoria_webapp.siege",
-    "pk": 204,
-    "fields": {
-      "rangee": "E",
-      "numero_siege": 4,
-      "place_pmr": false,
-      "salle": 3
-    }
-  },
-  {
-    "model": "cinephoria_webapp.siege",
-    "pk": 205,
-    "fields": {
-      "rangee": "E",
-      "numero_siege": 5,
-      "place_pmr": false,
-      "salle": 3
-    }
-  },
-  {
-    "model": "cinephoria_webapp.siege",
-    "pk": 206,
-    "fields": {
-      "rangee": "E",
-      "numero_siege": 6,
-      "place_pmr": false,
-      "salle": 3
-    }
-  },
-  {
-    "model": "cinephoria_webapp.siege",
-    "pk": 207,
-    "fields": {
-      "rangee": "E",
-      "numero_siege": 7,
-      "place_pmr": false,
-      "salle": 3
-    }
-  },
-  {
-    "model": "cinephoria_webapp.siege",
-    "pk": 208,
-    "fields": {
-      "rangee": "E",
-      "numero_siege": 8,
-      "place_pmr": false,
-      "salle": 3
-    }
-  },
-  {
-    "model": "cinephoria_webapp.siege",
-    "pk": 209,
-    "fields": {
-      "rangee": "E",
-      "numero_siege": 9,
-      "place_pmr": false,
-      "salle": 3
-    }
-  },
-  {
-    "model": "cinephoria_webapp.siege",
-    "pk": 210,
-    "fields": {
-      "rangee": "E",
-      "numero_siege": 10,
-      "place_pmr": false,
-      "salle": 3
-    }
-  },
-  {
-    "model": "cinephoria_webapp.siege",
-    "pk": 211,
-    "fields": {
-      "rangee": "F",
-      "numero_siege": 1,
-      "place_pmr": false,
-      "salle": 3
-    }
-  },
-  {
-    "model": "cinephoria_webapp.siege",
-    "pk": 212,
-    "fields": {
-      "rangee": "F",
-      "numero_siege": 2,
-      "place_pmr": false,
-      "salle": 3
-    }
-  },
-  {
-    "model": "cinephoria_webapp.siege",
-    "pk": 213,
-    "fields": {
-      "rangee": "F",
-      "numero_siege": 3,
-      "place_pmr": false,
-      "salle": 3
-    }
-  },
-  {
-    "model": "cinephoria_webapp.siege",
-    "pk": 214,
-    "fields": {
-      "rangee": "F",
-      "numero_siege": 4,
-      "place_pmr": false,
-      "salle": 3
-    }
-  },
-  {
-    "model": "cinephoria_webapp.siege",
-    "pk": 215,
-    "fields": {
-      "rangee": "F",
-      "numero_siege": 5,
-      "place_pmr": false,
-      "salle": 3
-    }
-  },
-  {
-    "model": "cinephoria_webapp.siege",
-    "pk": 216,
-    "fields": {
-      "rangee": "F",
-      "numero_siege": 6,
-      "place_pmr": false,
-      "salle": 3
-    }
-  },
-  {
-    "model": "cinephoria_webapp.siege",
-    "pk": 217,
-    "fields": {
-      "rangee": "F",
-      "numero_siege": 7,
-      "place_pmr": false,
-      "salle": 3
-    }
-  },
-  {
-    "model": "cinephoria_webapp.siege",
-    "pk": 218,
-    "fields": {
-      "rangee": "F",
-      "numero_siege": 8,
-      "place_pmr": false,
-      "salle": 3
-    }
-  },
-  {
-    "model": "cinephoria_webapp.siege",
-    "pk": 219,
-    "fields": {
-      "rangee": "F",
-      "numero_siege": 9,
-      "place_pmr": false,
-      "salle": 3
-    }
-  },
-  {
-    "model": "cinephoria_webapp.siege",
-    "pk": 220,
-    "fields": {
-      "rangee": "F",
-      "numero_siege": 10,
-      "place_pmr": false,
-      "salle": 3
-    }
-  },
-  {
-    "model": "cinephoria_webapp.siege",
-    "pk": 221,
-    "fields": {
-      "rangee": "G",
-      "numero_siege": 1,
-      "place_pmr": false,
-      "salle": 3
-    }
-  },
-  {
-    "model": "cinephoria_webapp.siege",
-    "pk": 222,
-    "fields": {
-      "rangee": "G",
-      "numero_siege": 2,
-      "place_pmr": false,
-      "salle": 3
-    }
-  },
-  {
-    "model": "cinephoria_webapp.siege",
-    "pk": 223,
-    "fields": {
-      "rangee": "G",
-      "numero_siege": 3,
-      "place_pmr": false,
-      "salle": 3
-    }
-  },
-  {
-    "model": "cinephoria_webapp.siege",
-    "pk": 224,
-    "fields": {
-      "rangee": "G",
-      "numero_siege": 4,
-      "place_pmr": false,
-      "salle": 3
-    }
-  },
-  {
-    "model": "cinephoria_webapp.siege",
-    "pk": 225,
-    "fields": {
-      "rangee": "G",
-      "numero_siege": 5,
-      "place_pmr": false,
-      "salle": 3
-    }
-  },
-  {
-    "model": "cinephoria_webapp.siege",
-    "pk": 226,
-    "fields": {
-      "rangee": "G",
-      "numero_siege": 6,
-      "place_pmr": false,
-      "salle": 3
-    }
-  },
-  {
-    "model": "cinephoria_webapp.siege",
-    "pk": 227,
-    "fields": {
-      "rangee": "G",
-      "numero_siege": 7,
-      "place_pmr": false,
-      "salle": 3
-    }
-  },
-  {
-    "model": "cinephoria_webapp.siege",
-    "pk": 228,
-    "fields": {
-      "rangee": "G",
-      "numero_siege": 8,
-      "place_pmr": false,
-      "salle": 3
-    }
-  },
-  {
-    "model": "cinephoria_webapp.siege",
-    "pk": 229,
-    "fields": {
-      "rangee": "G",
-      "numero_siege": 9,
-      "place_pmr": false,
-      "salle": 3
-    }
-  },
-  {
-    "model": "cinephoria_webapp.siege",
-    "pk": 230,
-    "fields": {
-      "rangee": "G",
-      "numero_siege": 10,
-      "place_pmr": false,
-      "salle": 3
-    }
-  },
-  {
-    "model": "cinephoria_webapp.siege",
-    "pk": 231,
-    "fields": {
-      "rangee": "H",
-      "numero_siege": 1,
-      "place_pmr": false,
-      "salle": 3
-    }
-  },
-  {
-    "model": "cinephoria_webapp.siege",
-    "pk": 232,
-    "fields": {
-      "rangee": "H",
-      "numero_siege": 2,
-      "place_pmr": false,
-      "salle": 3
-    }
-  },
-  {
-    "model": "cinephoria_webapp.siege",
-    "pk": 233,
-    "fields": {
-      "rangee": "H",
-      "numero_siege": 3,
-      "place_pmr": true,
-      "salle": 3
-    }
-  },
-  {
-    "model": "cinephoria_webapp.siege",
-    "pk": 234,
-    "fields": {
-      "rangee": "H",
-      "numero_siege": 4,
-      "place_pmr": true,
-      "salle": 3
-    }
-  },
-  {
-    "model": "cinephoria_webapp.siege",
-    "pk": 235,
-    "fields": {
-      "rangee": "H",
-      "numero_siege": 5,
-      "place_pmr": true,
-      "salle": 3
-    }
-  },
-  {
-    "model": "cinephoria_webapp.siege",
-    "pk": 236,
-    "fields": {
-      "rangee": "H",
-      "numero_siege": 6,
-      "place_pmr": true,
-      "salle": 3
-    }
-  },
-  {
-    "model": "cinephoria_webapp.siege",
-    "pk": 237,
-    "fields": {
-      "rangee": "H",
-      "numero_siege": 7,
-      "place_pmr": true,
-      "salle": 3
-    }
-  },
-  {
-    "model": "cinephoria_webapp.siege",
-    "pk": 238,
-    "fields": {
-      "rangee": "H",
-      "numero_siege": 8,
-      "place_pmr": true,
-      "salle": 3
-    }
-  },
-  {
-    "model": "cinephoria_webapp.siege",
-    "pk": 239,
-    "fields": {
-      "rangee": "H",
-      "numero_siege": 9,
-      "place_pmr": true,
-      "salle": 3
-    }
-  },
-  {
-    "model": "cinephoria_webapp.siege",
-    "pk": 240,
-    "fields": {
-      "rangee": "H",
-      "numero_siege": 10,
-      "place_pmr": true,
-      "salle": 3
+      "numero_salle": "2",
+      "total_places": 40,
+      "places_pmr": 2,
+      "qualite": 3,
+      "cinema": 7
     }
   },
   {
     "model": "cinephoria_webapp.film",
-    "pk": 1,
     "fields": {
-      "titre": "Code Zéro",
-      "duree": 120,
-      "synopsis": "Un thriller captivant autour d’un code mystérieux.",
+      "titre": "Code zéro",
+      "duree": 110,
+      "synopsis": "Synopsis du film Code zéro",
       "age_minimum": 12,
-      "label_coup_de_coeur": true,
-      "note": 4.5,
+      "label_coup_de_coeur": false,
+      "note": 4.0,
       "genre": 1,
+      "dernier_modificateur": 1,
       "date_ajout": "2025-05-14",
       "date_sortie": "2025-05-01",
-      "date_derniere_modification": "2025-05-20T00:00:00Z",
+      "cinemas": [
+        1,
+        2,
+        3
+      ]
+    }
+  },
+  {
+    "model": "cinephoria_webapp.film",
+    "fields": {
+      "titre": "Coeur à contretemps",
+      "duree": 110,
+      "synopsis": "Synopsis du film Coeur à contretemps",
+      "age_minimum": 12,
+      "label_coup_de_coeur": false,
+      "note": 4.0,
+      "genre": 3,
+      "dernier_modificateur": 1,
+      "date_ajout": "2025-05-14",
+      "date_sortie": "2025-05-01",
+      "cinemas": [
+        1,
+        2,
+        3
+      ]
+    }
+  },
+  {
+    "model": "cinephoria_webapp.film",
+    "fields": {
+      "titre": "Confusion totale",
+      "duree": 110,
+      "synopsis": "Synopsis du film Confusion totale",
+      "age_minimum": 12,
+      "label_coup_de_coeur": true,
+      "note": 4.0,
+      "genre": 2,
+      "dernier_modificateur": 1,
+      "date_ajout": "2025-05-14",
+      "date_sortie": "2025-05-01",
+      "cinemas": [
+        1,
+        2,
+        3
+      ]
+    }
+  },
+  {
+    "model": "cinephoria_webapp.film",
+    "fields": {
+      "titre": "Divorce et ricochets",
+      "duree": 110,
+      "synopsis": "Synopsis du film Divorce et ricochets",
+      "age_minimum": 12,
+      "label_coup_de_coeur": false,
+      "note": 4.0,
+      "genre": 2,
+      "dernier_modificateur": 1,
+      "date_ajout": "2025-05-14",
+      "date_sortie": "2025-05-01",
+      "cinemas": [
+        1,
+        2,
+        3
+      ]
+    }
+  },
+  {
+    "model": "cinephoria_webapp.film",
+    "fields": {
+      "titre": "La foret des murmures",
+      "duree": 110,
+      "synopsis": "Synopsis du film La foret des murmures",
+      "age_minimum": 12,
+      "label_coup_de_coeur": false,
+      "note": 4.0,
+      "genre": 4,
+      "dernier_modificateur": 1,
+      "date_ajout": "2025-05-14",
+      "date_sortie": "2025-05-01",
+      "cinemas": [
+        1,
+        2,
+        3
+      ]
+    }
+  },
+  {
+    "model": "cinephoria_webapp.film",
+    "fields": {
+      "titre": "le masque du revenant",
+      "duree": 110,
+      "synopsis": "Synopsis du film le masque du revenant",
+      "age_minimum": 12,
+      "label_coup_de_coeur": true,
+      "note": 4.0,
+      "genre": 4,
+      "dernier_modificateur": 1,
+      "date_ajout": "2025-05-14",
+      "date_sortie": "2025-05-01",
+      "cinemas": [
+        1,
+        2,
+        3
+      ]
+    }
+  },
+  {
+    "model": "cinephoria_webapp.film",
+    "fields": {
+      "titre": "Le royaume caché",
+      "duree": 110,
+      "synopsis": "Synopsis du film Le royaume caché",
+      "age_minimum": 12,
+      "label_coup_de_coeur": false,
+      "note": 4.0,
+      "genre": 4,
+      "dernier_modificateur": 1,
+      "date_ajout": "2025-05-14",
+      "date_sortie": "2025-05-01",
+      "cinemas": [
+        1,
+        2,
+        3
+      ]
+    }
+  },
+  {
+    "model": "cinephoria_webapp.film",
+    "fields": {
+      "titre": "Le voyage des coeurs vaillants",
+      "duree": 110,
+      "synopsis": "Synopsis du film Le voyage des coeurs vaillants",
+      "age_minimum": 12,
+      "label_coup_de_coeur": false,
+      "note": 4.0,
+      "genre": 5,
+      "dernier_modificateur": 1,
+      "date_ajout": "2025-05-14",
+      "date_sortie": "2025-05-01",
+      "cinemas": [
+        1,
+        2,
+        3
+      ]
+    }
+  },
+  {
+    "model": "cinephoria_webapp.film",
+    "fields": {
+      "titre": "Les enfants de l'hyperespace",
+      "duree": 110,
+      "synopsis": "Synopsis du film Les enfants de l'hyperespace",
+      "age_minimum": 12,
+      "label_coup_de_coeur": true,
+      "note": 4.0,
+      "genre": 1,
+      "dernier_modificateur": 1,
+      "date_ajout": "2025-05-14",
+      "date_sortie": "2025-05-01",
+      "cinemas": [
+        1,
+        2,
+        3
+      ]
+    }
+  },
+  {
+    "model": "cinephoria_webapp.film",
+    "fields": {
+      "titre": "les vacances de Tonton Gaston",
+      "duree": 110,
+      "synopsis": "Synopsis du film les vacances de Tonton Gaston",
+      "age_minimum": 12,
+      "label_coup_de_coeur": false,
+      "note": 4.0,
+      "genre": 2,
+      "dernier_modificateur": 1,
+      "date_ajout": "2025-05-14",
+      "date_sortie": "2025-05-01",
+      "cinemas": [
+        1,
+        2,
+        3
+      ]
+    }
+  },
+  {
+    "model": "cinephoria_webapp.film",
+    "fields": {
+      "titre": "Opération blackout",
+      "duree": 110,
+      "synopsis": "Synopsis du film Opération blackout",
+      "age_minimum": 12,
+      "label_coup_de_coeur": false,
+      "note": 4.0,
+      "genre": 1,
+      "dernier_modificateur": 1,
+      "date_ajout": "2025-05-14",
+      "date_sortie": "2025-05-01",
+      "cinemas": [
+        1,
+        2,
+        3
+      ]
+    }
+  },
+  {
+    "model": "cinephoria_webapp.film",
+    "fields": {
+      "titre": "Planète Mars",
+      "duree": 110,
+      "synopsis": "Synopsis du film Planète Mars",
+      "age_minimum": 12,
+      "label_coup_de_coeur": true,
+      "note": 4.0,
+      "genre": 1,
+      "dernier_modificateur": 1,
+      "date_ajout": "2025-05-14",
+      "date_sortie": "2025-05-01",
+      "cinemas": [
+        1,
+        2,
+        3
+      ]
+    }
+  },
+  {
+    "model": "cinephoria_webapp.film",
+    "fields": {
+      "titre": "Startup en délire",
+      "duree": 110,
+      "synopsis": "Synopsis du film Startup en délire",
+      "age_minimum": 12,
+      "label_coup_de_coeur": false,
+      "note": 4.0,
+      "genre": 2,
+      "dernier_modificateur": 1,
+      "date_ajout": "2025-05-14",
+      "date_sortie": "2025-05-01",
+      "cinemas": [
+        1,
+        2,
+        3
+      ]
+    }
+  },
+  {
+    "model": "cinephoria_webapp.film",
+    "fields": {
+      "titre": "Tatie déraille",
+      "duree": 110,
+      "synopsis": "Synopsis du film Tatie déraille",
+      "age_minimum": 12,
+      "label_coup_de_coeur": false,
+      "note": 4.0,
+      "genre": 2,
+      "dernier_modificateur": 1,
+      "date_ajout": "2025-05-14",
+      "date_sortie": "2025-05-01",
       "cinemas": [
         1,
         2,
@@ -2559,10 +566,9 @@
   },
   {
     "model": "cinephoria_webapp.seance",
-    "pk": 1,
     "fields": {
       "film": 1,
-      "salle": 1,
+      "salle": 2,
       "heure_debut": "18:30",
       "jours_diffusion": [
         4
@@ -2571,7 +577,6 @@
   },
   {
     "model": "cinephoria_webapp.seance",
-    "pk": 2,
     "fields": {
       "film": 1,
       "salle": 2,
@@ -2583,9 +588,41 @@
   },
   {
     "model": "cinephoria_webapp.seance",
-    "pk": 3,
     "fields": {
       "film": 1,
+      "salle": 2,
+      "heure_debut": "18:30",
+      "jours_diffusion": [
+        6
+      ]
+    }
+  },
+  {
+    "model": "cinephoria_webapp.seance",
+    "fields": {
+      "film": 2,
+      "salle": 3,
+      "heure_debut": "18:30",
+      "jours_diffusion": [
+        4
+      ]
+    }
+  },
+  {
+    "model": "cinephoria_webapp.seance",
+    "fields": {
+      "film": 2,
+      "salle": 3,
+      "heure_debut": "18:30",
+      "jours_diffusion": [
+        5
+      ]
+    }
+  },
+  {
+    "model": "cinephoria_webapp.seance",
+    "fields": {
+      "film": 2,
       "salle": 3,
       "heure_debut": "18:30",
       "jours_diffusion": [
@@ -2594,15 +631,399 @@
     }
   },
   {
-    "model": "cinephoria_webapp.avis",
-    "pk": 1,
+    "model": "cinephoria_webapp.seance",
     "fields": {
-      "note": 5,
-      "commentaire": "Excellent film !",
-      "film": 1,
-      "utilisateur": 1,
-      "valide": true,
-      "date": "2025-05-20T00:00:00Z"
+      "film": 3,
+      "salle": 4,
+      "heure_debut": "18:30",
+      "jours_diffusion": [
+        4
+      ]
+    }
+  },
+  {
+    "model": "cinephoria_webapp.seance",
+    "fields": {
+      "film": 3,
+      "salle": 4,
+      "heure_debut": "18:30",
+      "jours_diffusion": [
+        5
+      ]
+    }
+  },
+  {
+    "model": "cinephoria_webapp.seance",
+    "fields": {
+      "film": 3,
+      "salle": 4,
+      "heure_debut": "18:30",
+      "jours_diffusion": [
+        6
+      ]
+    }
+  },
+  {
+    "model": "cinephoria_webapp.seance",
+    "fields": {
+      "film": 4,
+      "salle": 5,
+      "heure_debut": "18:30",
+      "jours_diffusion": [
+        4
+      ]
+    }
+  },
+  {
+    "model": "cinephoria_webapp.seance",
+    "fields": {
+      "film": 4,
+      "salle": 5,
+      "heure_debut": "18:30",
+      "jours_diffusion": [
+        5
+      ]
+    }
+  },
+  {
+    "model": "cinephoria_webapp.seance",
+    "fields": {
+      "film": 4,
+      "salle": 5,
+      "heure_debut": "18:30",
+      "jours_diffusion": [
+        6
+      ]
+    }
+  },
+  {
+    "model": "cinephoria_webapp.seance",
+    "fields": {
+      "film": 5,
+      "salle": 6,
+      "heure_debut": "18:30",
+      "jours_diffusion": [
+        4
+      ]
+    }
+  },
+  {
+    "model": "cinephoria_webapp.seance",
+    "fields": {
+      "film": 5,
+      "salle": 6,
+      "heure_debut": "18:30",
+      "jours_diffusion": [
+        5
+      ]
+    }
+  },
+  {
+    "model": "cinephoria_webapp.seance",
+    "fields": {
+      "film": 5,
+      "salle": 6,
+      "heure_debut": "18:30",
+      "jours_diffusion": [
+        6
+      ]
+    }
+  },
+  {
+    "model": "cinephoria_webapp.seance",
+    "fields": {
+      "film": 6,
+      "salle": 7,
+      "heure_debut": "18:30",
+      "jours_diffusion": [
+        4
+      ]
+    }
+  },
+  {
+    "model": "cinephoria_webapp.seance",
+    "fields": {
+      "film": 6,
+      "salle": 7,
+      "heure_debut": "18:30",
+      "jours_diffusion": [
+        5
+      ]
+    }
+  },
+  {
+    "model": "cinephoria_webapp.seance",
+    "fields": {
+      "film": 6,
+      "salle": 7,
+      "heure_debut": "18:30",
+      "jours_diffusion": [
+        6
+      ]
+    }
+  },
+  {
+    "model": "cinephoria_webapp.seance",
+    "fields": {
+      "film": 7,
+      "salle": 8,
+      "heure_debut": "18:30",
+      "jours_diffusion": [
+        4
+      ]
+    }
+  },
+  {
+    "model": "cinephoria_webapp.seance",
+    "fields": {
+      "film": 7,
+      "salle": 8,
+      "heure_debut": "18:30",
+      "jours_diffusion": [
+        5
+      ]
+    }
+  },
+  {
+    "model": "cinephoria_webapp.seance",
+    "fields": {
+      "film": 7,
+      "salle": 8,
+      "heure_debut": "18:30",
+      "jours_diffusion": [
+        6
+      ]
+    }
+  },
+  {
+    "model": "cinephoria_webapp.seance",
+    "fields": {
+      "film": 8,
+      "salle": 9,
+      "heure_debut": "18:30",
+      "jours_diffusion": [
+        4
+      ]
+    }
+  },
+  {
+    "model": "cinephoria_webapp.seance",
+    "fields": {
+      "film": 8,
+      "salle": 9,
+      "heure_debut": "18:30",
+      "jours_diffusion": [
+        5
+      ]
+    }
+  },
+  {
+    "model": "cinephoria_webapp.seance",
+    "fields": {
+      "film": 8,
+      "salle": 9,
+      "heure_debut": "18:30",
+      "jours_diffusion": [
+        6
+      ]
+    }
+  },
+  {
+    "model": "cinephoria_webapp.seance",
+    "fields": {
+      "film": 9,
+      "salle": 10,
+      "heure_debut": "18:30",
+      "jours_diffusion": [
+        4
+      ]
+    }
+  },
+  {
+    "model": "cinephoria_webapp.seance",
+    "fields": {
+      "film": 9,
+      "salle": 10,
+      "heure_debut": "18:30",
+      "jours_diffusion": [
+        5
+      ]
+    }
+  },
+  {
+    "model": "cinephoria_webapp.seance",
+    "fields": {
+      "film": 9,
+      "salle": 10,
+      "heure_debut": "18:30",
+      "jours_diffusion": [
+        6
+      ]
+    }
+  },
+  {
+    "model": "cinephoria_webapp.seance",
+    "fields": {
+      "film": 10,
+      "salle": 11,
+      "heure_debut": "18:30",
+      "jours_diffusion": [
+        4
+      ]
+    }
+  },
+  {
+    "model": "cinephoria_webapp.seance",
+    "fields": {
+      "film": 10,
+      "salle": 11,
+      "heure_debut": "18:30",
+      "jours_diffusion": [
+        5
+      ]
+    }
+  },
+  {
+    "model": "cinephoria_webapp.seance",
+    "fields": {
+      "film": 10,
+      "salle": 11,
+      "heure_debut": "18:30",
+      "jours_diffusion": [
+        6
+      ]
+    }
+  },
+  {
+    "model": "cinephoria_webapp.seance",
+    "fields": {
+      "film": 11,
+      "salle": 12,
+      "heure_debut": "18:30",
+      "jours_diffusion": [
+        4
+      ]
+    }
+  },
+  {
+    "model": "cinephoria_webapp.seance",
+    "fields": {
+      "film": 11,
+      "salle": 12,
+      "heure_debut": "18:30",
+      "jours_diffusion": [
+        5
+      ]
+    }
+  },
+  {
+    "model": "cinephoria_webapp.seance",
+    "fields": {
+      "film": 11,
+      "salle": 12,
+      "heure_debut": "18:30",
+      "jours_diffusion": [
+        6
+      ]
+    }
+  },
+  {
+    "model": "cinephoria_webapp.seance",
+    "fields": {
+      "film": 12,
+      "salle": 13,
+      "heure_debut": "18:30",
+      "jours_diffusion": [
+        4
+      ]
+    }
+  },
+  {
+    "model": "cinephoria_webapp.seance",
+    "fields": {
+      "film": 12,
+      "salle": 13,
+      "heure_debut": "18:30",
+      "jours_diffusion": [
+        5
+      ]
+    }
+  },
+  {
+    "model": "cinephoria_webapp.seance",
+    "fields": {
+      "film": 12,
+      "salle": 13,
+      "heure_debut": "18:30",
+      "jours_diffusion": [
+        6
+      ]
+    }
+  },
+  {
+    "model": "cinephoria_webapp.seance",
+    "fields": {
+      "film": 13,
+      "salle": 14,
+      "heure_debut": "18:30",
+      "jours_diffusion": [
+        4
+      ]
+    }
+  },
+  {
+    "model": "cinephoria_webapp.seance",
+    "fields": {
+      "film": 13,
+      "salle": 14,
+      "heure_debut": "18:30",
+      "jours_diffusion": [
+        5
+      ]
+    }
+  },
+  {
+    "model": "cinephoria_webapp.seance",
+    "fields": {
+      "film": 13,
+      "salle": 14,
+      "heure_debut": "18:30",
+      "jours_diffusion": [
+        6
+      ]
+    }
+  },
+  {
+    "model": "cinephoria_webapp.seance",
+    "fields": {
+      "film": 14,
+      "salle": 1,
+      "heure_debut": "18:30",
+      "jours_diffusion": [
+        4
+      ]
+    }
+  },
+  {
+    "model": "cinephoria_webapp.seance",
+    "fields": {
+      "film": 14,
+      "salle": 1,
+      "heure_debut": "18:30",
+      "jours_diffusion": [
+        5
+      ]
+    }
+  },
+  {
+    "model": "cinephoria_webapp.seance",
+    "fields": {
+      "film": 14,
+      "salle": 1,
+      "heure_debut": "18:30",
+      "jours_diffusion": [
+        6
+      ]
     }
   }
 ]
