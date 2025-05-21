@@ -95,7 +95,7 @@ def index(request):
                 seance_datetime = datetime.combine(seance_date, seance.heure_debut)
                 prochaines_seances.append((seance_datetime, seance))
 
-        prochaines_seances.sort()
+        prochaines_seances.sort(key=lambda x: x[0])
         film_seances_dict[film.id] = [{
             "seance": s[1],
             "date": s[0].date(),
