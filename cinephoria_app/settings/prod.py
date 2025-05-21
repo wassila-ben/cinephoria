@@ -74,9 +74,6 @@ CONTENT_SECURITY_POLICY = {
 }
 
 
-# Redéfinir MEDIA_URL uniquement si nécessaire
-MEDIA_URL = f"https://res.cloudinary.com/{os.getenv('CLOUDINARY_CLOUD_NAME')}/"
-
 
 
 
