@@ -1,7 +1,7 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from .models import Film, Cinema, Avis, Seance, Reservation, Genre, Utilisateur, ReservationSiege, Siege, Billet
 from datetime import datetime, timedelta
-from .forms import CustomUserCreationForm, CustomAuthenticationForm, ReservationForm, SiegeSelectionForm, ChoixSeanceForm
+from .forms import CustomUserCreationForm, CustomAuthenticationForm, ReservationForm, SiegeSelectionForm, ChoixSeanceForm, AvisForm
 from django.contrib import messages
 from django.utils import timezone
 from django.utils.dateparse import parse_date
@@ -15,6 +15,7 @@ from django.http import HttpResponse
 from django.conf import settings
 import json
 from django.core.serializers.json import DjangoJSONEncoder
+from django.utils.crypto import get_random_string
 
 
 
@@ -387,3 +388,66 @@ def reservation_confirmation(request):
     }
 
     return render(request, 'cinephoria_webapp/reservation_confirmation.html', context)
+
+@login_required
+def mon_espace(request):
+    reservations = Reservation.objects.filter(utilisateur=request.user).order_by('-date_reservation')
+    now = timezone.now()
+
+    return render(request, 'cinephoria_webapp/mon_espace.html', {
+        'reservations': reservations,
+        'now': now
+    })
+
+@login_required
+def noter_film(request, film_id):
+    film = get_object_or_404(Film, id=film_id)
+    existing_avis = Avis.objects.filter(film=film, utilisateur=request.user).first()
+
+    if existing_avis:
+        messages.warning(request, "Vous avez déjà noté ce film.")
+        return redirect('mon_espace')
+
+    if request.method == 'POST':
+        form = AvisForm(request.POST)
+        if form.is_valid():
+            avis = form.save(commit=False)
+            avis.film = film
+            avis.utilisateur = request.user
+            avis.valide = False
+            avis.save()
+            messages.success(request, "Votre avis a été soumis pour validation.")
+            return redirect('mon_espace')
+    else:
+        form = AvisForm()
+
+    return render(request, 'cinephoria_webapp/noter_film.html', {'film': film, 'form': form})
+
+def reset_password(request):
+    if request.method == 'POST':
+        form = MotDePasseOublieForm(request.POST)
+        if form.is_valid():
+            email = form.cleaned_data['email']
+            try:
+                utilisateur = Utilisateur.objects.get(email=email)
+                nouveau_mdp = get_random_string(length=10)
+                utilisateur.set_password(nouveau_mdp)
+                utilisateur.doit_changer_mdp = True
+                utilisateur.save()
+
+                send_mail(
+                    "Réinitialisation de votre mot de passe",
+                    f"Bonjour,\n\nVoici votre nouveau mot de passe temporaire : {nouveau_mdp}\n\nMerci de le changer dès votre prochaine connexion.",
+                    settings.DEFAULT_FROM_EMAIL,
+                    [email],
+                    fail_silently=False,
+                )
+
+                messages.success(request, "Un mot de passe temporaire vous a été envoyé par email.")
+                return redirect('login')
+            except Utilisateur.DoesNotExist:
+                messages.warning(request, "Aucun compte ne correspond à cet email.")
+    else:
+        form = MotDePasseOublieForm()
+
+    return render(request, 'cinephoria_webapp/reset_password.html', {'form': form})

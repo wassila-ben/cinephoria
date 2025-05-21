@@ -100,6 +100,10 @@ urlpatterns = [
     # Url pour token d'authentification
     path('api/token-auth/', views_api.token_auth_view, name='api_token_auth'),
 
+    # Espace utilisateur
+    path("mon-espace/", views.mon_espace, name="mon_espace"),
+    path("noter/<int:film_id>/", views.noter_film, name="noter_film"),
+
 ]
 
 if settings.DEBUG:

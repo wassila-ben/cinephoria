@@ -40,6 +40,7 @@ class Utilisateur(AbstractBaseUser, PermissionsMixin):
     pays = models.CharField(max_length=50, default="France")
     is_active = models.BooleanField(default=True)
     is_staff = models.BooleanField(default=False)
+    
 
     groups = models.ManyToManyField(
         Group,

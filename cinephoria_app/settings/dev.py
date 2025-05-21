@@ -8,6 +8,9 @@ ALLOWED_HOSTS = ['0.0.0.0', 'localhost', '127.0.0.1']
 
 SECRET_KEY = os.getenv("SECRET_KEY")
 
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',

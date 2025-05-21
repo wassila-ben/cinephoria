@@ -53,7 +53,7 @@
                         <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"><i class="bi bi-person-circle fs-4"></i></a>
                         <ul class="dropdown-menu dropdown-menu-end">
                         {% if user.is_authenticated %}
-                            <li><a class="dropdown-item" href="#">Mes informations</a></li>
+                            <li><a class="dropdown-item" href="{% url 'mon_espace' %}">Mon espace</a></li>
                             {% if user.is_staff %}
                                 <li><a class="dropdown-item" href="{% url 'employee_dashboard' %}">Intranet</a></li>
                             {% endif %}

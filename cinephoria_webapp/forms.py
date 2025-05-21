@@ -118,12 +118,19 @@ class SiegeSelectionForm(forms.Form):
 
 
 class AvisForm(forms.ModelForm):
+    NOTE_CHOICES = [(i, f"{'★' * i}") for i in range(1, 6)]
+
+    note = forms.ChoiceField(
+        choices=NOTE_CHOICES,
+        widget=forms.RadioSelect(attrs={'class': 'form-check-input'}),
+        label="Note"
+    )
+
     class Meta:
         model = Avis
         fields = ['note', 'commentaire']
         widgets = {
-            'note': forms.NumberInput(attrs={'min': 1, 'max': 5}),
-            'commentaire': forms.Textarea(attrs={'rows': 3}),
+            'commentaire': forms.Textarea(attrs={'rows': 4, 'class': 'form-control'}),
         }
 
 class SeanceSelectorForm(forms.Form):
@@ -158,3 +165,6 @@ class SeanceSelectorForm(forms.Form):
             "class": "form-control"
         })
     )
+
+class MotDePasseOublieForm(forms.Form):
+    email = forms.EmailField(label="Adresse email", widget=forms.EmailInput(attrs={'class': 'form-control'}))
