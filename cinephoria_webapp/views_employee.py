@@ -199,6 +199,6 @@ def employee_dashboard(request):
         'nb_films': Film.objects.count(),
         'nb_seances': Seance.objects.count(),
         'nb_salles': Salle.objects.count(),
-        'avis_en_attente': Avis.objects.filter(validé=False).count()
+        'avis_en_attente': Avis.objects.filter(valide=False).count()
     }
     return render(request, 'cinephoria_webapp/employee_panel/dashboard.html', {'stats': stats})
