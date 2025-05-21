@@ -90,6 +90,19 @@ if os.getenv("CI") != "true":  # on ne force PAS pendant les tests
     from cloudinary_storage.storage import MediaCloudinaryStorage
     default_storage._wrapped = MediaCloudinaryStorage()
 
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'handlers': {
+        'console': {
+            'class': 'logging.StreamHandler',
+        },
+    },
+    'root': {
+        'handlers': ['console'],
+        'level': 'DEBUG',
+    },
+}
 print("Chargement des settings PROD")
 
 
