@@ -20,8 +20,6 @@ STATICFILES_DIRS = [BASE_DIR / 'static']
 
 MEDIA_URL = f"https://res.cloudinary.com/{os.getenv('CLOUDINARY_CLOUD_NAME')}/"
 
-MEDIA_ROOT = BASE_DIR / 'media'
-
 # WhiteNoise & Cloudinary
 MIDDLEWARE.insert(1, 'whitenoise.middleware.WhiteNoiseMiddleware')
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
