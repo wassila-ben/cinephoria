@@ -2,6 +2,8 @@ from .base import *
 import os
 import dj_database_url
 from django.conf import settings
+from django.core.files.storage import default_storage
+from cloudinary_storage.storage import MediaCloudinaryStorage
 
 
 # prod avec Heroku
@@ -76,13 +78,16 @@ CONTENT_SECURITY_POLICY = {
 MEDIA_URL = f"https://res.cloudinary.com/{os.getenv('CLOUDINARY_CLOUD_NAME')}/"
 
 
-DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
+
 
 CLOUDINARY_STORAGE = {
     'CLOUD_NAME': os.getenv('CLOUDINARY_CLOUD_NAME'),
     'API_KEY': os.getenv('CLOUDINARY_API_KEY'),
     'API_SECRET': os.getenv('CLOUDINARY_API_SECRET'),
 }
+
+default_storage._wrapped = MediaCloudinaryStorage()
+
 print("Chargement des settings PROD")
 
 
