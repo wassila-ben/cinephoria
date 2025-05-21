@@ -19,8 +19,6 @@ Cinéphoria - Dernières sorties
                         <div class="position-relative">
                             {% if film.affiche %}
                                 <img src="{{ film.affiche.url }}" class="card-img-top" alt="{{ film.titre }}">
-                            {% else %}
-                                <img src="{% static 'img/default_poster.jpg' %}" class="card-img-top" alt="Affiche par défaut">
                             {% endif %}
                             {% if film.note %}
                                 <span class="position-absolute top-0 end-0 m-2 badge btn-outline-primary">

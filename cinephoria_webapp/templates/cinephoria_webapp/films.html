@@ -62,8 +62,6 @@
                                 <a href="{% url 'details_film' film.id %}">
                                 {% if film.affiche %}
                                     <img class="img-fluid card-img-top scale-on-hover" src="{{ film.affiche.url }}" alt="{{ film.titre }}">
-                                {% else %}
-                                    <img class="img-fluid card-img-top scale-on-hover" src="{% static 'images/placeholder.jpg' %}" alt="Affiche non disponible">
                                 {% endif %}
                                 </a>
                                 <div class="card-body">
