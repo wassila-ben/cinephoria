@@ -167,7 +167,7 @@ def details_film(request, film_id):
     
     # Récupére toutes les séances associées au film
     seances = Seance.objects.filter(film=film).select_related('salle', 'salle__qualite')
-    avis = Avis.objects.filter(film=film, valide=true).select_related('utilisateur').order_by('-date')
+    avis = Avis.objects.filter(film=film, valide=True).select_related('utilisateur').order_by('-date')
 
     moyenne_notes = avis.aggregate(Avg('note'))['note__avg']
 
