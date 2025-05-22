@@ -218,7 +218,7 @@ class Siege(models.Model):
     place_pmr = models.BooleanField(default=False)
 
     def __str__(self):
-        return f"Salle {self.salle.numero_salle} - Siege {self.numero_siege} (Seance {self.seance or 'Libre'})"
+        return f"Salle {self.salle.numero_salle} - Siege {self.numero_siege}"
 
 
 class Cinema(models.Model):
