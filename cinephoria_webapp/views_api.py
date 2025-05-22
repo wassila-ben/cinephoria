@@ -2,7 +2,9 @@ from rest_framework.decorators import api_view, permission_classes
 from rest_framework.response import Response
 from rest_framework import status
 from rest_framework.permissions import IsAuthenticated
+from rest_framework.authtoken.views import ObtainAuthToken
 from rest_framework.authtoken.views import obtain_auth_token
+from rest_framework.authtoken.models import Token
 
 from django.http import JsonResponse
 from django.views.decorators.http import require_GET
@@ -57,6 +59,11 @@ def api_salles_list(request):
         } for salle in salles
     ]
     return Response(data)
+
+class CustomAuthToken(ObtainAuthToken):
+    def post(self, request, *args, **kwargs):
+        request.data['username'] = request.data.get('email')
+        return super().post(request, *args, **kwargs)
 
 
 @require_GET

@@ -4,6 +4,7 @@ from django.urls import path
 from django.conf import settings
 from django.conf.urls.static import static
 from cinephoria_webapp import views_admin, views_employee, views_api
+from cinephoria_webapp.views_api import CustomAuthToken
 
 
 urlpatterns = [
@@ -96,9 +97,10 @@ urlpatterns = [
     path('api/incidents/', views_api.api_incident_list_create, name='api_incident_list_create'),
     path('api/incidents/<int:pk>/', views_api.api_incident_resolve, name='api_incident_resolve'),
     path('api/salles/', views_api.api_salles_list),
+    
 
     # Url pour token d'authentification
-    path('api/token-auth/', views_api.token_auth_view, name='api_token_auth'),
+    path('api/token-auth/', CustomAuthToken.as_view()),
 
     # Espace utilisateur
     path("mon-espace/", views.mon_espace, name="mon_espace"),

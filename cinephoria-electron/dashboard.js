@@ -1,3 +1,5 @@
+console.log("💡 Script JS chargé !");
+
 const fs = require('fs');
 const path = require('path');
 const tokenPath = path.join(__dirname, 'token.txt');
