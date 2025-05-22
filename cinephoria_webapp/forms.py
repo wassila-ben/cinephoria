@@ -1,6 +1,6 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
-from .models import Utilisateur, Seance, Reservation, ReservationSiege, Siege, Avis, Film, Cinema
+from .models import Utilisateur, Seance, Reservation, ReservationSiege, Siege, Avis, Film, Cinema, Contact
 from django.core.exceptions import ValidationError
 from django.contrib.auth import get_user_model
 
@@ -168,3 +168,33 @@ class SeanceSelectorForm(forms.Form):
 
 class MotDePasseOublieForm(forms.Form):
     email = forms.EmailField(label="Adresse email", widget=forms.EmailInput(attrs={'class': 'form-control'}))
+
+class ContactForm(forms.ModelForm):
+    class Meta:
+        model = Contact
+        fields = ['nom', 'cinema', 'objet_demande', 'description']
+        widgets = {
+            'nom': forms.TextInput(attrs={
+                'class': 'form-control',
+            }),
+            'cinema': forms.Select(attrs={'class': 'form-select'}),
+            'objet_demande': forms.TextInput(attrs={
+                'class': 'form-control',
+            }),
+            'description': forms.Textarea(attrs={
+                'class': 'form-control',
+                'rows': 4
+            }),
+        }
+
+    def clean_objet_demande(self):
+        value = self.cleaned_data.get('objet_demande', '').strip()
+        if not value or value == "Objet inconnu":
+            raise forms.ValidationError("L’objet est requis.")
+        return value
+
+    def clean_description(self):
+        value = self.cleaned_data.get('description', '').strip()
+        if not value or value == "Pas de description":
+            raise forms.ValidationError("La description est obligatoire.")
+        return value

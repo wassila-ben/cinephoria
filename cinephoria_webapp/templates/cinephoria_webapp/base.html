@@ -43,7 +43,7 @@
                         <a class="nav-link text-uppercase {% if request.resolver_match.url_name == 'reservation' %}active{% endif %}" href="{% url 'reservation' %}">Réservation</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link text-uppercase" href="#">Contact</a>
+                        <a class="nav-link text-uppercase" href="{% url 'contact' %}">Contact</a>
                     </li>
                 </ul>
 

@@ -106,6 +106,8 @@ urlpatterns = [
     path("mon-espace/", views.mon_espace, name="mon_espace"),
     path("noter/<int:film_id>/", views.noter_film, name="noter_film"),
 
+    path('contact/', views.contact_view, name='contact'),
+
 ]
 
 if settings.DEBUG:

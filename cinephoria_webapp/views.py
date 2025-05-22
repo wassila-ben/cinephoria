@@ -1,7 +1,7 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from .models import Film, Cinema, Avis, Seance, Reservation, Genre, Utilisateur, ReservationSiege, Siege, Billet
 from datetime import datetime, timedelta
-from .forms import CustomUserCreationForm, CustomAuthenticationForm, ReservationForm, SiegeSelectionForm, ChoixSeanceForm, AvisForm
+from .forms import CustomUserCreationForm, CustomAuthenticationForm, ReservationForm, SiegeSelectionForm, ChoixSeanceForm, AvisForm, ContactForm
 from django.contrib import messages
 from django.utils import timezone
 from django.utils.dateparse import parse_date
@@ -451,3 +451,31 @@ def reset_password(request):
         form = MotDePasseOublieForm()
 
     return render(request, 'cinephoria_webapp/reset_password.html', {'form': form})
+
+def contact_view(request):
+    if request.method == 'POST':
+        form = ContactForm(request.POST)
+        if form.is_valid():
+            contact = form.save(commit=False)
+            if request.user.is_authenticated:
+                contact.utilisateur = request.user
+            else:
+                messages.error(request, "Vous devez être connecté pour envoyer une demande.")
+                return redirect('login')
+            contact.save()
+
+            # Envoi d'un mail générique
+            send_mail(
+                subject=f"[Contact] {contact.objet_demande}",
+                message=f"{contact.nom or 'Anonyme'}\nCinéma : {contact.cinema}\n\n{contact.description}",
+                from_email=None,
+                recipient_list=['support@cinephoria.com'],
+                fail_silently=True
+            )
+
+            messages.success(request, "Votre demande a été envoyée.")
+            return redirect('index')
+    else:
+        form = ContactForm()
+    
+    return render(request, 'cinephoria_webapp/contact.html', {'form': form})

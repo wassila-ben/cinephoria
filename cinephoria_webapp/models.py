@@ -365,9 +365,9 @@ class Incident(models.Model):
 class Contact(models.Model):
     utilisateur = models.ForeignKey(Utilisateur, on_delete=models.CASCADE)
     cinema = models.ForeignKey(Cinema, on_delete=models.CASCADE)
-    nom = models.CharField(max_length=100, blank=True, default="Anonyme")
-    objet_demande = models.CharField(max_length=100, default="Objet inconnu")
-    description = models.TextField(default="Pas de description")
+    nom = models.CharField(max_length=100, blank=True, null=True)
+    objet_demande = models.CharField(max_length=100)
+    description = models.TextField()
     date = models.DateField(auto_now_add=True)
     statut = models.CharField(max_length=50, default="En attente")
 

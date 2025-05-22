@@ -1,0 +1,55 @@
+{% extends 'cinephoria_webapp/base.html' %}
+{% load static %}
+
+{% block title %}Contact – Cinéphoria{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-8">
+            <div class="border p-4 shadow-sm bg-body-secondary rounded text-light">
+
+                <h2 class="text-center mb-4">📩 Contactez-nous</h2>
+
+                {% if form.errors %}
+                    <div class="alert alert-danger">
+                        <ul class="mb-0">
+                            {% for field in form %}
+                                {% for error in field.errors %}
+                                    <li><strong>{{ field.label }} :</strong> {{ error }}</li>
+                                {% endfor %}
+                            {% endfor %}
+                        </ul>
+                    </div>
+                {% endif %}
+
+                <form method="post" class="row g-4">
+                    {% csrf_token %}
+
+                    <div class="col-md-6">
+                        {{ form.nom.label_tag }} {{ form.nom }}
+                    </div>
+
+                    <div class="col-md-6">
+                        {{ form.cinema.label_tag }} {{ form.cinema }}
+                    </div>
+
+                    <div class="col-12">
+                        {{ form.objet_demande.label_tag }} {{ form.objet_demande }}
+                    </div>
+
+                    <div class="col-12">
+                        {{ form.description.label_tag }} {{ form.description }}
+                    </div>
+
+                    <div class="col-12 d-flex justify-content-between mt-3">
+                        <a href="{% url 'index' %}" class="btn btn-outline-light">Retour</a>
+                        <button type="submit" class="btn btn-primary">Envoyer</button>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
