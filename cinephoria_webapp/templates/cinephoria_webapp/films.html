@@ -54,9 +54,13 @@
                 <div class="col-md-6 col-lg-3 mt-4">
                     <div class="card border-0">
                         <a href="{% url 'details_film' film.id %}">
-                        {% if film.affiche %}
-                        <img class="img-fluid card-img-top scale-on-hover" src="{{ film.affiche.url }}" alt="{{ film.titre }}">
-                        {% endif %}
+                            {% if film.affiche %}
+                            <img src="{{ film.affiche.url }}" class="img-fluid card-img-top scale-on-hover" alt="{{ film.titre }}">
+                            {% elif film.affiche_url %}
+                            <img src="{{ film.affiche_url }}" class="img-fluid card-img-top scale-on-hover" alt="{{ film.titre }}">
+                            {% else %}
+                            <img src="{% static 'images/placeholder.jpg' %}" class="img-fluid card-img-top scale-on-hover" alt="Aucune affiche">
+                            {% endif %}
                         </a>
                         <div class="card-body">
                         <h6><a href="{% url 'details_film' film.id %}" class="text-decoration-none text-white">{{ film.titre }}</a></h6>

@@ -226,7 +226,7 @@ def choisir_cinema(request):
             request.session.pop("cinema_id", None)  # Supprime la sélection de cinéma
         else:
             request.session["cinema_id"] = cinema_id
-    return redirect('index')
+    return redirect(request.META.get('HTTP_REFERER', 'index'))
 
 
 
@@ -391,8 +391,25 @@ def reservation_confirmation(request):
 
 @login_required
 def mon_espace(request):
-    reservations = Reservation.objects.filter(utilisateur=request.user).order_by('-date_reservation')
+    reservations = Reservation.objects.filter(utilisateur=request.user).select_related(
+        'seance__film', 'seance__salle__cinema'
+    ).order_by('-date_reservation')
+
     now = timezone.now()
+
+    for res in reservations:
+        # Combine le jour + heure de la séance (si ton modèle a un champ `jour`)
+        try:
+            res.date_complete = datetime.combine(res.jour, res.seance.heure_debut)
+        except AttributeError:
+            res.date_complete = None  # pour éviter plantage
+
+        # Si tu as un champ de QR code (ex : fichier ou URL)
+        try:
+            billet =res.billet
+            res.qr_code_url = billet.qr_code.url if billet.qr_code else None
+        except Billet.DoesNotExist:
+            res.qr_code_url = None
 
     return render(request, 'cinephoria_webapp/mon_espace.html', {
         'reservations': reservations,

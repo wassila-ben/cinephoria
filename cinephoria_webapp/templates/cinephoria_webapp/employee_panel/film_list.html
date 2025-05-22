@@ -27,9 +27,11 @@
                 <tr>
                     <td class="text-center">
                         {% if film.affiche %}
-                            <img src="{{ film.affiche.url }}" alt="{{ film.titre }}" class="img-fluid rounded" style="max-height: 80px;">
+                        <img src="{{ film.affiche.url }}" alt="{{ film.titre }}" class="img-fluid rounded" style="max-height: 80px;">
+                        {% elif film.affiche_url %}
+                        <img src="{{ film.affiche_url }}" alt="{{ film.titre }}" class="img-fluid rounded" style="max-height: 80px;">
                         {% else %}
-                            <span class="text-muted small">Aucune</span>
+                        <span class="text-muted small">Aucune</span>
                         {% endif %}
                     </td>
                     <td>{{ film.titre }}</td>

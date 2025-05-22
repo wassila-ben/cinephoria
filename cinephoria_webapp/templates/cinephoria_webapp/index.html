@@ -17,15 +17,16 @@ Cinéphoria - Dernières sorties
                 <div class="col">
                     <div class="card h-100 shadow-sm">
                         <div class="position-relative">
+                            <a href="{% url 'details_film' film.id %}">
                             {% if film.affiche %}
-                                <img src="{{ film.affiche.url }}" class="card-img-top" alt="{{ film.titre }}">
+                            <img src="{{ film.affiche.url }}" class="img-fluid card-img-top scale-on-hover" alt="{{ film.titre }}">
+                            {% elif film.affiche_url %}
+                            <img src="{{ film.affiche_url }}" class="img-fluid card-img-top scale-on-hover" alt="{{ film.titre }}">
+                            {% else %}
+                            <img src="{% static 'images/placeholder.jpg' %}" class="img-fluid card-img-top scale-on-hover" alt="Aucune affiche">
                             {% endif %}
-                            {% if film.note %}
-                                <span class="position-absolute top-0 end-0 m-2 badge btn-outline-primary">
-                                    {{ film.note|default:"-" }}/5
-                                </span>
-                            {% endif %}
-                    
+                            </a>
+
                             {% if film.label_coup_de_coeur %}
                                 <div class="position-absolute bottom-0 start-0 w-100 text-center badge bg-secondary rounded-3 py-2 my-1">
                                     ❤️ Coup de cœur

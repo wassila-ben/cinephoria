@@ -6,6 +6,7 @@ from rest_framework.authtoken.views import ObtainAuthToken
 from rest_framework.authtoken.views import obtain_auth_token
 from rest_framework.authtoken.models import Token
 
+
 from django.http import JsonResponse
 from django.views.decorators.http import require_GET
 
@@ -72,7 +73,14 @@ def get_seance_infos(request):
     data = {
         "cinemas": [],
         "jours": [],
-        "horaires": []
+        "horaires": [],
+        "titre": "",
+        "synopsis": "",
+        "affiche_url": "",
+        "qualite": "",
+        "jour": "",
+        "heure": "",
+        "cinema": ""
     }
 
     if not film_id:
@@ -87,13 +95,16 @@ def get_seance_infos(request):
     horaires_set = set()
     jours_set = set()
     cinemas_set = set()
+    qualites_set = set()
 
     # Toutes les séances à venir
     seances = Seance.objects.filter(film=film).select_related('salle__cinema', 'salle__qualite')
 
+    premiere_seance_valide = None
+
     for seance in seances:
         for jour_index in seance.jours_diffusion:
-            jour_index = int(jour_index)  # 🔧 conversion nécessaire
+            jour_index = int(jour_index)
             jour_date = today + timedelta((jour_index - today.weekday()) % 7)
 
             # Vérifie s'il reste des places
@@ -105,7 +116,11 @@ def get_seance_infos(request):
             if reserved >= total_places:
                 continue
 
+            if not premiere_seance_valide:
+                premiere_seance_valide = (seance, jour_index)
+
             cinemas_set.add(seance.salle.cinema)
+            qualites_set.add(seance.salle.qualite.type_qualite)
             horaires_set.add(seance.heure_debut.strftime("%H:%M"))
             jours_set.add(jour_index)
 
@@ -115,7 +130,7 @@ def get_seance_infos(request):
     }
 
     for jour_index in sorted(jours_set):
-        jour_index = int(jour_index)  # 🔧 à nouveau ici
+        jour_index = int(jour_index)
         jour_date = today + timedelta((jour_index - today.weekday()) % 7)
         data["jours"].append({
             "label": f"{jours_map[jour_index]} {jour_date.strftime('%d/%m')}",
@@ -125,9 +140,25 @@ def get_seance_infos(request):
     data["cinemas"] = [{"id": c.id, "nom": c.nom} for c in cinemas_set]
     data["horaires"] = sorted(horaires_set)
 
-    # Infos supplémentaires
+    # Infos principales
     data["titre"] = film.titre
     data["synopsis"] = film.synopsis
-    data["affiche"] = film.affiche.url if film.affiche else ""
+
+    if film.affiche_url:
+        data["affiche_url"] = film.affiche_url
+    elif film.affiche and hasattr(film.affiche, "url"):
+        data["affiche_url"] = film.affiche.url
+    else:
+        data["affiche_url"] = ""
+
+    # Premier élément valide utilisé pour préremplissage
+    if premiere_seance_valide:
+        seance, jour_index = premiere_seance_valide
+        jour_date = today + timedelta((jour_index - today.weekday()) % 7)
+
+        data["qualite"] = seance.salle.qualite.type_qualite
+        data["heure"] = seance.heure_debut.strftime("%H:%M")
+        data["cinema"] = seance.salle.cinema.nom
+        data["jour"] = f"{jours_map[jour_index]} {jour_date.strftime('%d/%m')}"
 
     return JsonResponse(data)

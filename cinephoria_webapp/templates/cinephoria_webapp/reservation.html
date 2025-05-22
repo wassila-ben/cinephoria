@@ -69,7 +69,7 @@ Réserver un film
         <h4>Détails du film sélectionné</h4>
         <div class="row mb-4">
             <div class="col-md-4">
-                <img id="filmAffiche" src="" class="img-fluid rounded" alt="Affiche">
+                <img id="filmAffiche" src="" class="img-fluid rounded" alt="Affiche" style="display: none;">
             </div>
             <div class="col-md-8">
                 <p><strong>Titre :</strong> <span id="filmTitre"></span></p>
@@ -88,7 +88,6 @@ Réserver un film
 {% block script %}
 <script>
 document.addEventListener("DOMContentLoaded", () => {
-    console.log("filmSelect:", document.getElementById("id_film"));
     const filmSelect = document.getElementById("id_film");
     const cinemaSelect = document.getElementById("cinemaSelect");
     const jourSelect = document.getElementById("jourSelect");
@@ -146,7 +145,18 @@ document.addEventListener("DOMContentLoaded", () => {
         document.getElementById("filmQualite").textContent = data.qualite || "";
         document.getElementById("filmJour").textContent = data.jour || "";
         document.getElementById("filmHeure").textContent = data.heure || "";
-        document.getElementById("filmAffiche").src = data.affiche || "";
+
+        // Affiche
+        const afficheEl = document.getElementById("filmAffiche");
+        const afficheUrl = data.affiche_url && data.affiche_url.startsWith("http") ? data.affiche_url : "";
+
+        if (afficheUrl) {
+            afficheEl.src = afficheUrl;
+            afficheEl.style.display = "block";
+        } else {
+            afficheEl.src = "";
+            afficheEl.style.display = "none";
+        }
 
         syncHidden();
     });

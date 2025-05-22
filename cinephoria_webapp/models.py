@@ -89,7 +89,8 @@ class Film(models.Model):
     titre = models.CharField(max_length=100, default="Titre inconnu")
     duree = models.PositiveIntegerField(default=90,help_text="Durée en minutes")
     synopsis = models.TextField(default="Synopsis indisponible")
-    affiche = models.ImageField(upload_to='films/', null=True, blank=True)
+    affiche = models.ImageField(upload_to='films/', null=True, blank=True, max_length=300)
+    affiche_url = models.URLField(null=True, blank=True)
     date_ajout = models.DateField(null=True, blank=True)
     date_sortie = models.DateField(null=True, blank=True)
     age_minimum = models.IntegerField(default=0)
@@ -264,7 +265,8 @@ class ReservationSiege(models.Model):
         return f"Réservation siège {self.siege.numero_siege}"
 
 class Billet(models.Model):
-    reservation = models.ForeignKey(Reservation, on_delete=models.CASCADE)
+    reservation = models.OneToOneField(Reservation, on_delete=models.CASCADE, related_name='billet')
+
     
     def generate_unique_billet_number():
         return str(uuid.uuid4().hex[:10]).upper()
