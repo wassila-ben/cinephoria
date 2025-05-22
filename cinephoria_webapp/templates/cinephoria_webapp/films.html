@@ -49,36 +49,31 @@
         </form>
 
         <!-- Liste des films -->
-        <section class="last-added-block films-cards" style="padding-top: 60px; padding-bottom: 60px;" data-bs-theme="dark">
-            <h2 class="display-6 text-center m-auto mb-5 mt-0 text-uppercase">Derniers films ajoutés</h2>
-            <div class="container">
-                <!-- Start: Last-added-films-heading -->
-                <div class="heading"></div>
-                <!-- End: Last-added-films-heading -->
-                <div class="row">
-                    {% for film in films %}
-                        <div class="col-md-6 col-lg-3 mt-4">
-                            <div class="card border-0">
-                                <a href="{% url 'details_film' film.id %}">
-                                {% if film.affiche %}
-                                    <img class="img-fluid card-img-top scale-on-hover" src="{{ film.affiche.url }}" alt="{{ film.titre }}">
-                                {% endif %}
-                                </a>
-                                <div class="card-body">
-                                    <h6><a href="{% url 'details_film' film.id %}" class="text-decoration-none text-white">{{ film.titre }}</a></h6>
-                                    <p class="text-muted card-text">{{ film.synopsis|truncatewords:20 }}</p>
-                                    <a href="{% url 'details_film' film.id %}" class="btn btn-primary" type="button">Voir Détails</a>
-                                </div>
-                            </div>
-                        </div>
-                    {% empty %}
-                        <p class="text-center text-muted">Aucun film ajouté récemment.</p>
-                    {% endfor %}
+        <div class="row">
+            {% for film in films %}
+                <div class="col-md-6 col-lg-3 mt-4">
+                    <div class="card border-0">
+                        <a href="{% url 'details_film' film.id %}">
+                        {% if film.affiche %}
+                        <img class="img-fluid card-img-top scale-on-hover" src="{{ film.affiche.url }}" alt="{{ film.titre }}">
+                        {% endif %}
+                        </a>
+                        <div class="card-body">
+                        <h6><a href="{% url 'details_film' film.id %}" class="text-decoration-none text-white">{{ film.titre }}</a></h6>
+                        <p class="text-muted card-text">{{ film.synopsis|truncatewords:20 }}</p>
+                        <a href="{% url 'details_film' film.id %}" class="btn btn-primary" type="button">Voir Détails</a>
+                    </div>
                 </div>
+            </div>
+            {% empty %}
+            <p class="text-center text-muted">Aucun film trouvé.</p>
+        {% endfor %}
+        </div>
+
             </div>
         </section>
     </div>
-</section>
+
 
 <style>
 .synopsis {
