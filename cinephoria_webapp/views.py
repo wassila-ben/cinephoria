@@ -328,8 +328,12 @@ def choix_sieges(request):
                 )
                 for siege in selected:
                     ReservationSiege.objects.create(reservation=reservation, siege=siege)
+
+                # Créer un seul billet après
+                if not hasattr(reservation, 'billet'):
                     Billet.objects.create(reservation=reservation)
 
+                # Calculer le prix total
                 reservation.calculer_prix()
                 return redirect('reservation_confirmation')
 
@@ -379,7 +383,7 @@ def reservation_confirmation(request):
             jour_reel = candidate
             break
 
-    billets = reservation.billet_set.all()
+    billets = [reservation.billet] if hasattr(reservation, 'billet') else []
     context = {
         "reservation": reservation,
         "billets": billets,

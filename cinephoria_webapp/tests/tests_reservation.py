@@ -59,5 +59,6 @@ class ReservationFlowTest(TestCase):
         self.assertIsNotNone(reservation)
         self.assertEqual(reservation.nombre_places, 2)
 
-        # Vérifie les billets
-        self.assertEqual(reservation.billet_set.count(), 2)
+        
+        billet = getattr(reservation, 'billet', None)
+        self.assertIsNotNone(billet)
