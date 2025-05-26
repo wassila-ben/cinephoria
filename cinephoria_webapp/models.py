@@ -183,18 +183,22 @@ class Seance(models.Model):
     jours_diffusion = models.JSONField(default=list, help_text="Liste des jours (ex: [0, 2, 4])")
 
     def __str__(self):
-        jours = ", ".join([self.get_jour_display(j) for j in self.jours_diffusion])
+        try:
+            jours = ", ".join([self.get_jour_display(int(j)) for j in self.jours_diffusion])
+        except Exception:
+            jours = "jours inconnus"
         return f"{self.film.titre} - {jours} à {self.heure_debut.strftime('%H:%M')}"
 
     def get_jour_display(self, jour_index):
         return dict(self.JOURS_SEMAINE).get(jour_index, "Jour inconnu")
 
     def save(self, *args, **kwargs):
-        if not self.heure_fin:
+        if not self.heure_fin and self.film and hasattr(self.film, 'duree'):
             debut_dt = datetime.combine(datetime.today(), self.heure_debut)
             fin_dt = debut_dt + timedelta(minutes=self.film.duree)
             self.heure_fin = fin_dt.time()
         super().save(*args, **kwargs)
+
 
     def prix(self):
         return self.salle.qualite.prix_seance

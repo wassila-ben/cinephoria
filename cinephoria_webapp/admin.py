@@ -137,32 +137,29 @@ class SeanceAdmin(admin.ModelAdmin):
         jours = form.cleaned_data.get('jours_semaine', [])
 
         if change or not jours:
-        # Mise à jour d'une séance existante
             obj.jours_diffusion = jours if jours else obj.jours_diffusion
 
-        # Convertir l'heure_debut (time) en datetime avant l'opération
-            debut_dt = datetime.combine(datetime.today(), obj.heure_debut)
-            fin_dt = debut_dt + timedelta(minutes=obj.film.duree)
-            obj.heure_fin = fin_dt.time()
-            super().save_model(request, obj, form, change)
+            if obj.film and hasattr(obj.film, 'duree'):
+                debut_dt = datetime.combine(datetime.today(), obj.heure_debut)
+                fin_dt = debut_dt + timedelta(minutes=obj.film.duree)
+                obj.heure_fin = fin_dt.time()
 
+            super().save_model(request, obj, form, change)
         else:
-            # Création multiple
             film = form.cleaned_data['film']
             salle = form.cleaned_data['salle']
             heure_debut = form.cleaned_data['heure_debut']
-
             debut_dt = datetime.combine(datetime.today(), heure_debut)
             heure_fin = (debut_dt + timedelta(minutes=film.duree)).time()
 
-        for jour in jours:
-            Seance.objects.create(
-                film=film,
-                salle=salle,
-                heure_debut=heure_debut,
-                heure_fin=heure_fin,
-                jours_diffusion=[jour]
-            )
+            for jour in jours:
+                Seance.objects.create(
+                    film=film,
+                    salle=salle,
+                    heure_debut=heure_debut,
+                    heure_fin=heure_fin,
+                    jours_diffusion=[jour]
+                )
 
 admin.site.register(Seance, SeanceAdmin)
 
@@ -175,9 +172,10 @@ class CinemaAdmin(admin.ModelAdmin):
     list_filter = ('ville',)
 
     def prochaines_seances(self, obj):
+        today_index = datetime.today().weekday()  # 0=lundi, 6=dimanche
         seances = Seance.objects.filter(
             salle__cinema=obj,
-            jour_semaine=now().strftime('%A'),
+            jours_diffusion__contains=[today_index],
             heure_debut__gte=now().time()
         ).order_by('heure_debut')[:3]  # limite à 3 prochaines séances
 

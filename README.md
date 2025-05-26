@@ -89,7 +89,7 @@ docker-compose exec web python manage.py loaddata initial_data.json
 ---
 
 
-## 📂 Structure du projet
+##  Structure du projet
 - `cinephoria_app/` : backend/settings
 - `cinephoria_webapp/` : App principale / Web
 - `templates/` : templates HTML
