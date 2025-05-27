@@ -136,33 +136,40 @@ class SeanceAdmin(admin.ModelAdmin):
     def save_model(self, request, obj, form, change):
         jours = form.cleaned_data.get('jours_semaine', [])
 
-        if change or not jours:
-            obj.jours_diffusion = jours if jours else obj.jours_diffusion
+        if change:
+            # MODIFICATION D'UNE SEANCE EXISTANTE
+            if jours:
+                obj.jours_diffusion = jours  
+            else:
+                obj.jours_diffusion = []  
 
+            # Recalcul de l'heure de fin
             if obj.film and hasattr(obj.film, 'duree'):
                 debut_dt = datetime.combine(datetime.today(), obj.heure_debut)
                 fin_dt = debut_dt + timedelta(minutes=obj.film.duree)
                 obj.heure_fin = fin_dt.time()
 
             super().save_model(request, obj, form, change)
+
         else:
+            # CREATION – une séance par jour
             film = form.cleaned_data['film']
             salle = form.cleaned_data['salle']
             heure_debut = form.cleaned_data['heure_debut']
-            debut_dt = datetime.combine(datetime.today(), heure_debut)
-            heure_fin = (debut_dt + timedelta(minutes=film.duree)).time()
 
             for jour in jours:
+                debut_dt = datetime.combine(datetime.today(), heure_debut)
+                heure_fin = (debut_dt + timedelta(minutes=film.duree)).time()
+
                 Seance.objects.create(
                     film=film,
                     salle=salle,
                     heure_debut=heure_debut,
                     heure_fin=heure_fin,
                     jours_diffusion=[jour]
-                )
+            )
 
 admin.site.register(Seance, SeanceAdmin)
-
 
 
 @admin.register(Cinema)

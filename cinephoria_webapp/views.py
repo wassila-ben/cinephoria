@@ -444,7 +444,7 @@ def noter_film(request, film_id):
 
     return render(request, 'cinephoria_webapp/noter_film.html', {'film': film, 'form': form})
 
-def reset_password(request):
+# def reset_password(request):
     if request.method == 'POST':
         form = MotDePasseOublieForm(request.POST)
         if form.is_valid():
