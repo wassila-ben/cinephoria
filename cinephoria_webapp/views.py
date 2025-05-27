@@ -32,25 +32,24 @@ def index(request):
     user = request.user
     cinemas = Cinema.objects.all()
 
-    # 1. Cinéma passé dans l'URL (manuellement sélectionné)
-    
     cinema_id = request.GET.get("cinema")
-    if cinema_id:
-        selected_cinema = get_object_or_404(Cinema, id=cinema_id)
-        request.session["cinema_id"] = cinema_id  # sauvegarde pour les prochaines fois
-    else:
-        # 2. Cinéma en session
-        cinema_id = request.session.get("cinema_id")
-        selected_cinema = Cinema.objects.filter(id=cinema_id).first()
 
-        # 3. Si toujours rien, on prends la ville de l'utilisateur
-        if not selected_cinema and user.is_authenticated:
-            selected_cinema = Cinema.objects.filter(ville=user.ville).first()
-    
+    # 1. Si l'utilisateur a choisi "Tous les cinémas"
     if cinema_id == "all":
         selected_cinema = None
         request.session.pop("cinema_id", None)
 
+    # 2. Si l'utilisateur a sélectionné un cinéma spécifique
+    elif cinema_id:
+        selected_cinema = get_object_or_404(Cinema, id=cinema_id)
+        request.session["cinema_id"] = cinema_id
+
+    # 3. Sinon, sur la session
+    else:
+        cinema_id = request.session.get("cinema_id")
+        selected_cinema = Cinema.objects.filter(id=cinema_id).first()
+
+    
 
     # 4. Calcul du dernier mercredi
     today = timezone.now().date()
