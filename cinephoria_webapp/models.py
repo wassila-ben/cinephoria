@@ -211,7 +211,7 @@ class Seance(models.Model):
     
     def get_jours_affichage(self):
         jours_dict = dict(self.JOURS_SEMAINE)
-        return [jours_dict.get(j, "Inconnu") for j in self.jours_diffusion]
+        return [jours_dict.get(int(j), "Inconnu") for j in self.jours_diffusion]
 
 
 class Siege(models.Model):

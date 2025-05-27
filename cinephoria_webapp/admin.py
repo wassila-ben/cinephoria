@@ -122,10 +122,7 @@ class SeanceAdmin(admin.ModelAdmin):
     list_display = ('film', 'salle', 'get_jours', 'heure_debut', 'heure_fin', 'get_prix')
 
     def get_jours(self, obj):
-        jours_semaine = dict(Seance.JOURS_SEMAINE)
-        return ", ".join([jours_semaine.get(int(j), "Jour inconnu") for j in obj.jours_diffusion])
-    get_jours.short_description = "Jours"
-
+        return ', '.join(obj.get_jours_affichage())
 
     def get_prix(self, obj):
         if obj.salle and obj.salle.qualite:
@@ -134,7 +131,7 @@ class SeanceAdmin(admin.ModelAdmin):
     get_prix.short_description = 'Prix'
 
     def save_model(self, request, obj, form, change):
-        jours = form.cleaned_data.get('jours_semaine', [])
+        jours = [int(j) for j in form.cleaned_data.get('jours_semaine', [])]
 
         if change:
             # MODIFICATION D'UNE SEANCE EXISTANTE
