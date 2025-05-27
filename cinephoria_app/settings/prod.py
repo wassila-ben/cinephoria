@@ -18,7 +18,7 @@ if not SECRET_KEY:
 DEBUG = False
 
 STATIC_URL = '/static/'
-STATIC_ROOT = BASE_DIR / 'staticfiles'     # dossier collecté par collectstatic
+STATIC_ROOT = os.path.join(BASE_DIR / 'staticfiles')     # dossier collecté par collectstatic
 STATICFILES_DIRS = [BASE_DIR / 'static']   
 
 
