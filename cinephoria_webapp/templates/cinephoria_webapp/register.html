@@ -106,7 +106,9 @@
                 </div>
             {% endif %}
         </div>
-
+        {% if next %}
+        <input type="hidden" name="next" value="{{ next }}">
+        {% endif %}
         <!-- Bouton de soumission -->
         <div class="mb-3 mt-4">
             <button class="btn btn-primary btn-lg d-block w-100" type="submit">Créer mon compte</button>

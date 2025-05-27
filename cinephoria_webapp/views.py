@@ -145,6 +145,8 @@ def logout_view(request):
     return redirect('login')
 
 def register(request):
+    next_url = request.GET.get('next') or request.POST.get('next')
+
     if request.method == 'POST':
         form = CustomUserCreationForm(request.POST)
         if form.is_valid():
@@ -153,13 +155,20 @@ def register(request):
             user.save()
             login(request, user)
             messages.success(request, "Compte créé avec succès.")
+
+            if next_url and url_has_allowed_host_and_scheme(next_url, allowed_hosts={request.get_host()}):
+                return redirect(next_url)
+
             return redirect('index')
         else:
             messages.error(request, "Une erreur est survenue, veuillez vérifier les informations.")
     else:
         form = CustomUserCreationForm()
 
-    return render(request, 'cinephoria_webapp/register.html', {'form': form})
+    return render(request, 'cinephoria_webapp/register.html', {
+        'form': form,
+        'next': next_url
+        })
 
 def details_film(request, film_id):
     # Récupére le film
@@ -282,7 +291,16 @@ def reservation(request):
         else:
             messages.error(request, "Veuillez corriger les erreurs du formulaire.")
     else:
-        form = ReservationForm(initial={'seance': selected_seance})
+        if selected_seance:
+            initial = {
+                'film': selected_seance.film,
+                'heure': selected_seance.heure_debut.strftime("%H:%M"),
+                'jour': datetime.now().date().strftime("%Y-%m-%d"),  # à ajuster selon le jour réel
+                'cinema': selected_seance.salle.cinema.nom,
+            }
+            form = ReservationForm(initial=initial)
+        else:
+            form = ReservationForm()
 
     return render(request, 'cinephoria_webapp/reservation.html', {
         'form': form,
@@ -351,6 +369,14 @@ def choix_sieges(request):
     prix_unitaires = seance.salle.qualite.prix_seance
     prix_total = prix_unitaires * nombre_places
 
+    jour_reel = None
+    today = timezone.now().date()
+    for i in range(7):
+        candidate = today + timedelta(days=i)
+        if candidate.weekday() in seance.jours_diffusion:
+            jour_reel = candidate
+            break
+
     return render(request, 'cinephoria_webapp/choix_sieges.html', {
         'sieges_by_rangee': sieges_by_rangee,
         'seance': seance,
@@ -358,6 +384,7 @@ def choix_sieges(request):
         'places_pmr': places_pmr,
         'prix_unitaires': prix_unitaires,
         'prix_total': prix_total,
+        'jour_reel': jour_reel,
     })
 
 @login_required

@@ -5,6 +5,22 @@
 <div class="container mt-5 text-white">
     <h2 class="mb-4">Sélectionnez vos sièges</h2>
 
+    <!-- Résumé réservation -->
+    <div class="alert alert-secondary">
+        <p class="mb-1"><strong>Film :</strong> {{ seance.film.titre }}</p>
+        <p class="mb-1"><strong>Date :</strong> {{ jour_reel|date:"l d F Y" }}</p>
+        <p class="mb-1"><strong>Heure :</strong> {{ seance.heure_debut|time:"H:i" }}</p>
+        <p class="mb-1"><strong>Cinéma :</strong> {{ seance.salle.cinema.nom }} — Salle {{ seance.salle.numero_salle }}</p>
+        <p class="mb-0"><strong>Nombre de places :</strong> {{ nombre_places }} {% if places_pmr %}(incl. PMR){% endif %}</p>
+    </div>
+
+    <!-- Légende -->
+    <div class="mb-4">
+        <span class="btn btn-outline-light btn-sm disabled me-2">Siège standard</span>
+        <span class="btn btn-outline-warning btn-sm disabled me-2">Siège PMR</span>
+        <span class="btn btn-danger btn-sm disabled">Réservé</span>
+    </div>
+
     <form method="post">
         {% csrf_token %}
 
@@ -14,15 +30,16 @@
                 <strong class="text-white">Rangée {{ rangee }}</strong><br>
                 {% for s in sieges %}
                 {% if s.reserve %}
-                <span class="btn btn-sm btn-danger disabled mb-1">{{ s.numero }}</span>
+                    <span class="btn btn-sm btn-danger disabled mb-1">{{ s.numero }}</span>
                 {% else %}
-                <label class="btn btn-outline-light btn-sm mb-1 position-relative">
-                    <input type="checkbox" name="sieges" value="{{ s.id }}" autocomplete="off" class="d-none">
-                    {{ s.numero }}
-                </label>
+                    <label class="btn btn-sm mb-1 position-relative 
+                        {% if s.pmr %}btn-outline-warning{% else %}btn-outline-light{% endif %}">
+                        <input type="checkbox" name="sieges" value="{{ s.id }}" autocomplete="off" class="d-none">
+                        {{ s.numero }}{% if s.pmr %} <i class="bi bi-wheelchair"></i>{% endif %}
+                    </label>
                 {% endif %}
                 {% endfor %}
-        </div>
+            </div>
         {% endfor %}
         </div>
 
@@ -33,11 +50,28 @@
 
         <button type="submit" class="btn btn-primary mt-3">Confirmer les sièges</button>
     </form>
+
+    <!-- Toast container -->
+    <div id="toast-container" class="position-fixed bottom-0 end-0 p-3" style="z-index: 1080;"></div>
 </div>
 {% endblock %}
 
 {% block script %}
 <script>
+function showToast(message) {
+    const toastContainer = document.getElementById('toast-container');
+    toastContainer.innerHTML = `
+        <div class="toast align-items-center text-white bg-danger border-0 show mb-2" role="alert">
+            <div class="d-flex">
+                <div class="toast-body">
+                    ${message}
+                </div>
+                <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"></button>
+            </div>
+        </div>
+    `;
+}
+
 document.addEventListener("DOMContentLoaded", () => {
     const maxSeats = Number("{{ nombre_places|default_if_none:0 }}");
     const selectedSeats = new Set();
@@ -46,23 +80,23 @@ document.addEventListener("DOMContentLoaded", () => {
         const label = input.closest("label");
 
         label.addEventListener("click", e => {
-            e.preventDefault();  // empêche le comportement par défaut du label
+            e.preventDefault();
             const seatId = input.value;
 
             if (selectedSeats.has(seatId)) {
                 selectedSeats.delete(seatId);
                 label.classList.remove("btn-primary");
-                label.classList.add("btn-outline-light");
+                label.classList.add(label.classList.contains("btn-outline-warning") ? "btn-outline-warning" : "btn-outline-light");
                 input.checked = false;
             } else {
-            if (selectedSeats.size >= maxSeats) {
-                alert(`Vous pouvez sélectionner jusqu’à ${maxSeats} siège(s).`);
-                return;
-            }
-            selectedSeats.add(seatId);
-            label.classList.remove("btn-outline-light");
-            label.classList.add("btn-primary");
-            input.checked = true;
+                if (selectedSeats.size >= maxSeats) {
+                    showToast(`Vous pouvez sélectionner jusqu’à ${maxSeats} siège(s).`);
+                    return;
+                }
+                selectedSeats.add(seatId);
+                label.classList.remove("btn-outline-light", "btn-outline-warning");
+                label.classList.add("btn-primary");
+                input.checked = true;
             }
         });
     });

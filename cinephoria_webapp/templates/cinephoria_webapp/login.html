@@ -55,7 +55,7 @@
                         </form>
 
                         <p class="text-muted">Mot de passe oublié ? <a href="{% url 'password_reset' %}">Réinitialisez-le</a></p>
-                        <p class="text-muted">Pas encore inscrit ? <a href="{% url 'register' %}">Créez un compte</a></p>
+                        <p class="text-muted">Pas encore inscrit ? <a href="{% url 'register' %}?next={{ request.path }}">Créez un compte</a></p>
                     </div>
                 </div>
             </div>
