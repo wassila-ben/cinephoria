@@ -33,7 +33,7 @@
                     <span class="btn btn-sm btn-danger disabled mb-1">{{ s.numero }}</span>
                 {% else %}
                     <label class="btn btn-sm mb-1 position-relative 
-                        {% if s.pmr %}btn-outline-warning{% else %}btn-outline-light{% endif %}">
+                        {% if s.pmr %}btn-outline-warning{% else %}btn-outline-light{% endif %}" data-pmr="{{ s.pmr|yesno:'true,false' }}">
                         <input type="checkbox" name="sieges" value="{{ s.id }}" autocomplete="off" class="d-none">
                         {{ s.numero }}{% if s.pmr %} <i class="bi bi-wheelchair"></i>{% endif %}
                     </label>
@@ -54,14 +54,17 @@
     <!-- Toast container -->
     <div id="toast-container" class="position-fixed bottom-0 end-0 p-3" style="z-index: 1080;"></div>
 </div>
+
+<!-- PMR flag for JS -->
+{{ places_pmr|yesno:"true,false"|json_script:"pmr-flag" }}
 {% endblock %}
 
 {% block script %}
 <script>
-function showToast(message) {
+function showToast(message, type = "danger") {
     const toastContainer = document.getElementById('toast-container');
     toastContainer.innerHTML = `
-        <div class="toast align-items-center text-white bg-danger border-0 show mb-2" role="alert">
+        <div class="toast align-items-center text-white bg-${type} border-0 show mb-2" role="alert">
             <div class="d-flex">
                 <div class="toast-body">
                     ${message}
@@ -74,6 +77,7 @@ function showToast(message) {
 
 document.addEventListener("DOMContentLoaded", () => {
     const maxSeats = Number("{{ nombre_places|default_if_none:0 }}");
+    const demandePMR = JSON.parse(document.getElementById("pmr-flag").textContent);
     const selectedSeats = new Set();
 
     document.querySelectorAll('input[name="sieges"]').forEach(input => {
@@ -90,7 +94,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 input.checked = false;
             } else {
                 if (selectedSeats.size >= maxSeats) {
-                    showToast(`Vous pouvez sélectionner jusqu’à ${maxSeats} siège(s).`);
+                    showToast(`Vous pouvez sélectionner jusqu’à ${maxSeats} siège(s).`, "warning");
                     return;
                 }
                 selectedSeats.add(seatId);
@@ -99,6 +103,36 @@ document.addEventListener("DOMContentLoaded", () => {
                 input.checked = true;
             }
         });
+    });
+
+    document.querySelector("form").addEventListener("submit", function (e) {
+        const selected = document.querySelectorAll('input[name="sieges"]:checked');
+        const selectedLabels = Array.from(selected).map(input => input.closest("label"));
+        const aPMR = selectedLabels.some(label => label.classList.contains("btn-outline-warning"));
+
+        if (selected.length < maxSeats) {
+            e.preventDefault();
+            showToast(`Veuillez sélectionner exactement ${maxSeats} siège(s).`, "warning");
+            return;
+        }
+
+        if (selected.length > maxSeats) {
+            e.preventDefault();
+            showToast(`Vous avez sélectionné trop de sièges. Maximum autorisé : ${maxSeats}.`, "danger");
+            return;
+        }
+
+        if (!demandePMR && aPMR) {
+            e.preventDefault();
+            showToast("Vous avez sélectionné un siège PMR sans l’avoir demandé.", "danger");
+            return;
+        }
+
+        if (demandePMR && !aPMR) {
+            e.preventDefault();
+            showToast("Vous avez demandé des places PMR mais n’en avez pas sélectionné.", "warning");
+            return;
+        }
     });
 });
 </script>

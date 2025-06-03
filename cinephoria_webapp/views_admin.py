@@ -232,5 +232,8 @@ def dashboard_reservations(request):
             'total': total,
             'color': color,
         })
+        
+        print("RAW DATA:", raw_data)
 
     return render(request, 'cinephoria_webapp/admin_panel/dashboard_reservations.html', {'data': data})
+
