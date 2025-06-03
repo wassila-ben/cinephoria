@@ -5,69 +5,75 @@
 <div class="container py-5">
     <h2 class="mb-4 text-center">Noter le film : {{ film.titre }}</h2>
 
-<style>
-    .rating {
-        display: flex;
-        flex-direction: row-reverse;
-        justify-content: center;
-        gap: 5px;
-    }
+    <form method="post">
+        {% csrf_token %}
 
-    .rating input {
-        display: none;
-    }
+        <style>
+            .rating {
+                display: flex;
+                flex-direction: row-reverse;
+                justify-content: center;
+                gap: 5px;
+            }
 
-    .rating label {
-        font-size: 2rem;
-        color: #444;
-        cursor: pointer;
-        transition: color 0.2s;
-    }
+            .rating input {
+                display: none;
+            }
 
-    .rating .btn {
-        border: none;
-        background-color: transparent;
-        color: #888;
-        transition: color 0.2s ease;
-    }
+            .rating label {
+                font-size: 2rem;
+                color: #444;
+                cursor: pointer;
+                transition: color 0.2s;
+            }
 
-    .rating .btn-check:checked + .btn,
-    .rating .btn:hover,
-    .rating .btn:hover ~ .btn {
-        color: #3399ff; /* adapté à ton thème bleu nuit */
-        text-shadow: 0 0 4px rgba(51, 153, 255, 0.5);
-    }
+            .rating .btn {
+                border: none;
+                background-color: transparent;
+                color: #888;
+                transition: color 0.2s ease;
+            }
 
-    @media (max-width: 576px) {
-        .rating .btn {
-            font-size: 1.6rem;
-        }
-    }
+            .rating .btn-check:checked + .btn,
+            .rating .btn:hover,
+            .rating .btn:hover ~ .btn {
+                color: #3399ff;
+                text-shadow: 0 0 4px rgba(51, 153, 255, 0.5);
+            }
 
+            @media (max-width: 576px) {
+                .rating .btn {
+                    font-size: 1.6rem;
+                }
+            }
 
-    .rating input:checked ~ label,
-    .rating input:checked + label,
-    .rating label:hover,
-    .rating label:hover ~ label {
-        color: #3399ff; /* Ton bleu nuit clair */
-    }
-</style>
+            .rating input:checked ~ label,
+            .rating input:checked + label,
+            .rating label:hover,
+            .rating label:hover ~ label {
+                color: #3399ff;
+            }
+        </style>
 
-    <div class="col-12 text-center">
-        <label class="form-label d-block mb-2">Votre note</label>
-        <div class="rating d-inline-flex flex-row-reverse justify-content-center">
-            {% for value, label in form.note.field.choices reversed %}
-                <input type="radio" class="btn-check" name="note" id="star{{ value }}" value="{{ value }}"
-                    {% if form.note.value == value|stringformat:"s" %}checked{% endif %}>
-        <label class="btn btn-outline-primary px-2 py-1 fs-3" for="star{{ value }}">★</label>
-    {% endfor %}
-    </div>
-</div>
+        <div class="col-12 text-center mb-4">
+            <label class="form-label d-block mb-2">Votre note</label>
+            <div class="rating d-inline-flex flex-row-reverse justify-content-center">
+                {% for value, label in form.note.field.choices reversed %}
+                    <input type="radio" class="btn-check" name="note" id="star{{ value }}" value="{{ value }}"
+                        {% if form.note.value == value|stringformat:"s" %}checked{% endif %}>
+                    <label class="btn btn-outline-primary px-2 py-1 fs-3" for="star{{ value }}">★</label>
+                {% endfor %}
+            </div>
+        </div>
 
+        <div class="col-md-8 mx-auto mb-4">
+            <label for="commentaire" class="form-label">Votre commentaire</label>
+            {{ form.commentaire }}
+        </div>
 
-<div class="col-md-8">
-    <label for="commentaire" class="form-label">Votre commentaire</label>
-    {{ form.commentaire }}
-    </div>
+        <div class="text-center">
+            <button type="submit" class="btn btn-primary">Valider mon avis</button>
+        </div>
+    </form>
 </div>
 {% endblock %}

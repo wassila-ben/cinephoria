@@ -24,11 +24,31 @@
             {% if film.label_coup_de_coeur %}
                 <span class="badge bg-warning text-dark mb-2">Coup de cœur</span>
             {% endif %}
-            <p class="text-muted">Note : {{ film.note|default:"-" }}/5</p>
+            <p class="text-muted">Note moyenne : {{ moyennes_notes|floatformat:1|default:"-" }}/5</p>
+
         </div>
     </div>
 
     <hr class="my-5">
+
+    <h3 class="text-uppercase text-white mb-4">Avis des spectateurs</h3>
+
+    {% if avis %}
+        <div class="list-group">
+            {% for a in avis %}
+                <div class="list-group-item bg-dark text-white border-secondary mb-3 p-3 rounded">
+                    <div class="d-flex justify-content-between align-items-center mb-2">
+                        <strong>{{ a.utilisateur.identifiant }}</strong>
+                        <small class="text-muted">{{ a.date }}</small>
+                    </div>
+                <div class="mb-2">Note : {{ a.note }}/5</div>
+                <p class="mb-0">{{ a.commentaire }}</p>
+                </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <p class="text-muted">Aucun avis n’a encore été publié pour ce film.</p>
+    {% endif %}
 
     <h3 class="text-uppercase text-white mb-4">Séances disponibles</h3>
     {% if film.seance_set.all %}
