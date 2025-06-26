@@ -1,5 +1,13 @@
 {% extends 'cinephoria_webapp/base.html' %}
+{% load static %}
 {% block title %}Mon espace{% endblock %}
+
+{% block extra_head %}
+    <link rel="manifest" href="{% static 'pwa/manifest.json' %}">
+    <meta name="theme-color" content="#0d1b2a">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <link rel="apple-touch-icon" href="{% static 'icons/icon-192x192.png' %}">
+{% endblock %}
 
 {% block content %}
 <div class="container py-5">
@@ -43,4 +51,12 @@
     <p>Vous n'avez encore fait aucune réservation.</p>
     {% endif %}
 </div>
+<script>
+    if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.register("{% static 'js/service-worker.js' %}")
+        .then(reg => console.log("Service Worker enregistré", reg))
+        .catch(err => console.warn("Erreur Service Worker", err));
+    }
+</script>
+
 {% endblock %}

@@ -1,0 +1,21 @@
+{
+    "name": "Cinéphoria – Espace utilisateur",
+    "short_name": "Cinéphoria",
+    "start_url": "/mon-espace/",
+    "display": "standalone",
+    "background_color": "#0d1b2a",
+    "theme_color": "#0d1b2a",
+    "orientation": "portrait",
+    "icons": [
+        {
+            "src": "/static/icons/icon-192x192.png",
+            "sizes": "192x192",
+            "type": "image/png"
+        },
+        {
+            "src": "/static/icons/icon-512x512.png",
+            "sizes": "512x512",
+            "type": "image/png"
+        }
+    ]
+}
