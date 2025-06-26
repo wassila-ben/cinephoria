@@ -324,6 +324,14 @@ def choix_sieges(request):
     nombre_places = data['nombre_places']
     places_pmr = data.get('places_pmr', False)
 
+    jour_reel = None
+    today = timezone.now().date()
+    for i in range(7):
+        candidate = today + timedelta(days=i)
+        if candidate.weekday() in seance.jours_diffusion:
+            jour_reel = candidate
+            break
+
     sieges = seance.salle.sieges.all().order_by('rangee', 'numero_siege')
     sieges_disponibles = [s for s in sieges if not ReservationSiege.objects.filter(reservation__seance=seance, siege=s).exists()]
 
@@ -369,14 +377,6 @@ def choix_sieges(request):
     
     prix_unitaires = seance.salle.qualite.prix_seance
     prix_total = prix_unitaires * nombre_places
-
-    jour_reel = None
-    today = timezone.now().date()
-    for i in range(7):
-        candidate = today + timedelta(days=i)
-        if candidate.weekday() in seance.jours_diffusion:
-            jour_reel = candidate
-            break
 
     return render(request, 'cinephoria_webapp/choix_sieges.html', {
         'sieges_by_rangee': sieges_by_rangee,
