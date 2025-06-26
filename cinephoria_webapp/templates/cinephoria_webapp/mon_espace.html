@@ -23,7 +23,7 @@
                 Salle : {{ res.seance.salle.numero_salle }} |
                 Heure : {{ res.seance.heure_debut|time:"H:i" }} |
                 Places : {{ res.nombre_places }} |
-                Date : {{ res.seance.date }} |
+                Date : {{ res.date_complete }} |
                 Total : {{ res.prix_total }} €
             </p>
             {% if res.seance.get_jour_display %}
