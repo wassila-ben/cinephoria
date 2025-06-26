@@ -427,24 +427,54 @@ def mon_espace(request):
     ).order_by('-date_reservation')
 
     now = timezone.now()
+    today = now.date()
+    current_weekday = today.weekday()
+    current_time = now.time()
+
+    a_venir = []
+    passees = []
+    sans_date = []
 
     for res in reservations:
-        # Combine le jour + heure de la séance (si ton modèle a un champ `jour`)
+        future_date = None
         try:
-            res.date_complete = datetime.combine(res.jour, res.seance.heure_debut)
-        except AttributeError:
-            res.date_complete = None  # pour éviter plantage
+            for i in range(7):
+                candidate = today + timedelta(days=i)
+                if candidate.weekday() in res.seance.jours_diffusion:
+                    future_date = candidate
+                    break
+            res.date_projection = future_date
+        except Exception:
+            res.date_projection = None
 
         try:
-            billet =res.billet
+            billet = res.billet
             res.qr_code_url = billet.qr_code.url if billet.qr_code else None
         except Billet.DoesNotExist:
             res.qr_code_url = None
 
+        if res.date_projection:
+            if res.date_projection > today or (
+                res.date_projection == today and res.seance.heure_debut > current_time
+            ):
+                a_venir.append(res)
+            else:
+                passees.append(res)
+        else:
+            sans_date.append(res)
+
+    reservation_categories = [
+        ("À venir", a_venir),
+        ("Passées", passees),
+        ("Sans date", sans_date),
+    ]
+
     return render(request, 'cinephoria_webapp/mon_espace.html', {
-        'reservations': reservations,
+        'reservation_categories': reservation_categories,
         'now': now
     })
+
+
 
 @login_required
 def noter_film(request, film_id):

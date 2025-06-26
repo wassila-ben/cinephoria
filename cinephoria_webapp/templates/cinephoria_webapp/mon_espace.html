@@ -13,63 +13,65 @@
 <div class="container py-5">
     <h2 class="mb-4">Mes réservations</h2>
 
-    {% if reservations %}
-        <div class="list-group">
-        {% for res in reservations %}
-            <div class="list-group-item">
-            <h5>{{ res.seance.film.titre }}</h5>
-            <p class="mb-1 text-muted">
-                Cinéma : {{ res.seance.salle.cinema.nom }} |
-                Salle : {{ res.seance.salle.numero_salle }} |
-                Heure : {{ res.seance.heure_debut|time:"H:i" }} |
-                Places : {{ res.nombre_places }} |
-                Date : {{ res.date_projection|date:"l d F" }} |
-                Total : {{ res.prix_total }} €
-            </p>
-            {% if res.seance.get_jour_display %}
-                <p class="small">Projection : {{ res.seance.get_jours_affichage|join:", " }}</p>
-            {% endif %}
+    {% for titre, reservations in reservation_categories %}
+        {% if reservations %}
+            <h4 class="mt-5">{{ titre }}</h4>
+            <div class="list-group">
+            {% for res in reservations %}
+                <div class="list-group-item">
+                    <h5>{{ res.seance.film.titre }}</h5>
+                    <p class="mb-1 text-muted">
+                        Cinéma : {{ res.seance.salle.cinema.nom }} |
+                        Salle : {{ res.seance.salle.numero_salle }} |
+                        Heure : {{ res.seance.heure_debut|time:"H:i" }} |
+                        {% if res.date_projection %}
+                            Date : {{ res.date_projection|date:"l d F" }} |
+                        {% else %}
+                            <em>Date inconnue</em> |
+                        {% endif %}
+                        Places : {{ res.nombre_places }} |
+                        Total : {{ res.prix_total }} €
+                    </p>
 
-            {% if res.qr_code_url %}
-            <p class="mt-2">
-            <strong>QR Code :</strong><br>
-            <a href="{{ res.qr_code_url }}" data-bs-toggle="modal" data-bs-target="#qrModal-{{ res.id }}">
-                <img src="{{ res.qr_code_url }}" alt="QR code" width="120" style="cursor: zoom-in;">
-            </a>
-            </p>
+                    {% if res.qr_code_url %}
+                    <p class="mt-2">
+                        <strong>QR Code :</strong><br>
+                        <img src="{{ res.qr_code_url }}" alt="QR code" width="120" style="cursor: zoom-in;" 
+                            data-bs-toggle="modal" data-bs-target="#qrModal" 
+                            onclick="document.getElementById('modalQrImage').src='{{ res.qr_code_url }}'">
+                    </p>
+                    {% else %}
+                    <p><em>QR code indisponible</em></p>
+                    {% endif %}
 
-            <!-- Modal pour affichage grand format -->
-            <div class="modal fade" id="qrModal-{{ res.id }}" tabindex="-1" aria-labelledby="qrModalLabel-{{ res.id }}" aria-hidden="true">
-                <div class="modal-dialog modal-dialog-centered">
-                    <div class="modal-content bg-dark text-white text-center">
-                        <div class="modal-body">
-                            <img src="{{ res.qr_code_url }}" alt="QR code grand" style="max-width: 90%; height: auto;">
-                        </div>
-                        <div class="modal-footer justify-content-center">
-                            <button type="button" class="btn btn-outline-light" data-bs-dismiss="modal">Fermer</button>
-                        </div>
-                    </div>
+
+                    {% if res.seance.heure_debut < now.time and res.seance.get_jours_affichage|length > 0 %}
+                        <a href="{% url 'noter_film' res.seance.film.id %}" class="btn btn-sm btn-outline-primary mt-2">
+                            Noter ce film
+                        </a>
+                    {% endif %}
                 </div>
-                
+            {% endfor %}
             </div>
-
-            {% else %}
-            <p><em>QR code indisponible</em></p>
-            {% endif %}
-
-
-            {% if res.seance.heure_debut < now.time and res.seance.get_jours_affichage|length > 0 %}
-                <a href="{% url 'noter_film' res.seance.film.id %}" class="btn btn-sm btn-outline-primary mt-2">
-                    Noter ce film
-                </a>
-            {% endif %}
+        {% endif %}
+    {% endfor %}
+    <!-- Modal d'affichage du QR Code agrandi -->
+    <div class="modal fade" id="qrModal" tabindex="-1" aria-labelledby="qrModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content bg-dark text-white">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="qrModalLabel">QR Code</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Fermer"></button>
+                </div>
+                <div class="modal-body text-center">
+                    <img id="modalQrImage" src="" alt="QR code agrandi" class="img-fluid">
+                </div>
+            </div>
         </div>
-        {% endfor %}
-        </div>
-    {% else %}
-    <p>Vous n'avez encore fait aucune réservation.</p>
-    {% endif %}
+    </div>
+
 </div>
+
 <script>
     if ('serviceWorker' in navigator) {
         navigator.serviceWorker.register("{% static 'js/service-worker.js' %}")
@@ -77,5 +79,4 @@
         .catch(err => console.warn("Erreur Service Worker", err));
     }
 </script>
-
 {% endblock %}
