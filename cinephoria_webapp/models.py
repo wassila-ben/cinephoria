@@ -246,6 +246,7 @@ class Reservation(models.Model):
     utilisateur = models.ForeignKey(Utilisateur, on_delete=models.CASCADE)
     seance = models.ForeignKey(Seance, on_delete=models.CASCADE)
     date_reservation = models.DateField(auto_now_add=True)
+    date_projection = models.DateField(null=True, blank=True)
     nombre_places = models.IntegerField(default=1)
     prix_total = models.FloatField(default=0.0)
     statut = models.CharField(max_length=50, choices=[

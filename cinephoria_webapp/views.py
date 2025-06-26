@@ -341,7 +341,8 @@ def choix_sieges(request):
                 reservation = Reservation.objects.create(
                     utilisateur=request.user,
                     seance=seance,
-                    nombre_places=nombre_places
+                    nombre_places=nombre_places,
+                    date_projection=jour_reel
                 )
                 for siege in selected:
                     ReservationSiege.objects.create(reservation=reservation, siege=siege)
@@ -434,7 +435,6 @@ def mon_espace(request):
         except AttributeError:
             res.date_complete = None  # pour éviter plantage
 
-        # Si tu as un champ de QR code (ex : fichier ou URL)
         try:
             billet =res.billet
             res.qr_code_url = billet.qr_code.url if billet.qr_code else None
