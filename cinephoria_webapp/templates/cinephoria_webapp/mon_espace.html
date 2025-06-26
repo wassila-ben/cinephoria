@@ -33,8 +33,25 @@
             {% if res.qr_code_url %}
             <p class="mt-2">
             <strong>QR Code :</strong><br>
-            <img src="{{ res.qr_code_url }}" alt="QR code" width="120">
+            <a href="{{ res.qr_code_url }}" data-bs-toggle="modal" data-bs-target="#qrModal-{{ res.id }}">
+                <img src="{{ res.qr_code_url }}" alt="QR code" width="120" style="cursor: zoom-in;">
+            </a>
             </p>
+
+            <!-- Modal pour affichage grand format -->
+            <div class="modal fade" id="qrModal-{{ res.id }}" tabindex="-1" aria-labelledby="qrModalLabel-{{ res.id }}" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content bg-dark text-white text-center">
+                        <div class="modal-body">
+                            <img src="{{ res.qr_code_url }}" alt="QR code grand" style="max-width: 90%; height: auto;">
+                        </div>
+                        <div class="modal-footer justify-content-center">
+                            <button type="button" class="btn btn-outline-light" data-bs-dismiss="modal">Fermer</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
             {% else %}
             <p><em>QR code indisponible</em></p>
             {% endif %}
